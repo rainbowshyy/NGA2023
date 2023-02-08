@@ -23,7 +23,7 @@ public class CodeBlockManager : MonoBehaviour
 
         codeBlocks = new Dictionary<agentType, List<CodeBlock>>();
 
-        codeBlocks.Add(agentType.Blue, new List<CodeBlock>() { new MoveBlock(new int[2]) });
+        codeBlocks.Add(agentType.Blue, new List<CodeBlock>() { new MoveBlock(new int[2] { 0, 1}) });
     }
 
     private void Start()

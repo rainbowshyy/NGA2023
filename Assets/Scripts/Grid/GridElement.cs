@@ -34,7 +34,6 @@ public abstract class GridElement : MonoBehaviour
 
     public void UpdatePosition()
     {
-        Debug.Log("a");
         transform.position = new Vector3(gridCoords.x + 0.5f, gridCoords.y + 0.5f, 0);
     }
 

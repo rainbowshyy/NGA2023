@@ -22,7 +22,8 @@ public class GridVisualizer : MonoBehaviour
         }
         Instance = this;
 
-        GridManager.onAdd += MoveElement;
+        GridManager.onAdd += InitElement;
+        GridManager.onMove += MoveElement;
     }
 
     private void Start()
@@ -47,9 +48,13 @@ public class GridVisualizer : MonoBehaviour
         onNewCenter?.Invoke(new Vector2(GridManager.Instance.width / 2f, GridManager.Instance.height / 2f));
     }
 
-    private void MoveElement(GridElement gridElement)
+    private void MoveElement(GridElement gridElement, GridCoordinates coords)
     {
-        Debug.Log("a");
+        gridElement.UpdatePosition();
+    }
+
+    private void InitElement(GridElement gridElement)
+    {
         gridElement.UpdatePosition();
     }
 }

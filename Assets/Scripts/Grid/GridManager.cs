@@ -34,7 +34,6 @@ public class GridManager : MonoBehaviour
             return false;
         }
         gridCurrentCoords.Add(gridElement.gridCoords);
-        Debug.Log("ok");
         onAdd?.Invoke(gridElement);
         return true;
     }
@@ -56,6 +55,7 @@ public class GridManager : MonoBehaviour
 
         gridCurrentCoords.Remove(gridElement.gridCoords);
         gridCurrentCoords.Add(newCoords);
+        gridElement.gridCoords = newCoords;
         onMove?.Invoke(gridElement, newCoords);
 
         return true;

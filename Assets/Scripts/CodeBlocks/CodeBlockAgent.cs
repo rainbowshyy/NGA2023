@@ -27,7 +27,6 @@ public class CodeBlockAgent : GridElement
         {
             return;
         }
-
         CodeBlockManager.Instance.codeBlocks[type][CodeBlockManager.Instance.GetStepForType(type, step)].RunCode(this);
     }
 }
