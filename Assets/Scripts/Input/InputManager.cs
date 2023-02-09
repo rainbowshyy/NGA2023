@@ -1,11 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
-    public static System.Action<Vector2> onMouseDelta;
+    public static System.Action<Vector2> onMousePos;
+    public static System.Action<Vector2> onScrollMouse;
+    public static System.Action<bool> onRightMouse;
 
     public PlayerInputAsset inputActions { get; private set; }
 
@@ -24,19 +24,19 @@ public class InputManager : MonoBehaviour
         inputActions = new PlayerInputAsset();
         inputActions.Player.Enable();
 
-        inputActions.Player.MouseDelta.performed += MouseDeltaPerformed;
-        inputActions.Player.MouseDelta.canceled += MouseDeltaPerformed;
+        inputActions.Player.MousePos.performed += MousePosPerformed;
+
+        inputActions.Player.RightMouse.started += RightMouseStarted;
+        inputActions.Player.RightMouse.canceled += RightMouseStarted;
     }
 
-    private void MouseDeltaPerformed(InputAction.CallbackContext context)
+    private void MousePosPerformed(InputAction.CallbackContext context)
     {
-        if (context.performed)
-        {
-            onMouseDelta?.Invoke(context.ReadValue<Vector2>());
-        }
-        else
-        {
-            onMouseDelta?.Invoke(Vector2.zero);
-        }
+        onMousePos?.Invoke(context.ReadValue<Vector2>());
+    }
+
+    private void RightMouseStarted(InputAction.CallbackContext context)
+    {
+        onRightMouse?.Invoke(context.started);
     }
 }
