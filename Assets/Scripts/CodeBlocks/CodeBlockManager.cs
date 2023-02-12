@@ -23,7 +23,9 @@ public class CodeBlockManager : MonoBehaviour
 
         codeBlocks = new Dictionary<agentType, List<CodeBlock>>();
 
-        codeBlocks.Add(agentType.Blue, new List<CodeBlock>() { new MoveBlock(new int[2] { 0, 1}) });
+        codeBlocks.Add(agentType.Blue, new List<CodeBlock>());
+
+        //codeBlocks.Add(agentType.Blue, new List<CodeBlock>() { new MoveBlock(new int[2] { 0, 1}) });
     }
 
     private void Start()
@@ -37,11 +39,21 @@ public class CodeBlockManager : MonoBehaviour
         return totalStep % codeBlocks[type].Count;
     }
 
+    public bool TypeHasCode(agentType type)
+    {
+        return (codeBlocks[type].Count > 0);
+    }
+
     IEnumerator CodeStep()
     {
         yield return new WaitForSeconds(1f);
         onDoCode?.Invoke(agentTeam.Player, step);
         step += 1;
         StartCoroutine(CodeStep());
+    }
+
+    public void SetCodeForType(agentType type, List<CodeBlock> codeBlocksParam)
+    {
+        codeBlocks[type] = codeBlocksParam;
     }
 }

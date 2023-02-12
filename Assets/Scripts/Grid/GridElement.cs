@@ -34,7 +34,7 @@ public abstract class GridElement : MonoBehaviour
 
     public void UpdatePosition()
     {
-        transform.position = new Vector3(gridCoords.x + 0.5f, gridCoords.y + 0.5f, 0);
+        transform.position = new Vector3(GridVisualizer.Instance.xOffset + gridCoords.x + 0.5f, GridVisualizer.Instance.yOffset + gridCoords.y + 0.5625f, 0);
     }
 
     public bool TryMove(int x, int y)

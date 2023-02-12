@@ -18,6 +18,6 @@ public class MoveBlock : CodeBlock
 
     public override string ShowSyntax()
     {
-        return "Move(<color=#FF3939><b>" + parameters[0].ToString() + "</b></color>, <color=#28FF4F><b>" + parameters[1].ToString() + "</b></color>);";
+        return "Move ( <color=#4eb2f3><b>" + parameters[0].ToString() + "</b></color> , <color=#f38f4e><b>" + parameters[1].ToString() + "</b></color> )";
     }
 }

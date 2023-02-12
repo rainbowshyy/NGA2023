@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2385e17db51c5a34da64e407e2c7bca6
+guid: ac65e4428863da54fb8230c6a6d1c541
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -117,13 +117,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: cubert_0
+      name: cubert2_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
-        height: 32
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,20 +131,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0a8a6d21e706b184e8489f9869c70d4c
-      internalID: 1659345982
+      spriteID: 98360a6b00ebdd443b314d1e0f3ab1c7
+      internalID: 1081019946
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cubert_1
+      name: cubert2_1
       rect:
         serializedVersion: 2
-        x: 32
+        x: 20
         y: 0
-        width: 32
-        height: 32
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -152,20 +152,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3b690e8774a19ad4089b7f5b1e570fd5
-      internalID: -1724818639
+      spriteID: 0f5e60b8041553c488b1d9a360c03150
+      internalID: -315767586
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cubert_2
+      name: cubert2_2
       rect:
         serializedVersion: 2
-        x: 64
+        x: 40
         y: 0
-        width: 32
-        height: 32
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -173,20 +173,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6ab17c2ecb93d50498d929830c124806
-      internalID: 258080903
+      spriteID: 4a9e21ebc6f91db4cbe1fa8966fa95a6
+      internalID: 1139603570
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cubert_3
+      name: cubert2_3
       rect:
         serializedVersion: 2
-        x: 96
+        x: 60
         y: 0
-        width: 32
-        height: 32
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -194,20 +194,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9609fa1debfe1014b89c3a62a94f6fd8
-      internalID: 2074374798
+      spriteID: 292d0a2e581b4024ab0c180e12d745ed
+      internalID: 462260452
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cubert_4
+      name: cubert2_4
       rect:
         serializedVersion: 2
-        x: 128
+        x: 80
         y: 0
-        width: 32
-        height: 32
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -215,20 +215,83 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e1ebd488908f0ca4abdabe196efa96f9
-      internalID: -13143997
+      spriteID: b3ee66e4bec47b449b2bec8a994fe0d8
+      internalID: 1398754816
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cubert_5
+      name: cubert2_5
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 0
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9f897420b9e84a4cba96c173f2e01d0
+      internalID: -188370141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cubert2_6
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 0
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a8a61609055d454a9372412bf156e0a
+      internalID: 594084103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cubert2_7
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 0
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2df24c9850999654eb61c345ed1e6dd6
+      internalID: -1457731225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cubert2_8
       rect:
         serializedVersion: 2
         x: 160
         y: 0
-        width: 32
-        height: 32
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -236,20 +299,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 66c0596314c994543973d2c89195c364
-      internalID: 1325957353
+      spriteID: bdebf14dadf8c23478c4301d1126f64f
+      internalID: 1031230175
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cubert_6
+      name: cubert2_9
       rect:
         serializedVersion: 2
-        x: 192
+        x: 180
         y: 0
-        width: 32
-        height: 32
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -257,20 +320,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 45dd547482cc88741a840c244075d9d0
-      internalID: -585801795
+      spriteID: 3ee146dff10f29b4ba8876cc47dd1531
+      internalID: -1679659133
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cubert_7
+      name: cubert2_10
       rect:
         serializedVersion: 2
-        x: 224
+        x: 200
         y: 0
-        width: 32
-        height: 32
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -278,20 +341,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1cf60d0e99f3c454e82ef40cef36b364
-      internalID: 853626428
+      spriteID: ad2e36b9c8c2ffa42a2e2bf427cbe3d8
+      internalID: -1741851354
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cubert_8
+      name: cubert2_11
       rect:
         serializedVersion: 2
-        x: 256
+        x: 220
         y: 0
-        width: 32
-        height: 32
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -299,71 +362,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 04bfa02c5e8fe1d429277061edc9fbe5
-      internalID: -218028663
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: cubert_9
-      rect:
-        serializedVersion: 2
-        x: 288
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9cf0a25802bb4ea44812f13bf8aaa8af
-      internalID: -912207202
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: cubert_10
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f02a37213e226714281d75daf47b6ee8
-      internalID: 1986049653
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: cubert_11
-      rect:
-        serializedVersion: 2
-        x: 352
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e4e791685708652499adc41931681071
-      internalID: -117902411
+      spriteID: ab0c59debf9fca04f9b0dfb97b4cbd78
+      internalID: -610463659
       vertices: []
       indices: 
       edges: []
@@ -379,18 +379,18 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      cubert_10: 1986049653
-      cubert_9: -912207202
-      cubert_0: 1659345982
-      cubert_5: 1325957353
-      cubert_11: -117902411
-      cubert_1: -1724818639
-      cubert_3: 2074374798
-      cubert_6: -585801795
-      cubert_4: -13143997
-      cubert_7: 853626428
-      cubert_2: 258080903
-      cubert_8: -218028663
+      cubert2_7: -1457731225
+      cubert2_1: -315767586
+      cubert2_3: 462260452
+      cubert2_8: 1031230175
+      cubert2_0: 1081019946
+      cubert2_11: -610463659
+      cubert2_2: 1139603570
+      cubert2_4: 1398754816
+      cubert2_9: -1679659133
+      cubert2_6: 594084103
+      cubert2_10: -1741851354
+      cubert2_5: -188370141
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

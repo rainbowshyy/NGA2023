@@ -23,7 +23,7 @@ public class CodeBlockAgent : GridElement
 
     private void DoCode(agentTeam codeTeam, int step)
     {
-        if (codeTeam != team)
+        if (codeTeam != team || !CodeBlockManager.Instance.TypeHasCode(type))
         {
             return;
         }

@@ -37,6 +37,7 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
     public void OnBeginDrag(PointerEventData eventData)
     {
         Debug.Log("begin");
+
         if (eventData.button == PointerEventData.InputButton.Right)
         {
             return;
@@ -88,5 +89,10 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
             anchorToMove.SetSiblingIndex(index);
             LayoutRebuilder.ForceRebuildLayoutImmediate(tf); //update layoutgroup?
         }
+    }
+
+    public void SetBackground(RectTransform rt)
+    {
+        background = rt;
     }
 }

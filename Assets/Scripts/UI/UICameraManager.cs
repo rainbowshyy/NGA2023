@@ -8,7 +8,6 @@ public class UICameraManager : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera vCam;
     [SerializeField] private Camera cam;
     [SerializeField] private RectTransform background;
-    [SerializeField] private RectTransform UIwindow;
     [SerializeField] private Canvas canvas;
 
     [SerializeField] private bool windowVisible;
@@ -36,22 +35,34 @@ public class UICameraManager : MonoBehaviour
     {
         //vCam.transform.position += (Vector3)toMove;
         background.anchoredPosition += toMove;
+        Bounds boxBounds = new Bounds(Vector3.zero, new Vector3(360f, 160f, 0));
+        if (!boxBounds.Contains(background.anchoredPosition))
+        {
+            background.anchoredPosition = boxBounds.ClosestPoint(background.anchoredPosition);
+        }
         toMove = Vector2.zero;
 
-        if (windowVisible && windowContainer.anchoredPosition.x < 0)
+        Vector2 step;
+        if (windowVisible && CameraManager.Instance.Offset.x > -3.125f)
         {
-            windowContainer.anchoredPosition += windowScrollSpeed * Time.deltaTime * Vector2.right;
-            if (windowContainer.anchoredPosition.x > 0)
+            step = windowScrollSpeed * Time.deltaTime * Vector2.right;
+            //windowContainer.anchoredPosition += step;
+            CameraManager.Instance.Offset -= step / 64f;
+            if (CameraManager.Instance.Offset.x < -3.125f)
             {
-                windowContainer.anchoredPosition = Vector2.zero;
+                //windowContainer.anchoredPosition = Vector2.zero;
+                CameraManager.Instance.Offset = new Vector2(-3.125f, 0f);
             }
         }
-        else if (!windowVisible && windowContainer.anchoredPosition.x > -1000)
+        else if (!windowVisible && CameraManager.Instance.Offset.x < 2.5f)
         {
-            windowContainer.anchoredPosition += windowScrollSpeed * Time.deltaTime * Vector2.left;
-            if (windowContainer.anchoredPosition.x < -1000)
+            step = windowScrollSpeed * Time.deltaTime * Vector2.left;
+            //windowContainer.anchoredPosition += step;
+            CameraManager.Instance.Offset -= step / 64f;
+            if (CameraManager.Instance.Offset.x > 2.5f)
             {
-                windowContainer.anchoredPosition = Vector2.left * 1000;
+                //windowContainer.anchoredPosition = Vector2.left * 360;
+                CameraManager.Instance.Offset = new Vector2(2.5f, 0f);
             }
         }
     }
@@ -66,14 +77,14 @@ public class UICameraManager : MonoBehaviour
         }
         lastPos = newPos;
         */
-        Vector2 newPos = pos / canvas.scaleFactor;
+        Vector2 newPos = new Vector2(pos.x / Screen.width, pos.y / Screen.height);
         if (doMove && windowVisible)
-            toMove += (newPos - lastPos);
-        lastPos = newPos;
+            toMove += (newPos * new Vector2(Screen.width, Screen.height) - lastPos);
+        lastPos = newPos * new Vector2(Screen.width, Screen.height);
 
-        if (newPos.x > 880 && windowVisible)
+        if (newPos.x > 0.75f && windowVisible)
             windowVisible = false;
-        else if (newPos.x < 80 && !windowVisible)
+        else if (newPos.x < 0.25f && !windowVisible)
         {
             windowVisible = true;
         }

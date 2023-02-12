@@ -17,6 +17,22 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private List<VirtualCameraStruct> virtualCameraStructs;
     private Dictionary<VCam, CinemachineVirtualCamera> vCams;
 
+    private Vector2 offset;
+
+    public Vector2 Offset
+    {
+        get
+        {
+            return offset;
+        }
+        set
+        {
+            Vector2 delta = value - Offset;
+            offset = value;
+            MoveVCameraDelta(VCam.MainGridCam, delta);
+        }
+    }
+
     public static CameraManager Instance { get; private set; }
 
     private void Awake()
@@ -36,6 +52,7 @@ public class CameraManager : MonoBehaviour
         }
 
         GridVisualizer.onNewCenter += MoveMainGridCamera;
+        offset = new Vector2(2.5f, 0);
     }
 
     private void Start()
@@ -43,14 +60,20 @@ public class CameraManager : MonoBehaviour
 
     }
 
-    private void MoveMainGridCamera(Vector2 pos)
+    private void MoveMainGridCamera()
     {
-        MoveVCamera(VCam.MainGridCam, pos);
+        MoveVCamera(VCam.MainGridCam, Offset.x * Vector2.left);
     }
 
     private void MoveVCamera(VCam id, Vector2 pos)
     {
         CinemachineVirtualCamera current = vCams[id];
         current.transform.position = new Vector3(pos.x, pos.y, -20);
+    }
+
+    private void MoveVCameraDelta(VCam id, Vector2 delta)
+    {
+        CinemachineVirtualCamera current = vCams[id];
+        current.transform.position = current.transform.position + (Vector3)delta;
     }
 }

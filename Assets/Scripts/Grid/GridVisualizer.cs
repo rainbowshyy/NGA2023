@@ -6,12 +6,16 @@ using UnityEngine.Tilemaps;
 public class GridVisualizer : MonoBehaviour
 {
     [SerializeField] private Tilemap tilemap;
+    [SerializeField] private Grid grid;
 
     [SerializeField] private Tile[] tiles;
 
-    public static System.Action<Vector2> onNewCenter;
+    public static System.Action onNewCenter;
 
     public static GridVisualizer Instance;
+
+    public float xOffset { get; private set; }
+    public float yOffset { get; private set; }
 
     private void Awake()
     {
@@ -45,7 +49,11 @@ public class GridVisualizer : MonoBehaviour
 
     private void UpdateCenter()
     {
-        onNewCenter?.Invoke(new Vector2(GridManager.Instance.width / 2f, GridManager.Instance.height / 2f));
+        xOffset = GridManager.Instance.width / -2f;
+        yOffset = GridManager.Instance.height / -2f;
+
+        onNewCenter?.Invoke();
+        grid.transform.position = new Vector3(xOffset, yOffset, 0);
     }
 
     private void MoveElement(GridElement gridElement, GridCoordinates coords)
