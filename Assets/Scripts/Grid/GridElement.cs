@@ -18,6 +18,7 @@ public abstract class GridElement : MonoBehaviour
 {
     public GridCoordinates gridCoords;
     [SerializeField] private GridCoordinates startingCoords;
+    public AgentUI UI;
 
     public virtual void Awake()
     {
@@ -35,6 +36,10 @@ public abstract class GridElement : MonoBehaviour
     public void UpdatePosition()
     {
         transform.position = new Vector3(GridVisualizer.Instance.xOffset + gridCoords.x + 0.5f, GridVisualizer.Instance.yOffset + gridCoords.y + 0.5625f, 0);
+        if (UI != null)
+        {
+            UI.SetPositionFromWorld(transform.position);
+        }
     }
 
     public bool TryMove(int x, int y)

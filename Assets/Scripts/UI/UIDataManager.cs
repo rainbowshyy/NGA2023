@@ -38,6 +38,9 @@ public class UIDataManager : MonoBehaviour
     {
         CreateCodeParent(agentType.Blue);
         CreateCodeBlock(new MoveBlock(new int[2] { 0, 1 }));
+        CreateCodeBlock(new MoveBlock(new int[2] { 0, -1 }));
+        CreateCodeBlock(new MoveBlock(new int[2] { -1, 0 }));
+        CreateCodeBlock(new MoveBlock(new int[2] { 1, 0 }));
     }
 
     public void CreateCodeParent(agentType type)
