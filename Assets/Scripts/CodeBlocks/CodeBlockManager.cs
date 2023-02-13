@@ -48,6 +48,8 @@ public class CodeBlockManager : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         onDoCode?.Invoke(agentTeam.Player, step);
+        yield return new WaitForSeconds(1f);
+        onDoCode?.Invoke(agentTeam.Enemy, step);
         step += 1;
         StartCoroutine(CodeStep());
     }

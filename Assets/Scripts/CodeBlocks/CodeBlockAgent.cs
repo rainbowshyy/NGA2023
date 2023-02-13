@@ -10,6 +10,9 @@ public class CodeBlockAgent : GridElement
     public agentTeam team;
     public agentType type;
 
+    public int health;
+    public int energy;
+
     public void AssignTeam()
     {
 
@@ -18,7 +21,11 @@ public class CodeBlockAgent : GridElement
     public override void Start()
     {
         base.Start();
+        health = 1;
+        energy = 1;
         CodeBlockManager.onDoCode += DoCode;
+
+        UpdateStatsUI();
     }
 
     private void DoCode(agentTeam codeTeam, int step)
@@ -28,5 +35,25 @@ public class CodeBlockAgent : GridElement
             return;
         }
         CodeBlockManager.Instance.codeBlocks[type][CodeBlockManager.Instance.GetStepForType(type, step)].RunCode(this);
+        UpdateStatsUI();
+    }
+
+    private void UpdateStatsUI()
+    {
+        if (UI == null)
+        {
+            return;
+        }
+        UI.SetEnergyText(energy);
+        UI.SetHPText(health);
+    }
+
+    public void AddEnergy(int toAdd)
+    {
+        energy += toAdd;
+        if (energy < 0)
+        {
+            energy = 0;
+        }
     }
 }

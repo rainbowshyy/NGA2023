@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
-    private HashSet<GridCoordinates> gridCurrentCoords;
+    private HashSet<Vector2> gridCurrentCoords;
 
     public int width;
     public int height;
@@ -13,7 +13,7 @@ public class GridManager : MonoBehaviour
 
     public static System.Action<GridElement> onRemove;
     public static System.Action<GridElement> onAdd;
-    public static System.Action<GridElement, GridCoordinates> onMove;
+    public static System.Action<GridElement, Vector2> onMove;
 
     private void Awake()
     {
@@ -24,7 +24,7 @@ public class GridManager : MonoBehaviour
         }
         Instance = this;
 
-        gridCurrentCoords = new HashSet<GridCoordinates>();
+        gridCurrentCoords = new HashSet<Vector2>();
     }
 
     public bool AddGridElement(GridElement gridElement)
@@ -40,7 +40,17 @@ public class GridManager : MonoBehaviour
 
     public bool TryMoveGridElement(GridElement gridElement, int x, int y)
     {
-        GridCoordinates newCoords = new GridCoordinates(gridElement.gridCoords.x + x, gridElement.gridCoords.y + y);
+        Vector2 newCoords = new Vector2(gridElement.gridCoords.x + x, gridElement.gridCoords.y + y);
+
+        string debug = "";
+        foreach (Vector2 g in gridCurrentCoords)
+        {
+            debug += "(" + g.x + ", " + g.y + "), ";
+        }
+        Debug.Log(debug);
+
+        if (gridCurrentCoords.Contains(newCoords))
+            Debug.Log("coll");
 
         if (
             gridCurrentCoords.Contains(newCoords) ||

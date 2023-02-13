@@ -56,7 +56,7 @@ public class GridVisualizer : MonoBehaviour
         grid.transform.position = new Vector3(xOffset, yOffset, 0);
     }
 
-    private void MoveElement(GridElement gridElement, GridCoordinates coords)
+    private void MoveElement(GridElement gridElement, Vector2 coords)
     {
         gridElement.UpdatePosition();
     }
