@@ -15,7 +15,11 @@ public class GameManager : MonoBehaviour
         }
 
         Instance = this;
+    }
 
-
+    private void Start()
+    {
+        SpawningManager.Instance.SpawnCodeAgent(agentType.Blue, new Vector2(3, 0));
+        SpawningManager.Instance.SpawnEnemy(agentType.Blob, new Vector2(3, 6));
     }
 }

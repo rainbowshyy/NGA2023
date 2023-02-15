@@ -5,16 +5,12 @@ using UnityEngine;
 public abstract class GridElement : MonoBehaviour
 {
     public Vector2 gridCoords;
-    [SerializeField] private Vector2 startingCoords;
+    public Vector2 startingCoords;
     public AgentUI UI;
-
-    public virtual void Awake()
-    {
-        gridCoords = startingCoords;
-    }
 
     public virtual void Start()
     {
+        gridCoords = startingCoords;
         if (!GridManager.Instance.AddGridElement(this))
         {
             Destroy(gameObject);

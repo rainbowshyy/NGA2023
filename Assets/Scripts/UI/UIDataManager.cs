@@ -6,12 +6,15 @@ public class UIDataManager : MonoBehaviour
 {
     [SerializeField] private GameObject codeBlockPref;
     [SerializeField] private GameObject codeParentPref;
+    [SerializeField] private GameObject codeParentEnemyPref;
 
     [SerializeField] private RectTransform codeBlockUI;
 
     [SerializeField] private StructTypeUI[] typeUIStruct;
     public static Dictionary<agentType, Color> typeColor;
     public static Dictionary<agentType, string> typeName;
+
+    public HashSet<agentType> CodeParents { get; private set; }
 
     public static UIDataManager Instance { get; private set; }
 
@@ -32,11 +35,12 @@ public class UIDataManager : MonoBehaviour
             typeColor.Add(s.type, s.color);
             typeName.Add(s.type, s.name);
         }
+
+        CodeParents = new HashSet<agentType>();
     }
 
     private void Start()
     {
-        CreateCodeParent(agentType.Blue);
         CreateCodeBlock(new MoveBlock(new int[2] { 0, 1 }));
         CreateCodeBlock(new MoveBlock(new int[2] { 0, -1 }));
         CreateCodeBlock(new MoveBlock(new int[2] { -1, 0 }));
@@ -44,8 +48,15 @@ public class UIDataManager : MonoBehaviour
         CreateCodeBlock(new EnergyBlock(new int[2] { 1, 0 }));
     }
 
-    public void CreateCodeParent(agentType type)
+    public void TryCreateCodeParent(agentType type)
     {
+        if (CodeParents.Contains(type))
+        {
+            return;
+        }
+
+        CodeParents.Add(type);
+
         Vector3 pos = new Vector3(450f + Random.Range(-200f, 200f), -260f + Random.Range(-100f, 100f), 0);
 
         GameObject go = Instantiate(codeParentPref, codeBlockUI);

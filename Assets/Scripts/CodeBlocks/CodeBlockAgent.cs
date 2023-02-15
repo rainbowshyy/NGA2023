@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum agentTeam { Player, Enemy}
-public enum agentType { Blue}
+public enum agentType { Blue, Blob}
 
 public class CodeBlockAgent : GridElement
 {
@@ -12,11 +12,6 @@ public class CodeBlockAgent : GridElement
 
     public int health;
     public int energy;
-
-    public void AssignTeam()
-    {
-
-    }
 
     public override void Start()
     {
