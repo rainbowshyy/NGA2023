@@ -72,4 +72,14 @@ public class UICodeBlockParent : MonoBehaviour
     {
         CodeBlockManager.Instance.SetCodeForType(type, GetCodeBlocks());
     }
+
+    public void SetCodeBlocks(List<CodeBlock> code)
+    {
+        foreach (CodeBlock c in code)
+        {
+            GameObject go = UIDataManager.Instance.CreateEnemyCodeBlock(c);
+            go.transform.SetParent(codeParent);
+        }
+        SetCodeForManager();
+    }
 }

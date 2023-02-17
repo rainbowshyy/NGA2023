@@ -5,6 +5,7 @@ using UnityEngine;
 public class UIDataManager : MonoBehaviour
 {
     [SerializeField] private GameObject codeBlockPref;
+    [SerializeField] private GameObject codeBlockEnemyPref;
     [SerializeField] private GameObject codeParentPref;
     [SerializeField] private GameObject codeParentEnemyPref;
 
@@ -66,7 +67,27 @@ public class UIDataManager : MonoBehaviour
         comp.SetDragDropBackground(codeBlockUI);
     }
 
-    public void CreateCodeBlock(CodeBlock codeBlock)
+    public void TryCreateEnemyCodeParent(agentType type)
+    {
+        if (CodeParents.Contains(type))
+        {
+            return;
+        }
+
+        CodeParents.Add(type);
+
+        Vector3 pos = new Vector3(450f + Random.Range(-200f, 200f), -260f + Random.Range(-100f, 100f), 0);
+
+        GameObject go = Instantiate(codeParentEnemyPref, codeBlockUI);
+        go.GetComponent<RectTransform>().anchoredPosition = pos;
+        UICodeBlockParent comp = go.GetComponent<UICodeBlockParent>();
+        comp.SetType(type);
+        comp.SetDragDropBackground(codeBlockUI);
+
+        List<CodeBlock> codeBlocks = CodeBlockManager.Instance.GetCodeFromStruct(EnemyManager.Instance.EnemyCodeDictionary[type]);
+        comp.SetCodeBlocks(codeBlocks);
+    }
+    public GameObject CreateCodeBlock(CodeBlock codeBlock)
     {
         Vector3 pos = new Vector3(450f + Random.Range(-200f, 200f), -260f + Random.Range(-100f, 100f), 0);
 
@@ -75,5 +96,17 @@ public class UIDataManager : MonoBehaviour
         UICodeBlock comp = go.GetComponent<UICodeBlock>();
         comp.SetCode(codeBlock);
         comp.SetDragDropBackground(codeBlockUI);
+        return go;
+    }
+
+    public GameObject CreateEnemyCodeBlock(CodeBlock codeBlock)
+    {
+        Vector3 pos = new Vector3(450f + Random.Range(-200f, 200f), -260f + Random.Range(-100f, 100f), 0);
+
+        GameObject go = Instantiate(codeBlockEnemyPref, codeBlockUI);
+        go.GetComponent<RectTransform>().anchoredPosition = pos;
+        UICodeBlock comp = go.GetComponent<UICodeBlock>();
+        comp.SetCode(codeBlock);
+        return go;
     }
 }

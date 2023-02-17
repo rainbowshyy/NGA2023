@@ -58,4 +58,27 @@ public class CodeBlockManager : MonoBehaviour
     {
         codeBlocks[type] = codeBlocksParam;
     }
+
+    public List<CodeBlock> GetCodeFromStruct(List<CodeBlockStruct> codeBlocksParam)
+    {
+        List<CodeBlock> codeBlocksReturn = new List<CodeBlock>();
+
+        foreach (CodeBlockStruct s in codeBlocksParam)
+        {
+            switch (s.code)
+            {
+                case CodeBlockTypes.MoveBlock:
+                    codeBlocksReturn.Add(new MoveBlock(s.parameters));
+                    break;
+                case CodeBlockTypes.EnergyBlock:
+                    codeBlocksReturn.Add(new EnergyBlock(s.parameters));
+                    break;
+                case CodeBlockTypes.WaitBlock:
+                    codeBlocksReturn.Add(new WaitBlock(s.parameters));
+                    break;
+            }
+        }
+
+        return codeBlocksReturn;
+    }
 }

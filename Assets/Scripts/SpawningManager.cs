@@ -29,11 +29,12 @@ public class SpawningManager : MonoBehaviour
 
     public void SpawnCodeAgent(agentType type, Vector2 pos)
     {
-        UIDataManager.Instance.TryCreateCodeParent(agentType.Blue);
+        UIDataManager.Instance.TryCreateCodeParent(type);
 
         GameObject go = Instantiate(agentPref, agentParent);
         CodeBlockAgent codeAgent = go.GetComponent<CodeBlockAgent>();
         codeAgent.startingCoords = pos;
+        codeAgent.type = type;
 
 
         GameObject UI = Instantiate(agentUIPref, agentUIParent);
@@ -44,12 +45,14 @@ public class SpawningManager : MonoBehaviour
 
     public void SpawnEnemy(agentType type, Vector2 pos)
     {
-        UIDataManager.Instance.TryCreateCodeParent(agentType.Blue);
+        UIDataManager.Instance.TryCreateEnemyCodeParent(type);
+
 
         GameObject go = Instantiate(enemyPref, agentParent);
         CodeBlockAgent codeAgent = go.GetComponent<CodeBlockAgent>();
         codeAgent.startingCoords = pos;
         codeAgent.team = agentTeam.Enemy;
+        codeAgent.type = type;
 
 
         GameObject UI = Instantiate(enemyUIPref, agentUIParent);

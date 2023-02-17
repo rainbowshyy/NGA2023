@@ -47,10 +47,13 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
         anchorToMove.SetParent(background);
         anchorToMove.SetSiblingIndex(background.childCount - 1);
         dragged = true;
-        dropZone.dragged = true;
         canvasGroup.blocksRaycasts = false;
-        if (canBeDropped)
-            dropZone.dropTransform = null;
+        if (dropZone != null)
+        {
+            dropZone.dragged = true;
+            if (canBeDropped)
+                dropZone.dropTransform = null;
+        }
         LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)oldParent);
         DragDropManager.onBeginDrag?.Invoke();
     }
@@ -63,7 +66,8 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
         }
 
         dragged = false;
-        dropZone.dragged = false;
+        if (dropZone != null)
+            dropZone.dragged = false;
         canvasGroup.blocksRaycasts = true;
         DragDropManager.onStopDrag?.Invoke();
     }
