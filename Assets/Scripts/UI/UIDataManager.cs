@@ -5,6 +5,7 @@ using UnityEngine;
 public class UIDataManager : MonoBehaviour
 {
     [SerializeField] private GameObject codeBlockPref;
+    [SerializeField] private GameObject ifCodeBlockPref;
     [SerializeField] private GameObject codeBlockEnemyPref;
     [SerializeField] private GameObject codeParentPref;
     [SerializeField] private GameObject codeParentEnemyPref;
@@ -47,6 +48,7 @@ public class UIDataManager : MonoBehaviour
         CreateCodeBlock(new MoveBlock(new int[2] { -1, 0 }));
         CreateCodeBlock(new MoveBlock(new int[2] { 1, 0 }));
         CreateCodeBlock(new EnergyBlock(new int[2] { 1, 0 }));
+        CreateCodeBlock(new EnergyGreaterBlock(new int[2] { 1, 0 }));
     }
 
     public void TryCreateCodeParent(agentType type)
@@ -91,7 +93,16 @@ public class UIDataManager : MonoBehaviour
     {
         Vector3 pos = new Vector3(450f + Random.Range(-200f, 200f), -260f + Random.Range(-100f, 100f), 0);
 
-        GameObject go = Instantiate(codeBlockPref, codeBlockUI);
+        GameObject go;
+
+        if (codeBlock.isCondition)
+        {
+            go = Instantiate(ifCodeBlockPref, codeBlockUI);
+        }
+        else
+        {
+            go = Instantiate(codeBlockPref, codeBlockUI);
+        }
         go.GetComponent<RectTransform>().anchoredPosition = pos;
         UICodeBlock comp = go.GetComponent<UICodeBlock>();
         comp.SetCode(codeBlock);

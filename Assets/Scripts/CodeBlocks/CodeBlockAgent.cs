@@ -32,20 +32,31 @@ public class CodeBlockAgent : GridElement
             return;
         }
 
-
-
-        /*
         bool isCondition = true;
         int depth = 0;
         CodeBlock current = CodeBlockManager.Instance.codeBlocks[type][currentStep[depth]];
+        int safety = 0;
+        bool alreadyLooped = false; //if it loops twice, there is no code to run.
         while (isCondition)
         {
+            safety += 1;
             if (current.isCondition)                                    //Check if condition
             {
-                if (current.scope == null || current.scope.Count <= 0)  //Check if there is code to run in scope
+                if (!current.RunCode(this) || current.scope == null || current.scope.Count <= 0)  //Check if there is no code to run in scope
                 {
-                    isCondition = false;
-                    return;                                             //...if not, then just return
+                    currentStep[depth] += 1;
+                    if (depth == 0 && currentStep[depth] >= CodeBlockManager.Instance.codeBlocks[type].Count) //Loop if depth is 0
+                    {
+                        currentStep[depth] = 0;
+                        if (alreadyLooped)
+                        {
+                            isCondition = false;
+                            return;
+                        }
+                        alreadyLooped = true;
+                    }
+                    depth = 0;
+                    current = CodeBlockManager.Instance.codeBlocks[type][currentStep[depth]];
                 }
                 else
                 {
@@ -59,6 +70,18 @@ public class CodeBlockAgent : GridElement
                         currentStep[depth] = 0;
                         depth -= 1;
                         currentStep[depth] += 1;
+                        if (depth == 0 && currentStep[depth] >= CodeBlockManager.Instance.codeBlocks[type].Count) //Loop if depth is 0
+                        {
+                            currentStep[depth] = 0;
+                            if (alreadyLooped)
+                            {
+                                isCondition = false;
+                                return;
+                            }
+                            alreadyLooped = true;
+                        }
+                        depth = 0;
+                        current = CodeBlockManager.Instance.codeBlocks[type][currentStep[depth]];
                     }
                     else
                     {
@@ -71,9 +94,20 @@ public class CodeBlockAgent : GridElement
                 isCondition = false;
                 current.RunCode(this);
                 currentStep[depth] += 1;
+                if (depth == 0 && currentStep[depth] >= CodeBlockManager.Instance.codeBlocks[type].Count) //Loop if depth is 0
+                {
+                    currentStep[depth] = 0;
+                }
+            }
+            if (safety > 99)
+            {
+                isCondition = false;
+                Debug.Log("Could not exit while loop");
+                return;
             }
         }
 
+        /*
         CodeBlockManager.Instance.codeBlocks[type][currentStep[0]].RunCode(this);
         currentStep[0] += 1;
         if (currentStep[0] >= CodeBlockManager.Instance.codeBlocks[type].Count)

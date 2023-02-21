@@ -62,7 +62,11 @@ public class UICodeBlockParent : MonoBehaviour
 
         foreach (Transform t in codeParent)
         {
-            current.Add(t.gameObject.GetComponent<UICodeBlock>().Code);
+            UICodeBlock currentUICodeBlock = t.gameObject.GetComponent<UICodeBlock>();
+
+            currentUICodeBlock.UpdateCodeBlockScope();
+
+            current.Add(currentUICodeBlock.Code);
         }
 
         return current;
