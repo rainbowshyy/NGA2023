@@ -9,6 +9,7 @@ public class CodeBlockManager : MonoBehaviour
     public Dictionary<agentType, List<CodeBlock>> codeBlocks;
 
     private int step;
+    private float speedMult = 0.5f;
 
     public static CodeBlockManager Instance { get; private set; }
 
@@ -24,14 +25,25 @@ public class CodeBlockManager : MonoBehaviour
         codeBlocks = new Dictionary<agentType, List<CodeBlock>>();
 
         codeBlocks.Add(agentType.Blue, new List<CodeBlock>());
-
-        //codeBlocks.Add(agentType.Blue, new List<CodeBlock>() { new MoveBlock(new int[2] { 0, 1}) });
     }
 
-    private void Start()
+    public void StartProgram()
     {
         step = 0;
         StartCoroutine(CodeStep());
+    }
+
+    public void ChangeSpeed(bool positive)
+    {
+        if (positive && speedMult > 0.0625f)
+        {
+            speedMult *= 0.5f;
+        }
+        else if (!positive && speedMult < 2)
+        {
+            speedMult *= 2f;
+        }
+        Debug.Log("new speed: " + speedMult);
     }
 
     public int GetStepForType(agentType type, int totalStep)
@@ -46,12 +58,13 @@ public class CodeBlockManager : MonoBehaviour
 
     IEnumerator CodeStep()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(speedMult);
         onDoCode?.Invoke(agentTeam.Player, step);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(speedMult);
         onDoCode?.Invoke(agentTeam.Enemy, step);
         step += 1;
-        StartCoroutine(CodeStep());
+        if (step < 36)
+            StartCoroutine(CodeStep());
     }
 
     public void SetCodeForType(agentType type, List<CodeBlock> codeBlocksParam)

@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 2020766480580211648}
   - component: {fileID: 2020766480580211649}
   - component: {fileID: 2020766480580211650}
+  - component: {fileID: 7192819861075787350}
   m_Layer: 5
   m_Name: Code
   m_TagString: Untagged
@@ -253,6 +254,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 1
   m_VerticalFit: 1
+--- !u!114 &7192819861075787350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2020766480580211660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9fe768d966bfcd48ac202327ff3359f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2020766480814385476
 GameObject:
   m_ObjectHideFlags: 0
@@ -495,7 +508,8 @@ MonoBehaviour:
   canBeDropped: 0
   background: {fileID: 0}
   anchorToMove: {fileID: 2020766481091666700}
-  dropZone: {fileID: 2020766480814385498}
+  dropZone:
+  - {fileID: 2020766480814385498}
   canvasGroup: {fileID: 2020766481022972489}
 --- !u!225 &2020766481022972489
 CanvasGroup:
@@ -525,6 +539,7 @@ GameObject:
   - component: {fileID: 2020766481091666689}
   - component: {fileID: 3234452836127194371}
   - component: {fileID: 6031753245483310117}
+  - component: {fileID: 5226607272213750996}
   m_Layer: 5
   m_Name: Parent
   m_TagString: Untagged
@@ -684,3 +699,15 @@ MonoBehaviour:
   text: {fileID: 2020766480039354079}
   codeParent: {fileID: 2020766480580211651}
   dragDrop: {fileID: 2020766481022972469}
+--- !u!114 &5226607272213750996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2020766481091666701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9fe768d966bfcd48ac202327ff3359f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

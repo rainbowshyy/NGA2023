@@ -21,8 +21,11 @@ public class DropZone : MonoBehaviour, IDropHandler
 
     public void OnDrop(PointerEventData eventData)
     {
-        eventData.pointerDrag.GetComponent<DragDrop>().SetAnchorParent(dropTransform, siblingIndex);
-        eventData.pointerDrag.GetComponent<DragDrop>().dropZone.dropTransform = dropTransform;
+        if (eventData.pointerDrag.GetComponent<DragDrop>().canBeDropped)
+        {
+            eventData.pointerDrag.GetComponent<DragDrop>().SetAnchorParent(dropTransform, siblingIndex);
+            eventData.pointerDrag.GetComponent<DragDrop>().dropZone[0].dropTransform = dropTransform;
+        }
     }
 
     private void DoBeginDrag()

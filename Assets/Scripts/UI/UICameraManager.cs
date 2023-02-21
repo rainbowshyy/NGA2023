@@ -82,9 +82,9 @@ public class UICameraManager : MonoBehaviour
             toMove += (newPos * new Vector2(Screen.width, Screen.height) - lastPos);
         lastPos = newPos * new Vector2(Screen.width, Screen.height);
 
-        if (newPos.x > 0.75f && windowVisible)
+        if (newPos.x > 0.9f && windowVisible)
             windowVisible = false;
-        else if (newPos.x < 0.25f && !windowVisible)
+        else if (newPos.x < 0.1f && !windowVisible)
         {
             windowVisible = true;
         }

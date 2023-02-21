@@ -42,12 +42,14 @@ public class GridManager : MonoBehaviour
     {
         Vector2 newCoords = new Vector2(gridElement.gridCoords.x + x, gridElement.gridCoords.y + y);
 
+        /*
         string debug = "";
         foreach (Vector2 g in gridCurrentCoords)
         {
             debug += "(" + g.x + ", " + g.y + "), ";
         }
         Debug.Log(debug);
+        */
 
         if (gridCurrentCoords.Contains(newCoords))
             Debug.Log("coll");

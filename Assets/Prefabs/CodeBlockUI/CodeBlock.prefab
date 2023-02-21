@@ -392,7 +392,8 @@ MonoBehaviour:
   canBeDropped: 1
   background: {fileID: 0}
   anchorToMove: {fileID: 3267591208078542226}
-  dropZone: {fileID: 3267591207382613853}
+  dropZone:
+  - {fileID: 3267591207382613853}
   canvasGroup: {fileID: 3267591208433750171}
 --- !u!225 &3267591208433750171
 CanvasGroup:

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEditor;
 
 public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
@@ -10,7 +11,7 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
 
     [SerializeField] private RectTransform background;
     [SerializeField] private RectTransform anchorToMove;
-    public DropZone dropZone;
+    public List<DropZone> dropZone;
     [SerializeField] private CanvasGroup canvasGroup;
 
     private bool dragged = false;
@@ -48,13 +49,19 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
         anchorToMove.SetSiblingIndex(background.childCount - 1);
         dragged = true;
         canvasGroup.blocksRaycasts = false;
-        if (dropZone != null)
+        if (canBeDropped && dropZone[0] != null)
+            dropZone[0].dropTransform = null;
+        foreach (DropZone d in dropZone)
         {
-            dropZone.dragged = true;
-            if (canBeDropped)
-                dropZone.dropTransform = null;
+            if (d != null)
+            {
+                d.dragged = true;
+            }
         }
-        LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)oldParent);
+        //LayoutRebuilder.MarkLayoutForRebuild((RectTransform)oldParent);
+        //EditorGUIUtility.PingObject(oldParent.gameObject);
+        //LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)oldParent);
+        LayoutRebuilderManager.Rebuild?.Invoke();
         DragDropManager.onBeginDrag?.Invoke();
     }
 
@@ -66,8 +73,11 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
         }
 
         dragged = false;
-        if (dropZone != null)
-            dropZone.dragged = false;
+        foreach (DropZone d in dropZone)
+        {
+            if (d != null)
+                d.dragged = false;
+        }
         canvasGroup.blocksRaycasts = true;
         DragDropManager.onStopDrag?.Invoke();
     }
@@ -91,7 +101,9 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
         {
             anchorToMove.SetParent(tf);
             anchorToMove.SetSiblingIndex(index);
-            LayoutRebuilder.ForceRebuildLayoutImmediate(tf); //update layoutgroup?
+            //EditorGUIUtility.PingObject(tf.gameObject);
+            //LayoutRebuilder.ForceRebuildLayoutImmediate(tf); //update layoutgroup?
+            LayoutRebuilderManager.Rebuild?.Invoke();
         }
     }
 

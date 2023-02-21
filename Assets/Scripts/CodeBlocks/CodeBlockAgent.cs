@@ -12,12 +12,14 @@ public class CodeBlockAgent : GridElement
 
     public int health;
     public int energy;
+    public List<int> currentStep;
 
     public override void Start()
     {
         base.Start();
         health = 1;
         energy = 1;
+        currentStep = new List<int>() { 0 };
         CodeBlockManager.onDoCode += DoCode;
 
         UpdateStatsUI();
@@ -29,7 +31,57 @@ public class CodeBlockAgent : GridElement
         {
             return;
         }
-        CodeBlockManager.Instance.codeBlocks[type][CodeBlockManager.Instance.GetStepForType(type, step)].RunCode(this);
+
+
+
+        /*
+        bool isCondition = true;
+        int depth = 0;
+        CodeBlock current = CodeBlockManager.Instance.codeBlocks[type][currentStep[depth]];
+        while (isCondition)
+        {
+            if (current.isCondition)                                    //Check if condition
+            {
+                if (current.scope == null || current.scope.Count <= 0)  //Check if there is code to run in scope
+                {
+                    isCondition = false;
+                    return;                                             //...if not, then just return
+                }
+                else
+                {
+                    depth += 1;                                         //If it is condition, add depth
+                    if (currentStep.Count < depth + 1)                  //Make sure we are not trying to find index depth when it does not exist
+                    {
+                        currentStep.Add(0);
+                    }
+                    if (currentStep[depth] >= current.scope.Count)      //if depth index is greater than scope count, go back up in depth, and proceed to next scope/block
+                    {
+                        currentStep[depth] = 0;
+                        depth -= 1;
+                        currentStep[depth] += 1;
+                    }
+                    else
+                    {
+                        current = current.scope[currentStep[depth]];        //Update currentblock to be the next in scope with new index, found by depth
+                    }
+                }
+            }
+            else
+            {
+                isCondition = false;
+                current.RunCode(this);
+                currentStep[depth] += 1;
+            }
+        }
+
+        CodeBlockManager.Instance.codeBlocks[type][currentStep[0]].RunCode(this);
+        currentStep[0] += 1;
+        if (currentStep[0] >= CodeBlockManager.Instance.codeBlocks[type].Count)
+        {
+            currentStep[0] = 0;
+        }
+        */
+
         UpdateStatsUI();
     }
 

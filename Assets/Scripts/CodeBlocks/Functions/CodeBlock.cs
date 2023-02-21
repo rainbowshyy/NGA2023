@@ -7,10 +7,13 @@ public enum CodeBlockTypes { MoveBlock, EnergyBlock, WaitBlock}
 public abstract class CodeBlock
 {
     public int[] parameters;
+    public bool isCondition;
+    public List<CodeBlock> scope;
 
     protected CodeBlock(int[] param)
     {
         parameters = param;
+        isCondition = false;
     }
 
     public abstract bool ReadyCode(CodeBlockAgent agent);
