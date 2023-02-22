@@ -5,6 +5,7 @@ using UnityEngine;
 public class GridManager : MonoBehaviour
 {
     private HashSet<Vector2> gridCurrentCoords;
+    private List<GameObject> objectsInGrid;
 
     public int width;
     public int height;
@@ -25,6 +26,7 @@ public class GridManager : MonoBehaviour
         Instance = this;
 
         gridCurrentCoords = new HashSet<Vector2>();
+        objectsInGrid = new List<GameObject>();
     }
 
     public bool AddGridElement(GridElement gridElement)
@@ -34,13 +36,68 @@ public class GridManager : MonoBehaviour
             return false;
         }
         gridCurrentCoords.Add(gridElement.gridCoords);
+        objectsInGrid.Add(gridElement.gameObject);
         onAdd?.Invoke(gridElement);
         return true;
     }
 
+    public void RemoveGridElement(GridElement gridElement)
+    {
+        if (gridCurrentCoords.Contains(gridElement.gridCoords))
+        {
+            gridCurrentCoords.Remove(gridElement.gridCoords);
+        }
+        if (objectsInGrid.Contains(gridElement.gameObject))
+        {
+            objectsInGrid.Remove(gridElement.gameObject);
+        }
+        onRemove?.Invoke(gridElement);
+    }
+
+    public CodeBlockAgent GetAgentAtCoords(int x, int y)
+    {
+        CodeBlockAgent agent = null;
+
+        foreach (GameObject g in objectsInGrid)
+        {
+            GridElement comp = g.GetComponent<GridElement>();
+
+            if (comp.gridCoords.x == x && comp.gridCoords.y == y)
+            {
+                agent = g.GetComponent<CodeBlockAgent>();
+                break;
+            }
+        }
+
+        return agent;
+    }
+
+    public List<CodeBlockAgent> GetAgentsInRange(int x, int y, int range, bool includeCenter)
+    {
+        List<CodeBlockAgent> agents = new List<CodeBlockAgent>();
+
+        foreach (GameObject g in objectsInGrid)
+        {
+            GridElement comp = g.GetComponent<GridElement>();
+
+            if (comp.gridCoords.x >= x - range &&
+                comp.gridCoords.x <= x + range &&
+                comp.gridCoords.y >= y - range &&
+                comp.gridCoords.y <= y + range)
+            {
+                if (includeCenter || comp.gridCoords.x != x || comp.gridCoords.y != y)
+                {
+                    agents.Add(g.GetComponent<CodeBlockAgent>());
+                }
+            }
+        }
+
+        return agents;
+    }
+
     public bool TryMoveGridElement(GridElement gridElement, int x, int y)
     {
-        Vector2 newCoords = new Vector2(gridElement.gridCoords.x + x, gridElement.gridCoords.y + y);
+        Vector2Int newCoords = new Vector2Int(gridElement.gridCoords.x + x, gridElement.gridCoords.y + y);
 
         /*
         string debug = "";

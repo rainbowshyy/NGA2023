@@ -33,7 +33,7 @@ public class SpawningManager : MonoBehaviour
         Instance = this;
     }
 
-    public void SpawnCodeAgent(agentType type, Vector2 pos)
+    public void SpawnCodeAgent(agentType type, Vector2Int pos)
     {
         UIDataManager.Instance.TryCreateCodeParent(type);
 
@@ -51,7 +51,7 @@ public class SpawningManager : MonoBehaviour
         ChangePlayerCount(1);
     }
 
-    public void SpawnEnemy(agentType type, Vector2 pos)
+    public void SpawnEnemy(agentType type, Vector2Int pos)
     {
         UIDataManager.Instance.TryCreateEnemyCodeParent(type);
 

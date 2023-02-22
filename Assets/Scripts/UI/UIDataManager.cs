@@ -49,6 +49,8 @@ public class UIDataManager : MonoBehaviour
         CreateCodeBlock(new MoveBlock(new int[2] { 1, 0 }));
         CreateCodeBlock(new EnergyBlock(new int[2] { 1, 0 }));
         CreateCodeBlock(new EnergyGreaterBlock(new int[2] { 1, 0 }));
+        CreateCodeBlock(new EnergyInRange(new int[2] { 1, 1 }));
+        CreateCodeBlock(new DamageInRange(new int[2] { 1, 1 }));
     }
 
     public void TryCreateCodeParent(agentType type)

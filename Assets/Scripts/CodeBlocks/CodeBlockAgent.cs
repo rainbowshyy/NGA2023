@@ -136,5 +136,32 @@ public class CodeBlockAgent : GridElement
         {
             energy = 0;
         }
+        UpdateStatsUI();
+    }
+
+    public void AddHealth(int toAdd)
+    {
+        health += toAdd;
+        if (health <= 0)
+        {
+            OnRemove();
+        }
+        UpdateStatsUI();
+    }
+
+    public void OnRemove()
+    {
+        CodeBlockManager.onDoCode -= DoCode;
+        GridManager.Instance.RemoveGridElement(this);
+        if (team == agentTeam.Enemy)
+        {
+            SpawningManager.Instance.ChangeEnemyCount(-1);
+        }
+        else
+        {
+            SpawningManager.Instance.ChangePlayerCount(-1);
+        }
+        Destroy(UI.gameObject);
+        Destroy(gameObject);
     }
 }

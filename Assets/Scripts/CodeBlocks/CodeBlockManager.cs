@@ -11,6 +11,8 @@ public class CodeBlockManager : MonoBehaviour
     private int step;
     private float speedMult = 0.5f;
 
+    Coroutine codeCo;
+
     public static CodeBlockManager Instance { get; private set; }
 
     private void Awake()
@@ -27,10 +29,21 @@ public class CodeBlockManager : MonoBehaviour
         codeBlocks.Add(agentType.Blue, new List<CodeBlock>());
     }
 
+    public void Start()
+    {
+        GameManager.onRoundLose += StopProgram;
+        GameManager.onRoundWin += StopProgram;
+    }
+
     public void StartProgram()
     {
         step = 0;
-        StartCoroutine(CodeStep());
+        codeCo = StartCoroutine(CodeStep());
+    }
+
+    public void StopProgram()
+    {
+        StopCoroutine(codeCo);
     }
 
     public void ChangeSpeed(bool positive)
@@ -64,7 +77,7 @@ public class CodeBlockManager : MonoBehaviour
         onDoCode?.Invoke(agentTeam.Enemy, step);
         step += 1;
         if (step < 36)
-            StartCoroutine(CodeStep());
+            codeCo = StartCoroutine(CodeStep());
         else
             GameManager.onRoundLose?.Invoke();
     }
@@ -90,6 +103,15 @@ public class CodeBlockManager : MonoBehaviour
                     break;
                 case CodeBlockTypes.WaitBlock:
                     codeBlocksReturn.Add(new WaitBlock(s.parameters));
+                    break;
+                case CodeBlockTypes.EnergyGreaterThan:
+                    codeBlocksReturn.Add(new EnergyGreaterBlock(s.parameters));
+                    break;
+                case CodeBlockTypes.EnergyInRange:
+                    codeBlocksReturn.Add(new EnergyInRange(s.parameters));
+                    break;
+                case CodeBlockTypes.DamageInRange:
+                    codeBlocksReturn.Add(new DamageInRange(s.parameters));
                     break;
             }
         }

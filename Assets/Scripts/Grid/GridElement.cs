@@ -4,8 +4,8 @@ using UnityEngine;
 
 public abstract class GridElement : MonoBehaviour
 {
-    public Vector2 gridCoords;
-    public Vector2 startingCoords;
+    public Vector2Int gridCoords;
+    public Vector2Int startingCoords;
     public AgentUI UI;
 
     public virtual void Start()
