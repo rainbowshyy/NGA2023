@@ -65,6 +65,8 @@ public class CodeBlockManager : MonoBehaviour
         step += 1;
         if (step < 36)
             StartCoroutine(CodeStep());
+        else
+            GameManager.onRoundLose?.Invoke();
     }
 
     public void SetCodeForType(agentType type, List<CodeBlock> codeBlocksParam)
