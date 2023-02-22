@@ -14,6 +14,12 @@ public class SpawningManager : MonoBehaviour
     [SerializeField] private Transform agentParent;
     [SerializeField] private Transform agentUIParent;
 
+    private int enemyCount;
+    private int playerCount;
+
+    public int EnemyCount { get { return enemyCount; } }
+    public int PlayerCount { get { return playerCount; } }
+
     public static SpawningManager Instance { get; private set; }
 
     private void Awake()
@@ -41,6 +47,8 @@ public class SpawningManager : MonoBehaviour
         AgentUI agentUI = UI.GetComponent<AgentUI>();
         agentUI.canvas = agentUIParent.GetComponent<Canvas>();
         codeAgent.UI = agentUI;
+
+        ChangePlayerCount(1);
     }
 
     public void SpawnEnemy(agentType type, Vector2 pos)
@@ -59,5 +67,25 @@ public class SpawningManager : MonoBehaviour
         AgentUI agentUI = UI.GetComponent<AgentUI>();
         agentUI.canvas = agentUIParent.GetComponent<Canvas>();
         codeAgent.UI = agentUI;
+
+        ChangeEnemyCount(1);
+    }
+
+    public void ChangeEnemyCount(int change)
+    {
+        enemyCount += change;
+        if (enemyCount <= 0) 
+        {
+            GameManager.onRoundWin?.Invoke();
+        }
+    }
+
+    public void ChangePlayerCount(int change)
+    {
+        playerCount += change;
+        if (playerCount <= 0)
+        {
+            GameManager.onRoundLose?.Invoke();
+        }
     }
 }
