@@ -13,10 +13,16 @@ public class DropZone : MonoBehaviour, IDropHandler
 
     public bool dragged;
 
-    private void Start()
+    private void OnEnable()
     {
         DragDropManager.onBeginDrag += DoBeginDrag;
         DragDropManager.onStopDrag += DoStopDrag;
+    }
+
+    private void OnDisable()
+    {
+        DragDropManager.onBeginDrag-= DoBeginDrag;
+        DragDropManager.onStopDrag-= DoStopDrag;
     }
 
     public void OnDrop(PointerEventData eventData)

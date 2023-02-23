@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 public class GridVisualizer : MonoBehaviour
 {
     [SerializeField] private Tilemap tilemap;
-    [SerializeField] private Grid grid;
+    public Grid grid;
 
     [SerializeField] private Tile[] tiles;
 

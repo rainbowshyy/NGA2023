@@ -917,6 +917,7 @@ GameObject:
   - component: {fileID: 96134288}
   - component: {fileID: 96134287}
   - component: {fileID: 96134286}
+  - component: {fileID: 96134289}
   m_Layer: 5
   m_Name: PlayButton
   m_TagString: Untagged
@@ -958,7 +959,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -1039,6 +1040,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 96134284}
   m_CullTransparentMesh: 1
+--- !u!114 &96134289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 96134284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d8ef84d70d725e4b915fc81258030e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 96134286}
 --- !u!1 &115439914
 GameObject:
   m_ObjectHideFlags: 0
@@ -3097,8 +3111,7 @@ MonoBehaviour:
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
-  m_Cameras:
-  - {fileID: 639484315}
+  m_Cameras: []
   m_RendererIndex: -1
   m_VolumeLayerMask:
     serializedVersion: 2
@@ -3634,7 +3647,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 00000000
+  m_ApplyToSortingLayers: 4b04896300000000d95207f0
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -3940,11 +3953,6 @@ CanvasRenderer:
 --- !u!4 &639484310 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5861725069656921978, guid: 3034e8d21b01a5c4a84a159fadc81799, type: 3}
-  m_PrefabInstance: {fileID: 401072230}
-  m_PrefabAsset: {fileID: 0}
---- !u!20 &639484315 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 5861725069656921979, guid: 3034e8d21b01a5c4a84a159fadc81799, type: 3}
   m_PrefabInstance: {fileID: 401072230}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &662958949
@@ -6403,6 +6411,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1123758662}
   m_CullTransparentMesh: 1
+--- !u!1 &1129590548
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1129590549}
+  - component: {fileID: 1129590550}
+  m_Layer: 0
+  m_Name: PlayerDataManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1129590549
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129590548}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2008190658}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1129590550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129590548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 284a5966ddf4bea48a03edd9754a6318, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1143257510
 GameObject:
   m_ObjectHideFlags: 0
@@ -8007,8 +8059,8 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1669923915
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -11128,6 +11180,7 @@ Transform:
   - {fileID: 613629338}
   - {fileID: 1648026249}
   - {fileID: 61140630}
+  - {fileID: 1129590549}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11484,6 +11537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0640cdc3cb558b4db03f72a24e32f24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cam: {fileID: 519420031}
   virtualCameraStructs:
   - vCam: 0
     obj: {fileID: 256272285}

@@ -43,6 +43,7 @@ public class UIDataManager : MonoBehaviour
 
     private void Start()
     {
+        /*
         CreateCodeBlock(new MoveBlock(new int[2] { 0, 1 }));
         CreateCodeBlock(new MoveBlock(new int[2] { 0, -1 }));
         CreateCodeBlock(new MoveBlock(new int[2] { -1, 0 }));
@@ -51,6 +52,7 @@ public class UIDataManager : MonoBehaviour
         CreateCodeBlock(new EnergyGreaterBlock(new int[2] { 1, 0 }));
         CreateCodeBlock(new EnergyInRange(new int[2] { 1, 1 }));
         CreateCodeBlock(new DamageInRange(new int[2] { 1, 1 }));
+        */
     }
 
     public void TryCreateCodeParent(agentType type)
@@ -88,7 +90,7 @@ public class UIDataManager : MonoBehaviour
         comp.SetType(type);
         comp.SetDragDropBackground(codeBlockUI);
 
-        List<CodeBlock> codeBlocks = CodeBlockManager.Instance.GetCodeFromStruct(EnemyManager.Instance.EnemyCodeDictionary[type]);
+        List<CodeBlock> codeBlocks = CodeBlockManager.GetCodeListFromStruct(EnemyManager.Instance.EnemyCodeDictionary[type]);
         comp.SetCodeBlocks(codeBlocks);
     }
     public GameObject CreateCodeBlock(CodeBlock codeBlock)

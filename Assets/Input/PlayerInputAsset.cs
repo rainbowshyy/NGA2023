@@ -44,6 +44,15 @@ public partial class @PlayerInputAsset : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LeftMouse"",
+                    ""type"": ""Button"",
+                    ""id"": ""9c88fefa-db6b-42ec-a7d5-e2878a121e9d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -68,6 +77,17 @@ public partial class @PlayerInputAsset : IInputActionCollection2, IDisposable
                     ""action"": ""RightMouse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""aa4282b7-316a-4d59-b968-6a5c5550605b"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftMouse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -78,6 +98,7 @@ public partial class @PlayerInputAsset : IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_MousePos = m_Player.FindAction("MousePos", throwIfNotFound: true);
         m_Player_RightMouse = m_Player.FindAction("RightMouse", throwIfNotFound: true);
+        m_Player_LeftMouse = m_Player.FindAction("LeftMouse", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -139,12 +160,14 @@ public partial class @PlayerInputAsset : IInputActionCollection2, IDisposable
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_MousePos;
     private readonly InputAction m_Player_RightMouse;
+    private readonly InputAction m_Player_LeftMouse;
     public struct PlayerActions
     {
         private @PlayerInputAsset m_Wrapper;
         public PlayerActions(@PlayerInputAsset wrapper) { m_Wrapper = wrapper; }
         public InputAction @MousePos => m_Wrapper.m_Player_MousePos;
         public InputAction @RightMouse => m_Wrapper.m_Player_RightMouse;
+        public InputAction @LeftMouse => m_Wrapper.m_Player_LeftMouse;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -160,6 +183,9 @@ public partial class @PlayerInputAsset : IInputActionCollection2, IDisposable
                 @RightMouse.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRightMouse;
                 @RightMouse.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRightMouse;
                 @RightMouse.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRightMouse;
+                @LeftMouse.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLeftMouse;
+                @LeftMouse.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLeftMouse;
+                @LeftMouse.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLeftMouse;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -170,6 +196,9 @@ public partial class @PlayerInputAsset : IInputActionCollection2, IDisposable
                 @RightMouse.started += instance.OnRightMouse;
                 @RightMouse.performed += instance.OnRightMouse;
                 @RightMouse.canceled += instance.OnRightMouse;
+                @LeftMouse.started += instance.OnLeftMouse;
+                @LeftMouse.performed += instance.OnLeftMouse;
+                @LeftMouse.canceled += instance.OnLeftMouse;
             }
         }
     }
@@ -178,5 +207,6 @@ public partial class @PlayerInputAsset : IInputActionCollection2, IDisposable
     {
         void OnMousePos(InputAction.CallbackContext context);
         void OnRightMouse(InputAction.CallbackContext context);
+        void OnLeftMouse(InputAction.CallbackContext context);
     }
 }

@@ -12,7 +12,7 @@ public class UIProgressBarElement : MonoBehaviour
     [SerializeField] private Sprite inactiveSprite;
     [SerializeField] private Sprite activeSprite;
 
-    public void SetActive(bool active, int left)
+    public void SetActive(bool active, int left, bool first)
     {
         if (active)
         {
@@ -22,7 +22,10 @@ public class UIProgressBarElement : MonoBehaviour
         else
         {
             image.sprite = inactiveSprite;
+        }
+        if (!active || !first)
+        {
             text.text = "";
-        }   
+        }
     }
 }

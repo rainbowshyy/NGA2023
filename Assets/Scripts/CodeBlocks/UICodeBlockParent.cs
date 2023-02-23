@@ -24,9 +24,14 @@ public class UICodeBlockParent : MonoBehaviour
         get { return sprite; }
     }
 
-    private void Awake()
+    private void OnEnable()
     {
         DragDropManager.onStopDrag += SetCodeForManager;
+    }
+
+    private void OnDisable()
+    {
+        DragDropManager.onStopDrag -= SetCodeForManager;
     }
 
     public void SetColor(Color color)

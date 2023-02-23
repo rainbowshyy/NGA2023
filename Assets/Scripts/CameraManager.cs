@@ -14,6 +14,7 @@ public struct VirtualCameraStruct
 
 public class CameraManager : MonoBehaviour
 {
+    public Camera cam;
     [SerializeField] private List<VirtualCameraStruct> virtualCameraStructs;
     private Dictionary<VCam, CinemachineVirtualCamera> vCams;
 
@@ -51,13 +52,17 @@ public class CameraManager : MonoBehaviour
             vCams.Add(v.vCam, v.obj);
         }
 
-        GridVisualizer.onNewCenter += MoveMainGridCamera;
         offset = new Vector2(2.5f, 0);
     }
 
-    private void Start()
+    private void OnEnable()
     {
+        GridVisualizer.onNewCenter += MoveMainGridCamera;
+    }
 
+    private void OnDisable()
+    {
+        GridVisualizer.onNewCenter -= MoveMainGridCamera;
     }
 
     private void MoveMainGridCamera()

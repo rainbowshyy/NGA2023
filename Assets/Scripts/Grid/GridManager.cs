@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
-    private HashSet<Vector2> gridCurrentCoords;
+    private HashSet<Vector2Int> gridCurrentCoords;
     private List<GameObject> objectsInGrid;
 
     public int width;
@@ -25,7 +27,7 @@ public class GridManager : MonoBehaviour
         }
         Instance = this;
 
-        gridCurrentCoords = new HashSet<Vector2>();
+        gridCurrentCoords = new HashSet<Vector2Int>();
         objectsInGrid = new List<GameObject>();
     }
 
@@ -108,8 +110,28 @@ public class GridManager : MonoBehaviour
         Debug.Log(debug);
         */
 
-        if (gridCurrentCoords.Contains(newCoords))
-            Debug.Log("coll");
+        if (
+            gridCurrentCoords.Contains(newCoords) ||
+            newCoords.x < 0 ||
+            newCoords.x >= width ||
+            newCoords.y < 0 ||
+            newCoords.y >= height
+            )
+        {
+            return false;
+        }
+
+        gridCurrentCoords.Remove(gridElement.gridCoords);
+        gridCurrentCoords.Add(newCoords);
+        gridElement.gridCoords = newCoords;
+        onMove?.Invoke(gridElement, newCoords);
+
+        return true;
+    }
+
+    public bool TrySetGridElement(GridElement gridElement, int x, int y)
+    {
+        Vector2Int newCoords = new Vector2Int(x, y);
 
         if (
             gridCurrentCoords.Contains(newCoords) ||
@@ -128,5 +150,33 @@ public class GridManager : MonoBehaviour
         onMove?.Invoke(gridElement, newCoords);
 
         return true;
+    }
+
+    public bool ElementAtTile(int x, int y)
+    {
+        return gridCurrentCoords.Contains(new Vector2Int(x, y));
+    }
+
+    public Vector2Int GetRandomTileInRect(int xMin, int yMin, int xMax, int yMax)
+    {
+        Vector2Int randomTile;
+
+        HashSet<Vector2Int> freeTiles= new HashSet<Vector2Int>();
+        for (int x = xMin; x < xMax + 1; x++)
+        {
+            for (int y = yMin; y < yMax + 1; y++)
+            {
+                if (x >= 0 && x < width && y >= 0 && y < height && !gridCurrentCoords.Contains(new Vector2Int(x, y)))
+                {
+                    freeTiles.Add(new Vector2Int(x, y));
+                }
+            }
+        }
+
+        System.Random rand = new System.Random();
+
+        randomTile = freeTiles.ElementAt(rand.Next(freeTiles.Count));
+
+        return randomTile;
     }
 }

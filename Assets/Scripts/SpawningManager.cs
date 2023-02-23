@@ -33,6 +33,14 @@ public class SpawningManager : MonoBehaviour
         Instance = this;
     }
 
+    public void SpawnPlayerAgents()
+    {
+        foreach (playerAgentData p in PlayerDataManager.Instance.playerAgents)
+        {
+            SpawnCodeAgent(p.type, p.pos);
+        }
+    }
+
     public void SpawnCodeAgent(agentType type, Vector2Int pos)
     {
         UIDataManager.Instance.TryCreateCodeParent(type);
@@ -87,5 +95,10 @@ public class SpawningManager : MonoBehaviour
         {
             GameManager.onRoundLose?.Invoke();
         }
+    }
+
+    public static void SpawnCodeBlock(CodeBlockStruct code)
+    {
+        UIDataManager.Instance.CreateCodeBlock(CodeBlockManager.GetCodeFromStruct(code));
     }
 }

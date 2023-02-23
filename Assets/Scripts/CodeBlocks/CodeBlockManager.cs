@@ -5,6 +5,7 @@ using UnityEngine;
 public class CodeBlockManager : MonoBehaviour
 {
     public static System.Action<agentTeam, int> onDoCode;
+    public static System.Action onStartProgram;
 
     public Dictionary<agentType, List<CodeBlock>> codeBlocks;
 
@@ -29,21 +30,30 @@ public class CodeBlockManager : MonoBehaviour
         codeBlocks.Add(agentType.Blue, new List<CodeBlock>());
     }
 
-    public void Start()
+    private void OnEnable()
     {
         GameManager.onRoundLose += StopProgram;
         GameManager.onRoundWin += StopProgram;
     }
 
+    private void OnDisable()
+    {
+        GameManager.onRoundLose -= StopProgram;
+        GameManager.onRoundWin -= StopProgram;
+    }
+
     public void StartProgram()
     {
         step = 0;
+        onStartProgram?.Invoke();
         codeCo = StartCoroutine(CodeStep());
+        InputManager.onToggleInputs?.Invoke(false);
     }
 
     public void StopProgram()
     {
         StopCoroutine(codeCo);
+        InputManager.onToggleInputs?.Invoke(true);
     }
 
     public void ChangeSpeed(bool positive)
@@ -87,7 +97,7 @@ public class CodeBlockManager : MonoBehaviour
         codeBlocks[type] = codeBlocksParam;
     }
 
-    public List<CodeBlock> GetCodeFromStruct(List<CodeBlockStruct> codeBlocksParam)
+    public static List<CodeBlock> GetCodeListFromStruct(List<CodeBlockStruct> codeBlocksParam)
     {
         List<CodeBlock> codeBlocksReturn = new List<CodeBlock>();
 
@@ -116,6 +126,34 @@ public class CodeBlockManager : MonoBehaviour
             }
         }
 
+        return codeBlocksReturn;
+    }
+
+    public static CodeBlock GetCodeFromStruct(CodeBlockStruct codeBlocksParam)
+    {
+        CodeBlock codeBlocksReturn = new WaitBlock(codeBlocksParam.parameters);
+
+        switch (codeBlocksParam.code)
+        {
+            case CodeBlockTypes.MoveBlock:
+                codeBlocksReturn = new MoveBlock(codeBlocksParam.parameters);
+                break;
+            case CodeBlockTypes.EnergyBlock:
+                codeBlocksReturn = new EnergyBlock(codeBlocksParam.parameters);
+                break;
+            case CodeBlockTypes.WaitBlock:
+                codeBlocksReturn = new WaitBlock(codeBlocksParam.parameters);
+                break;
+            case CodeBlockTypes.EnergyGreaterThan:
+                codeBlocksReturn = new EnergyGreaterBlock(codeBlocksParam.parameters);
+                break;
+            case CodeBlockTypes.EnergyInRange:
+                codeBlocksReturn = new EnergyInRange(codeBlocksParam.parameters);
+                break;
+            case CodeBlockTypes.DamageInRange:
+                codeBlocksReturn = new DamageInRange(codeBlocksParam.parameters);
+                break;
+        }
         return codeBlocksReturn;
     }
 }

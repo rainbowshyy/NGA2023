@@ -16,15 +16,35 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
 
     private bool dragged = false;
 
+    private bool inputsEnabled;
+
     private void Start()
+    {
+        ToggleInputsEnabled(true);
+    }
+
+    private void OnEnable()
     {
         DragDropManager.onBeginDrag += DoBeginDrag;
         DragDropManager.onStopDrag += DoStopDrag;
+        InputManager.onToggleInputs += ToggleInputsEnabled;
+    }
+
+    private void OnDisable()
+    {
+        DragDropManager.onBeginDrag -= DoBeginDrag;
+        DragDropManager.onStopDrag -= DoStopDrag;
+        InputManager.onToggleInputs -= ToggleInputsEnabled;
+    }
+
+    private void ToggleInputsEnabled(bool enabled)
+    {
+        inputsEnabled = enabled;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Right)
+        if (eventData.button == PointerEventData.InputButton.Right || (!inputsEnabled && canBeDropped))
         {
             return;
         }
@@ -37,9 +57,7 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("begin");
-
-        if (eventData.button == PointerEventData.InputButton.Right)
+        if (eventData.button == PointerEventData.InputButton.Right || (!inputsEnabled && canBeDropped))
         {
             return;
         }
@@ -67,7 +85,7 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Right)
+        if (eventData.button == PointerEventData.InputButton.Right || (!inputsEnabled && canBeDropped))
         {
             return;
         }
@@ -86,13 +104,13 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
     {
         if (!dragged)
         {
-            gameObject.SetActive(false);
+            canvasGroup.blocksRaycasts = false;
         }
     }
 
     private void DoStopDrag()
     {
-        gameObject.SetActive(true);
+        canvasGroup.blocksRaycasts = true;
     }
 
     public void SetAnchorParent(RectTransform tf, int index)

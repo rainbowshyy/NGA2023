@@ -7,6 +7,11 @@ public struct CodeBlockStruct
 {
     public CodeBlockTypes code;
     public int[] parameters;
+    public CodeBlockStruct(CodeBlockTypes code, int[] parameters)
+    {
+        this.code = code;
+        this.parameters = parameters;
+    }
 }
 
 [System.Serializable]
