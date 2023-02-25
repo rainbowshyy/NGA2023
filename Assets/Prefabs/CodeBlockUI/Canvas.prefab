@@ -446,7 +446,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 664, y: -248}
+  m_AnchoredPosition: {x: 764, y: -248}
   m_SizeDelta: {x: 448, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1411939014126594960
@@ -714,7 +714,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: whileGame.exe
+  m_text: whileGame/Assets/Scripts/Gameplay/Code
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 72af2c80f5671b3449560b5608169044, type: 2}
   m_sharedMaterial: {fileID: 8504046755768492377, guid: 72af2c80f5671b3449560b5608169044, type: 2}
@@ -1281,7 +1281,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 912, y: -2}
+  m_AnchoredPosition: {x: 1012, y: -2}
   m_SizeDelta: {x: 64, y: 448}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &225238077375343860
@@ -2223,7 +2223,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &7710442172362592720
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -179,4 +179,14 @@ public class GridManager : MonoBehaviour
 
         return randomTile;
     }
+
+    public void ResetObjects()
+    {
+        gridCurrentCoords = new HashSet<Vector2Int>();
+        foreach (GameObject g in objectsInGrid)
+        {
+            g.GetComponent<GridElement>().ResetPosition();
+            gridCurrentCoords.Add(g.GetComponent<GridElement>().gridCoords);
+        }
+    }
 }

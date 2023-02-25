@@ -22,6 +22,6 @@ public class EnergyInRange : CodeBlock
 
     public override string ShowSyntax()
     {
-        return "<color=#ebca54>energy</color> <sprite index=9> += " + parameters[0] + " to others in Range ( " + parameters[1] + " )";
+        return "<color=#ebca54>energy</color> <sprite index=9> += " + parameters[0] + " in Range ( " + parameters[1] + " )";
     }
 }

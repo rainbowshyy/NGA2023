@@ -22,6 +22,6 @@ public class DamageInRange : CodeBlock
 
     public override string ShowSyntax()
     {
-        return "<color=#ee5644>health</color> <sprite index=8> -= " + parameters[0] + " to others in Range ( " + parameters[1] + " )";
+        return "<color=#ee5644>health</color> <sprite index=8> -= " + parameters[0] + " in Range ( " + parameters[1] + " )";
     }
 }

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 340ec09ece17df54092d3cad4708a5ff, type: 3}
+  m_Name: C_Energy1
+  m_EditorClassIdentifier: 
+  rarity: 0
+  elements:
+  - upgrades:
+    - {fileID: 11400000, guid: 3006747506b2a664daa57a262ed03e48, type: 2}
+  - upgrades:
+    - {fileID: 11400000, guid: 17c29e3cb6af9ac4a9a1d47cb7525f6e, type: 2}
+    - {fileID: 11400000, guid: 98fe6e8d27134d847b52b7ca1cd6eb1a, type: 2}
+  - upgrades:
+    - {fileID: 11400000, guid: a9b74d8e92132964b8400facd84a0ed1, type: 2}
+    - {fileID: 11400000, guid: 943929d9fb6d10d4b894fca5a7532e05, type: 2}
+    - {fileID: 11400000, guid: f7619111ef05e654684919fae3ba1118, type: 2}
+    - {fileID: 11400000, guid: b286d94f1683f6a48b7bf57c27680f3c, type: 2}

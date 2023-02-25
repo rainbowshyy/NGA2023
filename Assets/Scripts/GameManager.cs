@@ -7,6 +7,9 @@ public class GameManager : MonoBehaviour
 {
     public static Action onRoundLose;
     public static Action onRoundWin;
+    public static Action onNewRound;
+
+    private Stages currentStage;
 
     public static GameManager Instance { get; private set; }
 
@@ -24,22 +27,49 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         StartGame();
-        SpawningManager.Instance.SpawnEnemy(agentType.Blob, new Vector2Int(3, 6));
+    }
+
+    private void OnEnable()
+    {
         onRoundLose += LoseRound;
+        onNewRound += NewRound;
+    }
+
+    private void OnDisable()
+    {
+        onRoundLose -= LoseRound;
+        onNewRound -= NewRound;
     }
 
     private void StartGame()
     {
+        currentStage = Stages.Intro;
+
         PlayerDataManager.Instance.AddAgent(agentType.Blue);
 
         SpawningManager.Instance.SpawnPlayerAgents();
 
-        SpawningManager.SpawnCodeBlock(new CodeBlockStruct(CodeBlockTypes.MoveBlock, new int[2] { 0, 1 }));
-        SpawningManager.SpawnCodeBlock(new CodeBlockStruct(CodeBlockTypes.DamageInRange, new int[2] { 1, 1 }));
+        SpawningManager.SpawnCodeBlock(new CodeBlockStruct(CodeBlockTypes.MoveBlock, new int[2] { 0, 1 }, null));
+        SpawningManager.SpawnCodeBlock(new CodeBlockStruct(CodeBlockTypes.DamageInRange, new int[2] { 1, 1 }, null));
+
+        EncounterManager.Instance.PopulatePool(currentStage);
+        EncounterManager.Instance.NextInPool();
+    }
+
+    private void NewRound()
+    {
+        GridManager.Instance.ResetObjects();
+        EncounterManager.Instance.NextInPool();
     }
 
     private void LoseRound()
     {
+        StartCoroutine(DelayLoadScene());
+    }
+
+    IEnumerator DelayLoadScene()
+    {
+        yield return new WaitForEndOfFrame();
         SceneManager.LoadScene(0);
     }
 }

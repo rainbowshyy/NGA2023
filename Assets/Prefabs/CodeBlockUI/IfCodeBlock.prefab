@@ -164,9 +164,9 @@ RectTransform:
   m_Father: {fileID: 6073139352716762093}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 43.505, y: -16}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 45.005, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &843977877021841373
@@ -457,8 +457,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: If ( Energy > 2 )
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 72af2c80f5671b3449560b5608169044, type: 2}
-  m_sharedMaterial: {fileID: 8504046755768492377, guid: 72af2c80f5671b3449560b5608169044, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0fb59f36bc775c44988061cf1304b3af, type: 2}
+  m_sharedMaterial: {fileID: 1513672503913689547, guid: 0fb59f36bc775c44988061cf1304b3af, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -490,7 +490,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 1024
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -518,7 +518,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: 0, w: 2}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -730,7 +730,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 3221e99ca887a104a85e2526007ce5ad, type: 3}
-  m_Type: 1
+  m_Type: 2
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4

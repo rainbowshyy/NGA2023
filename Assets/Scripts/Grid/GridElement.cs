@@ -30,4 +30,15 @@ public abstract class GridElement : MonoBehaviour
     {
         return GridManager.Instance.TryMoveGridElement(this, x, y);
     }
+
+    public void SetStartingCoords(Vector2Int pos)
+    {
+        startingCoords = pos;
+    }
+
+    public void ResetPosition()
+    {
+        gridCoords = startingCoords;
+        UpdatePosition();
+    }
 }

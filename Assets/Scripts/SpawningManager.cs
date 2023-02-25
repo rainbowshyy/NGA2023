@@ -70,6 +70,7 @@ public class SpawningManager : MonoBehaviour
         codeAgent.team = agentTeam.Enemy;
         codeAgent.type = type;
 
+        go.GetComponent<Animator>().runtimeAnimatorController = EnemyManager.Instance.EnemyAnimatorDictionary[type];
 
         GameObject UI = Instantiate(enemyUIPref, agentUIParent);
         AgentUI agentUI = UI.GetComponent<AgentUI>();

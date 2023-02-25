@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: eef0335ca7ee71e44bbde85025185d4c
+guid: 2259420c4287b534cb16e5231e4c21f5
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,10 +9,10 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - pixelFont
+  - whileGameFont
   fallbackFontReferences: []
   customCharacters: 
-  fontRenderingMode: 0
+  fontRenderingMode: 2
   ascentCalculationMode: 1
   useLegacyBoundsCalculation: 0
   shouldRoundAdvanceValue: 1

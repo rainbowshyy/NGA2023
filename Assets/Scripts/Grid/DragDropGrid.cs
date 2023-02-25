@@ -55,7 +55,10 @@ public class DragDropGrid : MonoBehaviour
             InputManager.onMousePos -= Move;
             if (tileCurrent.y < 2)
             {
-                GridManager.Instance.TrySetGridElement(GetComponent<GridElement>(), tileCurrent.x, tileCurrent.y);
+                if (GridManager.Instance.TrySetGridElement(GetComponent<GridElement>(), tileCurrent.x, tileCurrent.y))
+                {
+                    GetComponent<GridElement>().SetStartingCoords(new Vector2Int(tileCurrent.x, tileCurrent.y));
+                }
             }
             GetComponent<GridElement>().UpdatePosition();
         }

@@ -8,4 +8,5 @@ public struct StructTypeUI
     public agentType type;
     public Color color;
     public string name;
+    public Sprite icon;
 }

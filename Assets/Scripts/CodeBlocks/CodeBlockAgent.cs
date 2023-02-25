@@ -20,9 +20,18 @@ public class CodeBlockAgent : GridElement
         health = 1;
         energy = 1;
         currentStep = new List<int>() { 0 };
-        CodeBlockManager.onDoCode += DoCode;
 
         UpdateStatsUI();
+    }
+
+    private void OnEnable()
+    {
+        CodeBlockManager.onDoCode += DoCode;
+    }
+
+    private void OnDisable()
+    {
+        CodeBlockManager.onDoCode -= DoCode;
     }
 
     private void DoCode(agentTeam codeTeam, int step)
@@ -151,7 +160,6 @@ public class CodeBlockAgent : GridElement
 
     public void OnRemove()
     {
-        CodeBlockManager.onDoCode -= DoCode;
         GridManager.Instance.RemoveGridElement(this);
         if (team == agentTeam.Enemy)
         {

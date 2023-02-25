@@ -25,12 +25,14 @@ public class UIProgressBarManager : MonoBehaviour
     {
         CodeBlockManager.onDoCode += SetStep;
         CodeBlockManager.onStartProgram += SetAllInactive;
+        GameManager.onNewRound += SetAllInactive;
     }
 
     private void OnDisable()
     {
         CodeBlockManager.onDoCode -= SetStep;
         CodeBlockManager.onStartProgram -= SetAllInactive;
+        GameManager.onNewRound -= SetAllInactive;
     }
 
     public void SetStep(agentTeam team, int step)

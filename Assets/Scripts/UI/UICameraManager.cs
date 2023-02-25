@@ -43,15 +43,15 @@ public class UICameraManager : MonoBehaviour
         toMove = Vector2.zero;
 
         Vector2 step;
-        if (windowVisible && CameraManager.Instance.Offset.x > -3.125f)
+        if (windowVisible && CameraManager.Instance.Offset.x > -5f)
         {
             step = windowScrollSpeed * Time.deltaTime * Vector2.right;
             //windowContainer.anchoredPosition += step;
             CameraManager.Instance.Offset -= step / 64f;
-            if (CameraManager.Instance.Offset.x < -3.125f)
+            if (CameraManager.Instance.Offset.x < -5f)
             {
                 //windowContainer.anchoredPosition = Vector2.zero;
-                CameraManager.Instance.Offset = new Vector2(-3.125f, 0f);
+                CameraManager.Instance.Offset = new Vector2(-5f, 0f);
             }
         }
         else if (!windowVisible && CameraManager.Instance.Offset.x < 2.5f)
@@ -82,9 +82,9 @@ public class UICameraManager : MonoBehaviour
             toMove += (newPos * new Vector2(Screen.width, Screen.height) - lastPos);
         lastPos = newPos * new Vector2(Screen.width, Screen.height);
 
-        if (newPos.x > 0.9f && windowVisible)
+        if (newPos.x > 0.95f && windowVisible)
             windowVisible = false;
-        else if (newPos.x < 0.1f && !windowVisible)
+        else if (newPos.x < 0.05f && !windowVisible)
         {
             windowVisible = true;
         }

@@ -7,6 +7,7 @@ public class UIDataManager : MonoBehaviour
     [SerializeField] private GameObject codeBlockPref;
     [SerializeField] private GameObject ifCodeBlockPref;
     [SerializeField] private GameObject codeBlockEnemyPref;
+    [SerializeField] private GameObject ifCodeBlockEnemyPref;
     [SerializeField] private GameObject codeParentPref;
     [SerializeField] private GameObject codeParentEnemyPref;
 
@@ -15,6 +16,7 @@ public class UIDataManager : MonoBehaviour
     [SerializeField] private StructTypeUI[] typeUIStruct;
     public static Dictionary<agentType, Color> typeColor;
     public static Dictionary<agentType, string> typeName;
+    public static Dictionary<agentType, Sprite> typeIcon;
 
     public HashSet<agentType> CodeParents { get; private set; }
 
@@ -32,10 +34,12 @@ public class UIDataManager : MonoBehaviour
 
         typeColor = new Dictionary<agentType, Color>();
         typeName = new Dictionary<agentType, string>();
+        typeIcon = new Dictionary<agentType, Sprite>();
         foreach (StructTypeUI s in typeUIStruct)
         {
             typeColor.Add(s.type, s.color);
             typeName.Add(s.type, s.name);
+            typeIcon.Add(s.type, s.icon);
         }
 
         CodeParents = new HashSet<agentType>();
@@ -91,7 +95,7 @@ public class UIDataManager : MonoBehaviour
         comp.SetDragDropBackground(codeBlockUI);
 
         List<CodeBlock> codeBlocks = CodeBlockManager.GetCodeListFromStruct(EnemyManager.Instance.EnemyCodeDictionary[type]);
-        comp.SetCodeBlocks(codeBlocks);
+        comp.SetCodeBlocksInit(codeBlocks);
     }
     public GameObject CreateCodeBlock(CodeBlock codeBlock)
     {
@@ -118,7 +122,16 @@ public class UIDataManager : MonoBehaviour
     {
         Vector3 pos = new Vector3(450f + Random.Range(-200f, 200f), -260f + Random.Range(-100f, 100f), 0);
 
-        GameObject go = Instantiate(codeBlockEnemyPref, codeBlockUI);
+        GameObject go;
+
+        if (codeBlock.isCondition)
+        {
+            go = Instantiate(ifCodeBlockEnemyPref, codeBlockUI);
+        }
+        else
+        {
+            go = Instantiate(codeBlockEnemyPref, codeBlockUI);
+        }
         go.GetComponent<RectTransform>().anchoredPosition = pos;
         UICodeBlock comp = go.GetComponent<UICodeBlock>();
         comp.SetCode(codeBlock);

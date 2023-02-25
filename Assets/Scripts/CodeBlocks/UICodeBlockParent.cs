@@ -9,6 +9,7 @@ public class UICodeBlockParent : MonoBehaviour
     [SerializeField] private agentType type;
 
     [SerializeField] private Image sprite;
+    [SerializeField] private Image icon;
     [SerializeField] private TextMeshProUGUI text;
     [SerializeField] private RectTransform codeParent;
 
@@ -54,6 +55,7 @@ public class UICodeBlockParent : MonoBehaviour
     {
         SetColor(UIDataManager.typeColor[type]);
         SetText(UIDataManager.typeName[type]);
+        icon.sprite = UIDataManager.typeIcon[type];
     }
 
     public void SetDragDropBackground(RectTransform rectTransform)
@@ -82,12 +84,21 @@ public class UICodeBlockParent : MonoBehaviour
         CodeBlockManager.Instance.SetCodeForType(type, GetCodeBlocks());
     }
 
-    public void SetCodeBlocks(List<CodeBlock> code)
+    public void SetCodeBlocksInit(List<CodeBlock> codeBlocks)
+    {
+        SetCodeBlocks(codeBlocks, codeParent);
+    }
+
+    public void SetCodeBlocks(List<CodeBlock> code, Transform parent)
     {
         foreach (CodeBlock c in code)
         {
             GameObject go = UIDataManager.Instance.CreateEnemyCodeBlock(c);
-            go.transform.SetParent(codeParent);
+            go.transform.SetParent(parent);
+            if (c.scope != null && c.scope.Count > 0)
+            {
+                SetCodeBlocks(c.scope, go.GetComponent<UICodeBlock>().codeParent);
+            }
         }
         SetCodeForManager();
     }
