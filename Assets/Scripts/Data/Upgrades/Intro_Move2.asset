@@ -15,4 +15,8 @@ MonoBehaviour:
   rarity: 3
   elements:
   - upgrades:
+    - {fileID: 11400000, guid: 2a25b6a6b504f5c4085d47f2f2ee669c, type: 2}
     - {fileID: 11400000, guid: 1244ba3ff37501f4c97fca39432c1bb8, type: 2}
+  - upgrades:
+    - {fileID: 11400000, guid: 3006747506b2a664daa57a262ed03e48, type: 2}
+    - {fileID: 11400000, guid: f2f0bffe7ab43f046aa295eaed8fc55e, type: 2}

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Stages { Intro, Act1, Act2, Act3}
+public enum Stages { Intro, Intro2, Act1, Act2, Act3}
 
 [System.Serializable]
 public struct EncounterElement

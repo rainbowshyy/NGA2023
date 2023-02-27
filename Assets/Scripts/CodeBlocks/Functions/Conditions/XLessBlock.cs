@@ -18,7 +18,7 @@ public class XLessBlock : ConditionBlock
 
     public override string ShowSyntax()
     {
-        return "If <color=#4eb2f3><b> X</b></color> < " + parameters[0];
+        return "If <color=#4eb2f3><b> X</b></color>  <  " + parameters[0];
     }
 
     public override void VisualCode(CodeBlockAgent agent)

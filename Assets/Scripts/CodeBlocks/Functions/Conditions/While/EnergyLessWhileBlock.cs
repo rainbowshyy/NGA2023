@@ -18,7 +18,7 @@ public class EnergyLessWhileBlock : WhileBlock
 
     public override string ShowSyntax()
     {
-        return "While <color=#ebca54>energy</color> <sprite index=9> < " + parameters[0];
+        return "While <color=#ebca54>PWR</color><sprite index=9>  <  " + parameters[0];
     }
 
     public override void VisualCode(CodeBlockAgent agent)

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: DamageRange2
   m_EditorClassIdentifier: 
   type: 6
-  parameter1Range: 01000000
-  parameter2Range: 02000000
+  parameter1Range: 02000000
+  parameter2Range: 00000000
   parameter3Range: 

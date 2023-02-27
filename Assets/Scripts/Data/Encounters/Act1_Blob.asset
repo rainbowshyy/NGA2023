@@ -12,14 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 377138a31a2f15d41a260658ce0e949d, type: 3}
   m_Name: Act1_Blob
   m_EditorClassIdentifier: 
-  stage: 1
+  stage: 2
   elements:
   - type: 1
     positions:
-    - {x: 3, y: 6}
+    - {x: 2, y: 6}
   - type: 1
     positions:
     - {x: 0, y: 3}
   - type: 1
     positions:
     - {x: 6, y: 3}
+  - type: 1
+    positions:
+    - {x: 4, y: 6}

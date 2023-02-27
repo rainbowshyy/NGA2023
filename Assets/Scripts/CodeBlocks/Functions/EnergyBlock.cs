@@ -19,7 +19,7 @@ public class EnergyBlock : CodeBlock
 
     public override string ShowSyntax()
     {
-        return "<color=#ebca54>energy</color> <sprite index=9> += " + parameters[0];
+        return "<color=#ebca54>PWR</color><sprite index=9>  +=  " + parameters[0];
     }
 
     public override void VisualCode(CodeBlockAgent agent)

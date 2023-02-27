@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 377138a31a2f15d41a260658ce0e949d, type: 3}
   m_Name: Act3_TEMP
   m_EditorClassIdentifier: 
-  stage: 3
+  stage: 4
   elements:
   - type: 1
     positions:

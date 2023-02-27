@@ -154,6 +154,11 @@ public class CodeBlockAgent : GridElement
             energy = 0;
         }
         UpdateStatsUI();
+        if (UI == null)
+        {
+            return;
+        }
+        UI.EnergyAnimation();
     }
 
     public void AddHealth(int toAdd)
@@ -164,6 +169,11 @@ public class CodeBlockAgent : GridElement
             OnRemove();
         }
         UpdateStatsUI();
+        if (UI == null)
+        {
+            return;
+        }
+        UI.HealthAnimation();
     }
 
     public void OnRemove()

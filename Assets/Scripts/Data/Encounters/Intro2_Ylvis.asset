@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 377138a31a2f15d41a260658ce0e949d, type: 3}
-  m_Name: Act1_Ylvis
+  m_Name: Intro2_Ylvis
   m_EditorClassIdentifier: 
   stage: 1
   elements:

@@ -13,16 +13,17 @@ public class DamageInRangeBlock : CodeBlock
 
     public override bool RunCode(CodeBlockAgent agent)
     {
-        foreach (CodeBlockAgent c in GridManager.Instance.GetAgentsInRange(agent.gridCoords.x, agent.gridCoords.y, parameters[1], false))
+        foreach (CodeBlockAgent c in GridManager.Instance.GetAgentsInRange(agent.gridCoords.x, agent.gridCoords.y, parameters[0], false))
         {
-            c.AddHealth(-parameters[0]);
+            c.AddHealth(-agent.energy);
         }
+        agent.energy = 0;
         return true;
     }
 
     public override string ShowSyntax()
     {
-        return "<color=#ee5644>health</color> <sprite index=8> -= " + parameters[0] + " in Range ( " + parameters[1] + " )";
+        return "Range( " + parameters[0] + " ) . <color=#ee5644>HP</color><sprite index=8>  -=  <color=#ebca54>PWR</color><sprite index=9>\n<color=#ebca54>PWR</color><sprite index=9>  =  0";
     }
 
     public override void VisualCode(CodeBlockAgent agent)

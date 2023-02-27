@@ -70,10 +70,10 @@ public class MoveBlock : CodeBlock
 
         if (spriteIndex == 8)
         {
-            return "Move ( <color=#4eb2f3><b>" + parameters[0].ToString() + "</b></color> , <color=#f38f4e><b>" + parameters[1].ToString() + "</b></color> )";
+            return "Move( <color=#4eb2f3><b>" + parameters[0].ToString() + "</b></color> , <color=#f38f4e><b>" + parameters[1].ToString() + "</b></color> )";
         }
 
-        return "Move ( <color=#4eb2f3><b>" + parameters[0].ToString() + "</b></color> , <color=#f38f4e><b>" + parameters[1].ToString() + "</b></color> ) <sprite index=" + spriteIndex + ">";
+        return "Move( <color=#4eb2f3><b>" + parameters[0].ToString() + "</b></color> , <color=#f38f4e><b>" + parameters[1].ToString() + "</b></color> )<sprite index=" + spriteIndex + ">";
     }
 
     public override void VisualCode(CodeBlockAgent agent)

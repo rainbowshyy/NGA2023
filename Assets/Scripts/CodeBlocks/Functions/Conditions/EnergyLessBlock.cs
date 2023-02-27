@@ -18,7 +18,7 @@ public class EnergyLessBlock : ConditionBlock
 
     public override string ShowSyntax()
     {
-        return "If <color=#ebca54>energy</color> <sprite index=9> < " + parameters[0];
+        return "If <color=#ebca54>PWR</color><sprite index=9>  <  " + parameters[0];
     }
 
     public override void VisualCode(CodeBlockAgent agent)

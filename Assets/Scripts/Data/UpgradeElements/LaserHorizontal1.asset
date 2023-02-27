@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: LaserHorizontal1
   m_EditorClassIdentifier: 
   type: 19
-  parameter1Range: 01000000
-  parameter2Range: ffffffff01000000
-  parameter3Range: 00000000
+  parameter1Range: ffffffff01000000
+  parameter2Range: 00000000
+  parameter3Range: 

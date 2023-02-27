@@ -16,6 +16,6 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 316ac20538ee06e4381d935273d08d91, type: 3}
   controller: {fileID: 9100000, guid: f8177cb79e17cf343a96d9dd71913b63, type: 2}
   enemyCode: []
-  agentName: Sir.kel
+  agentName: Sir. kel
   color: {r: 1, g: 0.41960788, b: 0.38823533, a: 1}
   startingHealth: 1

@@ -36,10 +36,10 @@ public class EffectManager : MonoBehaviour
                 EnergyUp(newPos);
                 break;
             case EffectTypes.damageRange:
-                DamageRange(newPos, parameters[1]);
+                DamageRange(newPos, parameters[0]);
                 break;
             case EffectTypes.damageLaser:
-                DamageRaycast(pos, parameters[1], parameters[2], point);
+                DamageRaycast(pos, parameters[0], parameters[1], point);
                 break;
         }
     }

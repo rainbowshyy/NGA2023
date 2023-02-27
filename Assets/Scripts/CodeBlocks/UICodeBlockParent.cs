@@ -95,11 +95,13 @@ public class UICodeBlockParent : MonoBehaviour
         {
             GameObject go = UIDataManager.Instance.CreateEnemyCodeBlock(c);
             go.transform.SetParent(parent);
+            LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)go.transform);
             if (c.scope != null && c.scope.Count > 0)
             {
                 SetCodeBlocks(c.scope, go.GetComponent<UICodeBlock>().codeParent);
             }
         }
+        LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)transform);
         SetCodeForManager();
     }
 }

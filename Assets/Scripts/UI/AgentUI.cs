@@ -9,6 +9,7 @@ public class AgentUI : MonoBehaviour
     private RectTransform rectTf;
     [SerializeField] private TextMeshProUGUI hpText;
     [SerializeField] private TextMeshProUGUI energyText;
+    [SerializeField] private Animator[] animator;
 
     private void Awake()
     {
@@ -28,5 +29,16 @@ public class AgentUI : MonoBehaviour
     public void SetEnergyText(int energy)
     {
         energyText.text = energy.ToString();
+    }
+
+    public void EnergyAnimation()
+    {
+        animator[1].ResetTrigger("Activate");
+        animator[1].SetTrigger("Activate");
+    }
+    public void HealthAnimation()
+    {
+        animator[0].ResetTrigger("Activate");
+        animator[0].SetTrigger("Activate");
     }
 }

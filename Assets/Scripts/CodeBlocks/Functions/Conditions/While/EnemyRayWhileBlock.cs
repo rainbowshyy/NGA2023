@@ -78,7 +78,7 @@ public class EnemyRayWhileBlock : WhileBlock
                 }
             }
         }
-        return "While Enemy in Raycast ( <color=#4eb2f3>" + parameters[0] + "</color> , <color=#f38f4e>" + parameters[1] + "</color> ) <sprite index=" + spriteIndex + ">";
+        return "While Raycast( <color=#4eb2f3>" + parameters[0] + "</color> , <color=#f38f4e>" + parameters[1] + "</color> )<sprite index=" + spriteIndex + ">  ==  Enemy";
     }
 
     public override void VisualCode(CodeBlockAgent agent)

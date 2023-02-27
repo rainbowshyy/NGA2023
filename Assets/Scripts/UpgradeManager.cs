@@ -154,8 +154,6 @@ public class UpgradeManager : MonoBehaviour
             parameters[0] = e.parameter1Range[index];
             index = Mathf.FloorToInt(Random.Range(0, e.parameter2Range.Length));
             parameters[1] = e.parameter2Range[index];
-            index = Mathf.FloorToInt(Random.Range(0, e.parameter3Range.Length));
-            parameters[2] = e.parameter3Range[index];
 
             optionRolled.Add(new CodeBlockStruct(e.type, parameters, null));
         }

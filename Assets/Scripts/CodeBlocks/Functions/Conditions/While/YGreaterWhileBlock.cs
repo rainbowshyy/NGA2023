@@ -18,7 +18,7 @@ public class YGreaterWhileBlock : WhileBlock
 
     public override string ShowSyntax()
     {
-        return "While <color=#f38f4e><b> Y</b></color> > " + parameters[0];
+        return "While <color=#f38f4e><b> Y</b></color>  >  " + parameters[0];
     }
 
     public override void VisualCode(CodeBlockAgent agent)

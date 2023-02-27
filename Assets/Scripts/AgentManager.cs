@@ -72,7 +72,7 @@ public class AgentManager : MonoBehaviour
             AgentAnimatorMap.Add(a.agentType, a.controller);
             AgentColorMap.Add(a.agentType, a.color);
             AgentIconMap.Add(a.agentType, a.icon);
-            AgentNameMap.Add(a.agentType, a.name);
+            AgentNameMap.Add(a.agentType, a.agentName);
             AgentHealthMap.Add(a.agentType, a.startingHealth);
         }
     }

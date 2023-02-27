@@ -47,7 +47,7 @@ public class EncounterManager : MonoBehaviour
                 rolledPool.Add(e);
             }
 
-            if (s != Stages.Intro)
+            if (s != Stages.Intro && s != Stages.Intro2)
             {
                 for (int i = 0; i < rolledPool.Count; i++)
                 {
@@ -57,7 +57,7 @@ public class EncounterManager : MonoBehaviour
                     rolledPool[randomIndex] = temp;
                 }
 
-                rolledPool.RemoveRange(count[(int)s - 1], rolledPool.Count - count[(int)s - 1]);
+                rolledPool.RemoveRange(count[(int)s - 2], rolledPool.Count - count[(int)s - 2]);
             }
             currentPool.AddRange(rolledPool);
         }

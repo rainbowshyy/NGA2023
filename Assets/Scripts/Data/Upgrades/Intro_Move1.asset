@@ -16,3 +16,6 @@ MonoBehaviour:
   elements:
   - upgrades:
     - {fileID: 11400000, guid: 2a25b6a6b504f5c4085d47f2f2ee669c, type: 2}
+    - {fileID: 11400000, guid: 1244ba3ff37501f4c97fca39432c1bb8, type: 2}
+  - upgrades:
+    - {fileID: 11400000, guid: 41b6ce0a65d876847bdc9a1b5e5c0a5c, type: 2}
