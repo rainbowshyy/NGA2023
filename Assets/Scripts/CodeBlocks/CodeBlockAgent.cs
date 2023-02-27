@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum agentTeam { Player, Enemy}
-public enum agentType { Blue, Blob}
+public enum agentTeam { Player, Enemy }
 
 public class CodeBlockAgent : GridElement
 {
@@ -17,8 +16,8 @@ public class CodeBlockAgent : GridElement
     public override void Start()
     {
         base.Start();
-        health = 1;
-        energy = 1;
+        health = AgentManager.Instance.AgentHealthMap[type];
+        energy = 0;
         currentStep = new List<int>() { 0 };
 
         UpdateStatsUI();
@@ -51,8 +50,13 @@ public class CodeBlockAgent : GridElement
             safety += 1;
             if (current.isCondition)                                    //Check if condition
             {
-                if (!current.RunCode(this) || current.scope == null || current.scope.Count <= 0)  //Check if there is no code to run in scope
+                if (currentStep.Count < depth + 2)                  //Make sure we are not trying to find index depth when it does not exist
                 {
+                    currentStep.Add(0);
+                }
+                if ((!current.RunCode(this) && !current.isLoop) || (!current.RunCode(this) && current.isLoop && currentStep[depth + 1] == 0) || current.scope == null || current.scope.Count <= 0)  //Check if there is no code to run in scope
+                {
+                    Debug.Log(current.RunCode(this));
                     currentStep[depth] += 1;
                     if (depth == 0 && currentStep[depth] >= CodeBlockManager.Instance.codeBlocks[type].Count) //Loop if depth is 0
                     {
@@ -77,20 +81,23 @@ public class CodeBlockAgent : GridElement
                     if (currentStep[depth] >= current.scope.Count)      //if depth index is greater than scope count, go back up in depth, and proceed to next scope/block
                     {
                         currentStep[depth] = 0;
-                        depth -= 1;
-                        currentStep[depth] += 1;
-                        if (depth == 0 && currentStep[depth] >= CodeBlockManager.Instance.codeBlocks[type].Count) //Loop if depth is 0
+                        if (!current.isLoop || !current.RunCode(this))
                         {
-                            currentStep[depth] = 0;
-                            if (alreadyLooped)
+                            depth -= 1;
+                            currentStep[depth] += 1;
+                            if (depth == 0 && currentStep[depth] >= CodeBlockManager.Instance.codeBlocks[type].Count) //Loop if depth is 0
                             {
-                                isCondition = false;
-                                return;
+                                currentStep[depth] = 0;
+                                if (alreadyLooped)
+                                {
+                                    isCondition = false;
+                                    return;
+                                }
+                                alreadyLooped = true;
                             }
-                            alreadyLooped = true;
+                            depth = 0;
+                            current = CodeBlockManager.Instance.codeBlocks[type][currentStep[depth]];
                         }
-                        depth = 0;
-                        current = CodeBlockManager.Instance.codeBlocks[type][currentStep[depth]];
                     }
                     else
                     {
@@ -102,6 +109,7 @@ public class CodeBlockAgent : GridElement
             {
                 isCondition = false;
                 current.RunCode(this);
+                current.VisualCode(this);
                 currentStep[depth] += 1;
                 if (depth == 0 && currentStep[depth] >= CodeBlockManager.Instance.codeBlocks[type].Count) //Loop if depth is 0
                 {
@@ -169,7 +177,11 @@ public class CodeBlockAgent : GridElement
         {
             SpawningManager.Instance.ChangePlayerCount(-1);
         }
-        Destroy(UI.gameObject);
         Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        Destroy(UI.gameObject);
     }
 }

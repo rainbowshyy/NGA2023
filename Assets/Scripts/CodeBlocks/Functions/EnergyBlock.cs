@@ -21,4 +21,9 @@ public class EnergyBlock : CodeBlock
     {
         return "<color=#ebca54>energy</color> <sprite index=9> += " + parameters[0];
     }
+
+    public override void VisualCode(CodeBlockAgent agent)
+    {
+        EffectManager.Instance.CreateEffect(EffectTypes.energyUp, agent.gridCoords, parameters, Vector2Int.zero);
+    }
 }

@@ -20,4 +20,9 @@ public class EnergyLessBlock : ConditionBlock
     {
         return "If <color=#ebca54>energy</color> <sprite index=9> < " + parameters[0];
     }
+
+    public override void VisualCode(CodeBlockAgent agent)
+    {
+        return;
+    }
 }

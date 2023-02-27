@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d1e248850f5fb048a7cdb301f3b941b, type: 3}
+  m_Name: SirKel
+  m_EditorClassIdentifier: 
+  agentType: 4
+  icon: {fileID: 21300000, guid: 316ac20538ee06e4381d935273d08d91, type: 3}
+  controller: {fileID: 9100000, guid: f8177cb79e17cf343a96d9dd71913b63, type: 2}
+  enemyCode: []
+  agentName: Sir.kel
+  color: {r: 1, g: 0.41960788, b: 0.38823533, a: 1}
+  startingHealth: 1

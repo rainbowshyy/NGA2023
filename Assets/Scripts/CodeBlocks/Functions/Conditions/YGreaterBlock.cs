@@ -20,4 +20,9 @@ public class YGreaterBlock : ConditionBlock
     {
         return "If <color=#f38f4e><b> Y</b></color> > " + parameters[0];
     }
+
+    public override void VisualCode(CodeBlockAgent agent)
+    {
+        return;
+    }
 }

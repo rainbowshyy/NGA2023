@@ -52,14 +52,14 @@ public class MoveBlock : CodeBlock
                 }
                 else if (parameters[1] < 0)
                 {
-                    spriteIndex = 4;
+                    spriteIndex = 6;
                 }
             }
             else if (parameters[0] < 0)
             {
                 if (parameters[1] > 0)
                 {
-                    spriteIndex = 6;
+                    spriteIndex = 4;
                 }
                 else if (parameters[1] < 0)
                 {
@@ -74,5 +74,10 @@ public class MoveBlock : CodeBlock
         }
 
         return "Move ( <color=#4eb2f3><b>" + parameters[0].ToString() + "</b></color> , <color=#f38f4e><b>" + parameters[1].ToString() + "</b></color> ) <sprite index=" + spriteIndex + ">";
+    }
+
+    public override void VisualCode(CodeBlockAgent agent)
+    {
+        return;
     }
 }

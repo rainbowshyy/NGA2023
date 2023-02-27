@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d1e248850f5fb048a7cdb301f3b941b, type: 3}
+  m_Name: Ylvis
+  m_EditorClassIdentifier: 
+  agentType: 3
+  icon: {fileID: 21300000, guid: e01cf3a0ef6a36d4b89aeba437a93f1c, type: 3}
+  controller: {fileID: 9100000, guid: b9cd1b693ec40334fb9359b06df45483, type: 2}
+  enemyCode:
+  - code: 18
+    parameters: 00000000ffffffff
+    scope:
+    - code: 0
+      parameters: 00000000ffffffff
+      scope: []
+  - code: 6
+    parameters: 0100000001000000
+    scope: []
+  - code: 18
+    parameters: 0000000001000000
+    scope:
+    - code: 0
+      parameters: 0000000001000000
+      scope: []
+  - code: 6
+    parameters: 0100000001000000
+    scope: []
+  agentName: Ylvis
+  color: {r: 0.8666667, g: 0.8666667, b: 0.8666667, a: 1}
+  startingHealth: 2

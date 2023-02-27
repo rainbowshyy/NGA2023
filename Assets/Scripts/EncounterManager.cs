@@ -9,7 +9,7 @@ public class EncounterManager : MonoBehaviour
 
     private Dictionary<Stages, List<Encounter>> encounterMap;
 
-    private List<Encounter> currentPool;
+    public List<Encounter> currentPool;
 
     public static EncounterManager Instance { get; private set; }
 
@@ -36,22 +36,30 @@ public class EncounterManager : MonoBehaviour
         currentPool = new List<Encounter>();
     }
 
-    public void PopulatePool(Stages stage)
+    public void PopulatePool(int[] count)
     {
-        currentPool.Clear();
-        foreach (Encounter e in encounterMap[stage])
+        foreach (Stages s in System.Enum.GetValues(typeof(Stages)))
         {
-            currentPool.Add(e);
-        }
-        if (stage != Stages.Intro)
-        {
-            for (int i = 0; i < currentPool.Count; i++)
+            List<Encounter> rolledPool = new List<Encounter>();
+
+            foreach (Encounter e in encounterMap[s])
             {
-                Encounter temp = currentPool[i];
-                int randomIndex = Random.Range(i, currentPool.Count);
-                currentPool[i] = currentPool[randomIndex];
-                currentPool[randomIndex] = temp;
+                rolledPool.Add(e);
             }
+
+            if (s != Stages.Intro)
+            {
+                for (int i = 0; i < rolledPool.Count; i++)
+                {
+                    Encounter temp = rolledPool[i];
+                    int randomIndex = Random.Range(i, rolledPool.Count);
+                    rolledPool[i] = rolledPool[randomIndex];
+                    rolledPool[randomIndex] = temp;
+                }
+
+                rolledPool.RemoveRange(count[(int)s - 1], rolledPool.Count - count[(int)s - 1]);
+            }
+            currentPool.AddRange(rolledPool);
         }
     }
 
@@ -67,6 +75,10 @@ public class EncounterManager : MonoBehaviour
         {
             Vector2Int pos = e.positions[Mathf.FloorToInt(Random.Range(0, e.positions.Count))];
             SpawningManager.Instance.SpawnEnemy(e.type, pos);
+        }
+        if (encounter.stage != GameManager.Instance.currentStage)
+        {
+            GameManager.onNewStage?.Invoke(encounter.stage);
         }
     }
 }

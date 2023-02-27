@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UpgradeManager : MonoBehaviour
 {
@@ -11,8 +13,13 @@ public class UpgradeManager : MonoBehaviour
 
     [SerializeField] private Transform[] options;
 
+    private Rarity[] currentRarities;
+    [SerializeField] private Color[] rarityColors;
+
     [SerializeField] private List<Upgrade> upgradeList;
     [SerializeField] private Dictionary<Rarity, List<Upgrade>> upgradeMap;
+
+    private float rareOffset;
 
     private List<CodeBlockStruct>[] optionRewards;
 
@@ -28,6 +35,23 @@ public class UpgradeManager : MonoBehaviour
 
         Instance = this;
 
+        FillUpgradePool();
+        rareOffset = -0.05f;
+        currentRarities = new Rarity[3];
+    }
+
+    private void OnEnable()
+    {
+        GameManager.onRoundEnd += OpenUpgrades;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.onRoundEnd -= OpenUpgrades;
+    }
+
+    private void FillUpgradePool()
+    {
         upgradeMap = new Dictionary<Rarity, List<Upgrade>>();
         foreach (Upgrade u in upgradeList)
         {
@@ -36,18 +60,7 @@ public class UpgradeManager : MonoBehaviour
                 upgradeMap.Add(u.rarity, new List<Upgrade>());
             }
             upgradeMap[u.rarity].Add(u);
-            upgradeMap[u.rarity].Add(u);
         }
-    }
-
-    private void OnEnable()
-    {
-        GameManager.onRoundWin += OpenUpgrades;
-    }
-
-    private void OnDisable()
-    {
-        GameManager.onRoundWin -= OpenUpgrades;
     }
 
     private void ClearUpgrades()
@@ -67,22 +80,48 @@ public class UpgradeManager : MonoBehaviour
 
         for (int i = 0; i < 3; i++)
         {
-            //ADD WHEN I HAVE MORE UPGRADES :)
-            //float rarity = Random.Range(0f, 1f);
-
-            float rarity = 1f;
-
-            if (rarity > 0.2f)
+            if (GameManager.Instance.currentStage != Stages.Intro)
             {
-                optionRewards[i] = RollOption(Rarity.Common);
-            }
-            else if (rarity > 0.04f)
-            {
-                optionRewards[i] = RollOption(Rarity.Uncommon);
+                float rarity = Random.Range(0f, 1f); //Slay the spire rarity
+
+                float[] rarityOdds = new float[2] { 0.4f, 0.03f };
+
+                if (rareOffset < 0)
+                {
+                    rarityOdds[1] += rareOffset;
+                    if (rarityOdds[1] < 0)
+                    {
+                        rarityOdds[0] += rarityOdds[1];
+                    }
+                }
+                else if (rareOffset > 0)
+                {
+                    rarityOdds[0] += rareOffset;
+                    rarityOdds[1] += rareOffset;
+                }
+
+                if (rarity > rarityOdds[0])
+                {
+                    optionRewards[i] = RollOption(Rarity.Common);
+                    rareOffset += 0.01f;
+                    ShowRarity(i, Rarity.Common);
+                }
+                else if (rarity > rarityOdds[1])
+                {
+                    optionRewards[i] = RollOption(Rarity.Uncommon);
+                    ShowRarity(i, Rarity.Uncommon);
+                }
+                else
+                {
+                    optionRewards[i] = RollOption(Rarity.Rare);
+                    rareOffset = -0.05f;
+                    ShowRarity(i, Rarity.Rare);
+                }
             }
             else
             {
-                optionRewards[i] = RollOption(Rarity.Rare);
+                optionRewards[i] = RollOption(Rarity.Intro);
+                ShowRarity(i, Rarity.Common);
             }
         }
     }
@@ -91,9 +130,19 @@ public class UpgradeManager : MonoBehaviour
     {
         List<CodeBlockStruct> optionRolled = new List<CodeBlockStruct>();
 
-        int roll = Mathf.FloorToInt(Random.Range(0f, upgradeMap[rarity].Count));
+        if (upgradeMap[rarity].Count == 0)
+        {
+            FillUpgradePool();
+        }
+
+        int roll = 0;
+        if (rarity != Rarity.Intro)
+        {
+            roll = Mathf.FloorToInt(Random.Range(0f, upgradeMap[rarity].Count));
+        }
         Upgrade rolledUpgrade = upgradeMap[rarity][roll];
         upgradeMap[rarity].RemoveAt(roll);
+
 
         foreach (UpgradePoolElement u in rolledUpgrade.elements)
         {
@@ -105,6 +154,8 @@ public class UpgradeManager : MonoBehaviour
             parameters[0] = e.parameter1Range[index];
             index = Mathf.FloorToInt(Random.Range(0, e.parameter2Range.Length));
             parameters[1] = e.parameter2Range[index];
+            index = Mathf.FloorToInt(Random.Range(0, e.parameter3Range.Length));
+            parameters[2] = e.parameter3Range[index];
 
             optionRolled.Add(new CodeBlockStruct(e.type, parameters, null));
         }
@@ -135,7 +186,12 @@ public class UpgradeManager : MonoBehaviour
         }
     }
 
-    private void OpenUpgrades()
+    private void ShowRarity(int index, Rarity rarity)
+    {
+        options[index].gameObject.GetComponent<Image>().color = rarityColors[((int)rarity)];
+    }
+
+    private void OpenUpgrades(bool win)
     {
         ClearUpgrades();
 

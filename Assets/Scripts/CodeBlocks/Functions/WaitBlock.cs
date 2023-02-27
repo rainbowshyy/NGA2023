@@ -20,4 +20,9 @@ public class WaitBlock : CodeBlock
     {
         return "Wait ( )";
     }
+
+    public override void VisualCode(CodeBlockAgent agent)
+    {
+        return;
+    }
 }

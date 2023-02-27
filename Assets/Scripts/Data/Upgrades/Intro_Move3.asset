@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 340ec09ece17df54092d3cad4708a5ff, type: 3}
+  m_Name: Intro_Move3
+  m_EditorClassIdentifier: 
+  rarity: 3
+  elements:
+  - upgrades:
+    - {fileID: 11400000, guid: 4752417c3329abb4e906f8aa54977403, type: 2}
+    - {fileID: 11400000, guid: 09b26017cad0a3147ac1c5c9d76381a7, type: 2}
+    - {fileID: 11400000, guid: b0a5615f925dc4f47b51ac3fa1a912fa, type: 2}
+    - {fileID: 11400000, guid: 41b6ce0a65d876847bdc9a1b5e5c0a5c, type: 2}

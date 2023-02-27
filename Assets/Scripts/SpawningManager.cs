@@ -50,6 +50,7 @@ public class SpawningManager : MonoBehaviour
         codeAgent.startingCoords = pos;
         codeAgent.type = type;
 
+        go.GetComponent<Animator>().runtimeAnimatorController = AgentManager.Instance.AgentAnimatorMap[type];
 
         GameObject UI = Instantiate(agentUIPref, agentUIParent);
         AgentUI agentUI = UI.GetComponent<AgentUI>();
@@ -70,7 +71,7 @@ public class SpawningManager : MonoBehaviour
         codeAgent.team = agentTeam.Enemy;
         codeAgent.type = type;
 
-        go.GetComponent<Animator>().runtimeAnimatorController = EnemyManager.Instance.EnemyAnimatorDictionary[type];
+        go.GetComponent<Animator>().runtimeAnimatorController = AgentManager.Instance.AgentAnimatorMap[type];
 
         GameObject UI = Instantiate(enemyUIPref, agentUIParent);
         AgentUI agentUI = UI.GetComponent<AgentUI>();
@@ -85,8 +86,9 @@ public class SpawningManager : MonoBehaviour
         enemyCount += change;
         if (enemyCount <= 0) 
         {
-            GameManager.onRoundWin?.Invoke();
+            GameManager.onRoundEnd?.Invoke(true);
         }
+        Debug.Log(enemyCount);
     }
 
     public void ChangePlayerCount(int change)
@@ -94,8 +96,21 @@ public class SpawningManager : MonoBehaviour
         playerCount += change;
         if (playerCount <= 0)
         {
-            GameManager.onRoundLose?.Invoke();
+            DoDamage();
         }
+    }
+
+    public void ResetCount()
+    {
+        enemyCount = 0;
+        playerCount = 0;
+    }
+
+    public void DoDamage()
+    {
+        GameManager.onTakeDamage?.Invoke(enemyCount);
+        enemyCount = 0;
+        playerCount = 0;
     }
 
     public static void SpawnCodeBlock(CodeBlockStruct code)

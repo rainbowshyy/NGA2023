@@ -11,6 +11,7 @@ public class CodeBlockManager : MonoBehaviour
 
     private int step;
     private float speedMult = 0.5f;
+    private bool stopped = false;
 
     Coroutine codeCo;
 
@@ -27,32 +28,33 @@ public class CodeBlockManager : MonoBehaviour
 
         codeBlocks = new Dictionary<agentType, List<CodeBlock>>();
 
-        codeBlocks.Add(agentType.Blue, new List<CodeBlock>());
+        codeBlocks.Add(agentType.Cubert, new List<CodeBlock>());
     }
 
     private void OnEnable()
     {
-        GameManager.onRoundLose += StopProgram;
-        GameManager.onRoundWin += StopProgram;
+        GameManager.onRoundEnd += StopProgram;
     }
 
     private void OnDisable()
     {
-        GameManager.onRoundLose -= StopProgram;
-        GameManager.onRoundWin -= StopProgram;
+        GameManager.onRoundEnd -= StopProgram;
     }
 
     public void StartProgram()
     {
         step = 0;
+        stopped = false;
         onStartProgram?.Invoke();
         codeCo = StartCoroutine(CodeStep());
         InputManager.onToggleInputs?.Invoke(false);
     }
 
-    public void StopProgram()
+    public void StopProgram(bool win)
     {
+        stopped = true;
         StopCoroutine(codeCo);
+        Debug.Log("yep");
         InputManager.onToggleInputs?.Invoke(true);
     }
 
@@ -66,7 +68,6 @@ public class CodeBlockManager : MonoBehaviour
         {
             speedMult *= 2f;
         }
-        Debug.Log("new speed: " + speedMult);
     }
 
     public int GetStepForType(agentType type, int totalStep)
@@ -81,15 +82,27 @@ public class CodeBlockManager : MonoBehaviour
 
     IEnumerator CodeStep()
     {
+        if (stopped)
+        {
+            yield break;
+        }
         yield return new WaitForSeconds(speedMult);
         onDoCode?.Invoke(agentTeam.Player, step);
+        if (stopped)
+        {
+            yield break;
+        }
         yield return new WaitForSeconds(speedMult);
         onDoCode?.Invoke(agentTeam.Enemy, step);
         step += 1;
+        if (stopped)
+        {
+            yield break;
+        }
         if (step < 36)
             codeCo = StartCoroutine(CodeStep());
         else
-            GameManager.onRoundLose?.Invoke();
+            SpawningManager.Instance.DoDamage();
     }
 
     public void SetCodeForType(agentType type, List<CodeBlock> codeBlocksParam)
@@ -104,6 +117,7 @@ public class CodeBlockManager : MonoBehaviour
         foreach (CodeBlockStruct s in codeBlocksParam)
         {
             CodeBlock toAdd = new WaitBlock(s.parameters);
+            /*
             switch (s.code)
             {
                 case CodeBlockTypes.MoveBlock:
@@ -119,12 +133,16 @@ public class CodeBlockManager : MonoBehaviour
                     toAdd = new EnergyGreaterBlock(s.parameters);
                     break;
                 case CodeBlockTypes.EnergyInRange:
-                    toAdd = new EnergyInRange(s.parameters);
+                    toAdd = new EnergyInRangeBlock(s.parameters);
                     break;
                 case CodeBlockTypes.DamageInRange:
                     toAdd = new DamageInRange(s.parameters);
                     break;
             }
+            */
+
+            toAdd = GetCodeFromStruct(s);
+
             if (s.scope != null && s.scope.Count > 0)
             {
                 toAdd.scope = GetCodeListFromStruct(s.scope);
@@ -157,10 +175,10 @@ public class CodeBlockManager : MonoBehaviour
                 codeBlocksReturn = new EnergyLessBlock(codeBlocksParam.parameters);
                 break;
             case CodeBlockTypes.EnergyInRange:
-                codeBlocksReturn = new EnergyInRange(codeBlocksParam.parameters);
+                codeBlocksReturn = new EnergyInRangeBlock(codeBlocksParam.parameters);
                 break;
             case CodeBlockTypes.DamageInRange:
-                codeBlocksReturn = new DamageInRange(codeBlocksParam.parameters);
+                codeBlocksReturn = new DamageInRangeBlock(codeBlocksParam.parameters);
                 break;
             case CodeBlockTypes.XGreaterThan:
                 codeBlocksReturn = new XGreaterBlock(codeBlocksParam.parameters);
@@ -173,6 +191,39 @@ public class CodeBlockManager : MonoBehaviour
                 break;
             case CodeBlockTypes.YLessThan:
                 codeBlocksReturn = new YLessBlock(codeBlocksParam.parameters);
+                break;
+            case CodeBlockTypes.EnergyGreaterWhile:
+                codeBlocksReturn = new EnergyGreaterWhileBlock(codeBlocksParam.parameters);
+                break;
+            case CodeBlockTypes.EnergyLessWhile:
+                codeBlocksReturn = new EnergyLessWhileBlock(codeBlocksParam.parameters);
+                break;
+            case CodeBlockTypes.XGreaterWhile:
+                codeBlocksReturn = new XGreaterWhileBlock(codeBlocksParam.parameters);
+                break;
+            case CodeBlockTypes.XLessWhile:
+                codeBlocksReturn = new XLessWhileBlock(codeBlocksParam.parameters);
+                break;
+            case CodeBlockTypes.YGreaterWhile:
+                codeBlocksReturn = new YGreaterWhileBlock(codeBlocksParam.parameters);
+                break;
+            case CodeBlockTypes.YLessWhile:
+                codeBlocksReturn = new YLessWhileBlock(codeBlocksParam.parameters);
+                break;
+            case CodeBlockTypes.Space:
+                codeBlocksReturn = new SpaceBlock(codeBlocksParam.parameters);
+                break;
+            case CodeBlockTypes.SpaceWhile:
+                codeBlocksReturn = new SpaceWhileBlock(codeBlocksParam.parameters);
+                break;
+            case CodeBlockTypes.DamageRay:
+                codeBlocksReturn = new DamageRayBlock(codeBlocksParam.parameters);
+                break;
+            case CodeBlockTypes.EnemyRay:
+                codeBlocksReturn = new EnemyRayBlock(codeBlocksParam.parameters);
+                break;
+            case CodeBlockTypes.EnemyRayWhile:
+                codeBlocksReturn = new EnemyRayWhileBlock(codeBlocksParam.parameters);
                 break;
         }
         return codeBlocksReturn;

@@ -154,7 +154,12 @@ public class GridManager : MonoBehaviour
 
     public bool ElementAtTile(int x, int y)
     {
-        return gridCurrentCoords.Contains(new Vector2Int(x, y));
+        bool isTrue = gridCurrentCoords.Contains(new Vector2Int(x, y));
+        if (x < 0 || x > 6 || y < 0 || y > 6)
+        {
+            isTrue = true;
+        }
+        return isTrue;
     }
 
     public Vector2Int GetRandomTileInRect(int xMin, int yMin, int xMax, int yMax)
@@ -183,10 +188,25 @@ public class GridManager : MonoBehaviour
     public void ResetObjects()
     {
         gridCurrentCoords = new HashSet<Vector2Int>();
-        foreach (GameObject g in objectsInGrid)
+        SpawningManager.Instance.ResetCount();
+        for (int i = 0; i < objectsInGrid.Count; i++)
         {
-            g.GetComponent<GridElement>().ResetPosition();
-            gridCurrentCoords.Add(g.GetComponent<GridElement>().gridCoords);
+            GameObject g = objectsInGrid[i];
+            RemoveGridElement(g.GetComponent<CodeBlockAgent>());
+            Destroy(g);
+            i--;
+        }
+    }
+
+    public void CapturePlayerAgentData()
+    {
+        PlayerDataManager.Instance.playerAgents.Clear();
+        foreach (GameObject go in objectsInGrid)
+        {
+            if (go.GetComponent<CodeBlockAgent>().team == agentTeam.Player)
+            {
+                PlayerDataManager.Instance.SetAgent(go.GetComponent<CodeBlockAgent>().type, go.GetComponent<CodeBlockAgent>().startingCoords);
+            }
         }
     }
 }

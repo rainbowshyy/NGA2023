@@ -8,4 +8,5 @@ public class UpgradeElement : ScriptableObject
     public CodeBlockTypes type;
     public int[] parameter1Range;
     public int[] parameter2Range;
+    public int[] parameter3Range;
 }

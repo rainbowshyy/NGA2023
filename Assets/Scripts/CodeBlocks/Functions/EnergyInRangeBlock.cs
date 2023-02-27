@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnergyInRange : CodeBlock
+public class EnergyInRangeBlock : CodeBlock
 {
-    public EnergyInRange(int[] param) : base(param) { }
+    public EnergyInRangeBlock(int[] param) : base(param) { }
 
     public override bool ReadyCode(CodeBlockAgent agent)
     {
@@ -23,5 +23,10 @@ public class EnergyInRange : CodeBlock
     public override string ShowSyntax()
     {
         return "<color=#ebca54>energy</color> <sprite index=9> += " + parameters[0] + " in Range ( " + parameters[1] + " )";
+    }
+
+    public override void VisualCode(CodeBlockAgent agent)
+    {
+        return;
     }
 }

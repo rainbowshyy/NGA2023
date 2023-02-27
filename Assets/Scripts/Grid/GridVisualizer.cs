@@ -65,4 +65,13 @@ public class GridVisualizer : MonoBehaviour
     {
         gridElement.UpdatePosition();
     }
+
+    public Vector3 GetWorldPos(Vector2Int pos)
+    {
+        Vector3 newPos;
+
+        newPos = grid.GetCellCenterWorld((Vector3Int)pos);
+
+        return newPos;
+    }
 }

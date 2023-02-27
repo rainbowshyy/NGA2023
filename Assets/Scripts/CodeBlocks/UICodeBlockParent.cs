@@ -53,9 +53,9 @@ public class UICodeBlockParent : MonoBehaviour
 
     public void SetData()
     {
-        SetColor(UIDataManager.typeColor[type]);
-        SetText(UIDataManager.typeName[type]);
-        icon.sprite = UIDataManager.typeIcon[type];
+        SetColor(AgentManager.Instance.AgentColorMap[type]);
+        SetText(AgentManager.Instance.AgentNameMap[type]);
+        icon.sprite = AgentManager.Instance.AgentIconMap[type];
     }
 
     public void SetDragDropBackground(RectTransform rectTransform)

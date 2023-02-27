@@ -13,12 +13,8 @@ public class UIDataManager : MonoBehaviour
 
     [SerializeField] private RectTransform codeBlockUI;
 
-    [SerializeField] private StructTypeUI[] typeUIStruct;
-    public static Dictionary<agentType, Color> typeColor;
-    public static Dictionary<agentType, string> typeName;
-    public static Dictionary<agentType, Sprite> typeIcon;
-
-    public HashSet<agentType> CodeParents { get; private set; }
+    public Dictionary<agentType, GameObject> EnemyCodeParents { get; private set; }
+    public Dictionary<agentType, GameObject> CodeParents { get; private set; }
 
     public static UIDataManager Instance { get; private set; }
 
@@ -32,17 +28,8 @@ public class UIDataManager : MonoBehaviour
 
         Instance = this;
 
-        typeColor = new Dictionary<agentType, Color>();
-        typeName = new Dictionary<agentType, string>();
-        typeIcon = new Dictionary<agentType, Sprite>();
-        foreach (StructTypeUI s in typeUIStruct)
-        {
-            typeColor.Add(s.type, s.color);
-            typeName.Add(s.type, s.name);
-            typeIcon.Add(s.type, s.icon);
-        }
-
-        CodeParents = new HashSet<agentType>();
+        EnemyCodeParents = new Dictionary<agentType, GameObject>();
+        CodeParents = new Dictionary<agentType, GameObject>();
     }
 
     private void Start()
@@ -59,14 +46,21 @@ public class UIDataManager : MonoBehaviour
         */
     }
 
+    public void RemoveCodeParents()
+    {
+        foreach (GameObject codeParent in EnemyCodeParents.Values)
+        {
+            Destroy(codeParent);
+        }
+        EnemyCodeParents.Clear();
+    }
+
     public void TryCreateCodeParent(agentType type)
     {
-        if (CodeParents.Contains(type))
+        if (CodeParents.ContainsKey(type))
         {
             return;
         }
-
-        CodeParents.Add(type);
 
         Vector3 pos = new Vector3(450f + Random.Range(-200f, 200f), -260f + Random.Range(-100f, 100f), 0);
 
@@ -75,16 +69,15 @@ public class UIDataManager : MonoBehaviour
         UICodeBlockParent comp = go.GetComponent<UICodeBlockParent>();
         comp.SetType(type);
         comp.SetDragDropBackground(codeBlockUI);
+        CodeParents.Add(type, go);
     }
 
     public void TryCreateEnemyCodeParent(agentType type)
     {
-        if (CodeParents.Contains(type))
+        if (EnemyCodeParents.ContainsKey(type))
         {
             return;
         }
-
-        CodeParents.Add(type);
 
         Vector3 pos = new Vector3(450f + Random.Range(-200f, 200f), -260f + Random.Range(-100f, 100f), 0);
 
@@ -94,11 +87,14 @@ public class UIDataManager : MonoBehaviour
         comp.SetType(type);
         comp.SetDragDropBackground(codeBlockUI);
 
-        List<CodeBlock> codeBlocks = CodeBlockManager.GetCodeListFromStruct(EnemyManager.Instance.EnemyCodeDictionary[type]);
+        List<CodeBlock> codeBlocks = CodeBlockManager.GetCodeListFromStruct(AgentManager.Instance.EnemyCodeMap[type]);
         comp.SetCodeBlocksInit(codeBlocks);
+
+        EnemyCodeParents.Add(type, go);
     }
     public GameObject CreateCodeBlock(CodeBlock codeBlock)
     {
+
         Vector3 pos = new Vector3(450f + Random.Range(-200f, 200f), -260f + Random.Range(-100f, 100f), 0);
 
         GameObject go;

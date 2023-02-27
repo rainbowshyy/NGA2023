@@ -58,6 +58,7 @@ public class DragDropGrid : MonoBehaviour
                 if (GridManager.Instance.TrySetGridElement(GetComponent<GridElement>(), tileCurrent.x, tileCurrent.y))
                 {
                     GetComponent<GridElement>().SetStartingCoords(new Vector2Int(tileCurrent.x, tileCurrent.y));
+                    GridManager.Instance.CapturePlayerAgentData();
                 }
             }
             GetComponent<GridElement>().UpdatePosition();

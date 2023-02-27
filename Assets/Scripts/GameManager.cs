@@ -5,11 +5,18 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static Action onRoundLose;
-    public static Action onRoundWin;
+    public static Action<int> onTakeDamage;
     public static Action onNewRound;
+    public static Action onNewRoundStarted;
+    public static Action<bool> onRoundEnd;
+    public static Action<Stages> onNewStage;
 
-    private Stages currentStage;
+    public static Action<int> onNewHealth;
+
+    public Stages currentStage;
+    private int health;
+
+    [SerializeField] private int[] stageEncounterCount;
 
     public static GameManager Instance { get; private set; }
 
@@ -31,40 +38,57 @@ public class GameManager : MonoBehaviour
 
     private void OnEnable()
     {
-        onRoundLose += LoseRound;
+        onTakeDamage += TakeDamage;
         onNewRound += NewRound;
+        onNewStage += NewStage;
     }
 
     private void OnDisable()
     {
-        onRoundLose -= LoseRound;
+        onTakeDamage -= TakeDamage;
         onNewRound -= NewRound;
+        onNewStage -= NewStage;
     }
 
     private void StartGame()
     {
         currentStage = Stages.Intro;
+        health = 10;
+        onNewHealth?.Invoke(health);
 
-        PlayerDataManager.Instance.AddAgent(agentType.Blue);
-
-        SpawningManager.Instance.SpawnPlayerAgents();
+        PlayerDataManager.Instance.AddAgent(agentType.Cubert);
 
         SpawningManager.SpawnCodeBlock(new CodeBlockStruct(CodeBlockTypes.MoveBlock, new int[2] { 0, 1 }, null));
         SpawningManager.SpawnCodeBlock(new CodeBlockStruct(CodeBlockTypes.DamageInRange, new int[2] { 1, 1 }, null));
 
-        EncounterManager.Instance.PopulatePool(currentStage);
-        EncounterManager.Instance.NextInPool();
+        EncounterManager.Instance.PopulatePool(stageEncounterCount);
+
+        onNewRound?.Invoke();
     }
 
     private void NewRound()
     {
+        UIDataManager.Instance.RemoveCodeParents();
         GridManager.Instance.ResetObjects();
         EncounterManager.Instance.NextInPool();
+        SpawningManager.Instance.SpawnPlayerAgents();
+        onNewRoundStarted?.Invoke();
     }
 
-    private void LoseRound()
+    private void TakeDamage(int loss)
     {
-        StartCoroutine(DelayLoadScene());
+        onRoundEnd?.Invoke(false);
+        health -= loss;
+        onNewHealth?.Invoke(health);
+        if (health < 0)
+        {
+            StartCoroutine(DelayLoadScene());
+        }
+    }
+
+    private void NewStage(Stages stage)
+    {
+        currentStage = stage;
     }
 
     IEnumerator DelayLoadScene()
