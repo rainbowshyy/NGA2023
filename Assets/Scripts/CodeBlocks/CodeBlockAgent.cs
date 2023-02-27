@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public enum agentTeam { Player, Enemy }
@@ -54,9 +55,12 @@ public class CodeBlockAgent : GridElement
                 {
                     currentStep.Add(0);
                 }
-                if ((!current.RunCode(this) && !current.isLoop) || (!current.RunCode(this) && current.isLoop && currentStep[depth + 1] == 0) || current.scope == null || current.scope.Count <= 0)  //Check if there is no code to run in scope
+                if ((!current.RunCode(this) && currentStep[depth + 1] == 0) || current.scope == null || current.scope.Count <= 0)  //Check if there is no code to run in scope
                 {
-                    Debug.Log(current.RunCode(this));
+                    if (!current.RunCode(this) && currentStep[depth + 1] == 0)
+                    {
+                        current.VisualCode(this);
+                    }
                     currentStep[depth] += 1;
                     if (depth == 0 && currentStep[depth] >= CodeBlockManager.Instance.codeBlocks[type].Count) //Loop if depth is 0
                     {
@@ -73,6 +77,10 @@ public class CodeBlockAgent : GridElement
                 }
                 else
                 {
+                    if (current.RunCode(this) && currentStep[depth + 1] == 0)
+                    {
+                        current.VisualCode(this);
+                    }
                     depth += 1;                                         //If it is condition, add depth
                     if (currentStep.Count < depth + 1)                  //Make sure we are not trying to find index depth when it does not exist
                     {
@@ -158,6 +166,7 @@ public class CodeBlockAgent : GridElement
         {
             return;
         }
+        EffectManager.Instance.CreateEffect(EffectTypes.energyUp, gridCoords, new int[2] {toAdd, 0}, Vector2Int.zero, true);
         UI.EnergyAnimation();
     }
 

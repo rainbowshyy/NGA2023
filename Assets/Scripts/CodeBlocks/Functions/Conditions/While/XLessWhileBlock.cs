@@ -23,6 +23,10 @@ public class XLessWhileBlock : WhileBlock
 
     public override void VisualCode(CodeBlockAgent agent)
     {
-        return;
+        EffectManager.Instance.CreateEffect(EffectTypes.coordCheck, agent.gridCoords, new int[2] { 0, -1 }, Vector2Int.zero, agent.gridCoords.x < parameters[0]);
+    }
+    public override string ToolTip()
+    {
+        return "Continuously runs this block's nested codeblocks while this unit's<color=#4eb2f3><b> X</b></color> position is less than " + parameters[0] + ".";
     }
 }

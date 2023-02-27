@@ -23,6 +23,10 @@ public class YGreaterBlock : ConditionBlock
 
     public override void VisualCode(CodeBlockAgent agent)
     {
-        return;
+        EffectManager.Instance.CreateEffect(EffectTypes.coordCheck, agent.gridCoords, new int[2] { 1, 0 }, Vector2Int.zero, agent.gridCoords.y > parameters[0]);
+    }
+    public override string ToolTip()
+    {
+        return "Runs this block's nested codeblocks if this unit's<color=#f38f4e><b> Y</b></color> position is greater than " + parameters[0] + ".";
     }
 }

@@ -79,4 +79,56 @@ public class SpaceWhileBlock : WhileBlock
     {
         return;
     }
+    public override string ToolTip()
+    {
+        int spriteIndex = 8;
+        if (parameters[0] == 0)
+        {
+            if (parameters[1] < 0)
+            {
+                spriteIndex = 3;
+            }
+            else if (parameters[1] > 0)
+            {
+                spriteIndex = 2;
+            }
+        }
+        else if (parameters[1] == 0)
+        {
+            if (parameters[0] < 0)
+            {
+                spriteIndex = 1;
+            }
+            else if (parameters[0] > 0)
+            {
+                spriteIndex = 0;
+            }
+        }
+        else
+        {
+            if (parameters[0] > 0)
+            {
+                if (parameters[1] > 0)
+                {
+                    spriteIndex = 5;
+                }
+                else if (parameters[1] < 0)
+                {
+                    spriteIndex = 6;
+                }
+            }
+            else if (parameters[0] < 0)
+            {
+                if (parameters[1] > 0)
+                {
+                    spriteIndex = 4;
+                }
+                else if (parameters[1] < 0)
+                {
+                    spriteIndex = 7;
+                }
+            }
+        }
+        return "Continuously runs this block's nested codeblocks while there is nothing <color=#4eb2f3>" + parameters[0] + "</color> tiles along the <color=#4eb2f3>X axis</color> and <color=#f38f4e>" + parameters[1] + "</color> tiles along the <color=#f38f4e>Y axis</color> ( <sprite index=" + spriteIndex + "> ).";
+    }
 }

@@ -22,4 +22,5 @@ public abstract class CodeBlock
     public abstract bool RunCode(CodeBlockAgent agent);
     public abstract string ShowSyntax();
     public abstract void VisualCode(CodeBlockAgent agent);
+    public abstract string ToolTip();
 }

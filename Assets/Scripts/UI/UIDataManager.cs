@@ -70,6 +70,8 @@ public class UIDataManager : MonoBehaviour
         comp.SetType(type);
         comp.SetDragDropBackground(codeBlockUI);
         CodeParents.Add(type, go);
+
+        comp.SetCodeForManager();
     }
 
     public void TryCreateEnemyCodeParent(agentType type)

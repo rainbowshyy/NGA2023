@@ -25,4 +25,8 @@ public class EnergyLessWhileBlock : WhileBlock
     {
         return;
     }
+    public override string ToolTip()
+    {
+        return "Continuously runs this block's nested codeblocks while this unit's <color=#ebca54>PWR</color><sprite index=9> is less than " + parameters[0] + ".";
+    }
 }

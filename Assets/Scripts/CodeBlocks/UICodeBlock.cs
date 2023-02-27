@@ -3,14 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
-public class UICodeBlock : MonoBehaviour
+public class UICodeBlock : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private CodeBlock code;
 
     [SerializeField] private TextMeshProUGUI text;
 
     [SerializeField] private DragDrop dragDrop;
+
+    private bool hover;
+    private bool showed;
+    private float hoverTimeCurrent;
+    [SerializeField] private float hoverTimeNeeded;
 
     public Transform codeParent;
 
@@ -64,5 +70,35 @@ public class UICodeBlock : MonoBehaviour
             u.UpdateCodeBlockScope();
             code.scope.Add(u.Code);
         }
+    }
+
+    private void Update()
+    {
+        if (hover)
+        {
+            if (hoverTimeCurrent < hoverTimeNeeded)
+            {
+                hoverTimeCurrent += Time.deltaTime;
+            }
+            else if (!showed)
+            {
+                TooltipBox.onShowTooltip?.Invoke(transform.position, code.ToolTip());
+                showed = true;
+            }
+        }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        hover = true;
+        showed = false;
+        hoverTimeCurrent = 0;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        hover = false;
+        TooltipBox.onHideTooltip?.Invoke();
+        hoverTimeCurrent = 0;
     }
 }

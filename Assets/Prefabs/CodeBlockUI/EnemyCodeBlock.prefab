@@ -260,6 +260,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 3267591209363297564}
   dragDrop: {fileID: 0}
+  hoverTimeNeeded: 1
   codeParent: {fileID: 0}
 --- !u!1 &3267591208433750145
 GameObject:

@@ -24,6 +24,11 @@ public class EnergyBlock : CodeBlock
 
     public override void VisualCode(CodeBlockAgent agent)
     {
-        EffectManager.Instance.CreateEffect(EffectTypes.energyUp, agent.gridCoords, parameters, Vector2Int.zero);
+        //EffectManager.Instance.CreateEffect(EffectTypes.energyUp, agent.gridCoords, parameters, Vector2Int.zero);
+    }
+
+    public override string ToolTip()
+    {
+        return "This unit adds " + parameters[0] + " to its <color=#ebca54>PWR</color><sprite index=9>.";
     }
 }

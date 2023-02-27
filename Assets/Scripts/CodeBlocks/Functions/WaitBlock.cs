@@ -25,4 +25,9 @@ public class WaitBlock : CodeBlock
     {
         return;
     }
+
+    public override string ToolTip()
+    {
+        return "This unit does nothing this tick.";
+    }
 }

@@ -78,11 +78,63 @@ public class EnemyRayBlock : ConditionBlock
                 }
             }
         }
-        return "If Raycast( <color=#4eb2f3>" + parameters[0] + "</color> , <color=#f38f4e>" + parameters[1] + "</color> )<sprite index=" + spriteIndex + ">  ==  Enemy";
+        return "If Enemy at Raycast( <color=#4eb2f3>" + parameters[0] + "</color> , <color=#f38f4e>" + parameters[1] + "</color> )<sprite index=" + spriteIndex + ">";
     }
 
     public override void VisualCode(CodeBlockAgent agent)
     {
         return;
+    }
+    public override string ToolTip()
+    {
+        int spriteIndex = 8;
+        if (parameters[0] == 0)
+        {
+            if (parameters[1] < 0)
+            {
+                spriteIndex = 3;
+            }
+            else if (parameters[1] > 0)
+            {
+                spriteIndex = 2;
+            }
+        }
+        else if (parameters[1] == 0)
+        {
+            if (parameters[0] < 0)
+            {
+                spriteIndex = 1;
+            }
+            else if (parameters[0] > 0)
+            {
+                spriteIndex = 0;
+            }
+        }
+        else
+        {
+            if (parameters[0] > 0)
+            {
+                if (parameters[1] > 0)
+                {
+                    spriteIndex = 5;
+                }
+                else if (parameters[1] < 0)
+                {
+                    spriteIndex = 6;
+                }
+            }
+            else if (parameters[0] < 0)
+            {
+                if (parameters[1] > 0)
+                {
+                    spriteIndex = 4;
+                }
+                else if (parameters[1] < 0)
+                {
+                    spriteIndex = 7;
+                }
+            }
+        }
+        return "Runs this block's nested codeblocks if there is an enemy unit in the direction ( <color=#4eb2f3>" + parameters[0] + "</color> , <color=#f38f4e>" + parameters[1] + "</color> )<sprite index=" + spriteIndex + "> . A unit is an enemy if it is not on the same team as this unit.";
     }
 }

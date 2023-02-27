@@ -17,6 +17,10 @@ public class DestroySelf : MonoBehaviour
 
     private void Start()
     {
-        Destroy(gameObject, delay + animator.GetCurrentAnimatorStateInfo(0).length);
+        if (animator != null)
+        {
+            delay += animator.GetCurrentAnimatorStateInfo(0).length;
+        }
+        Destroy(gameObject, delay);
     }
 }

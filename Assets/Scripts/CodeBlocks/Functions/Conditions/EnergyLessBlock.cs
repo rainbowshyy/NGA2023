@@ -25,4 +25,8 @@ public class EnergyLessBlock : ConditionBlock
     {
         return;
     }
+    public override string ToolTip()
+    {
+        return "Runs this block's nested codeblocks if this unit's <color=#ebca54>PWR</color><sprite index=9> is less than " + parameters[0] + ".";
+    }
 }

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 3
   parameter1Range: 01000000
-  parameter2Range: 02000000
+  parameter2Range: 01000000
   parameter3Range: 

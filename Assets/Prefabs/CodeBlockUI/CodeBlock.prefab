@@ -279,6 +279,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 3267591209363297564}
   dragDrop: {fileID: 3267591208433750151}
+  hoverTimeNeeded: 1
   codeParent: {fileID: 0}
 --- !u!114 &4211383742338070116
 MonoBehaviour:
