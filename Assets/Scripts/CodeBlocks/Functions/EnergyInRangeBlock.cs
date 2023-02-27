@@ -22,7 +22,7 @@ public class EnergyInRangeBlock : CodeBlock
 
     public override string ShowSyntax()
     {
-        return "<color=#ebca54>PWR</color><sprite index=9> in Range( " + parameters[1] + " )  +=  " + parameters[0];
+        return "<color=#ebca54>PWR</color><sprite index=9> in Range( " + parameters[1] + " )  <color=#98f460>+=</color>  " + parameters[0];
     }
 
     public override void VisualCode(CodeBlockAgent agent)
@@ -31,6 +31,6 @@ public class EnergyInRangeBlock : CodeBlock
     }
     public override string ToolTip()
     {
-        return "This unit adds " + parameters[0] + " to other units' <color=#ebca54>PWR</color><sprite index=9> within " + parameters[1] + " tiles.";
+        return "This unit <color=#98f460>adds</color> " + parameters[0] + " to other units' <color=#ebca54>PWR</color><sprite index=9> within " + parameters[1] + " tiles.";
     }
 }

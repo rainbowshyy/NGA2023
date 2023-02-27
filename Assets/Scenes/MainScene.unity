@@ -6012,7 +6012,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentStage: 0
-  stageEncounterCount: 030000000100000001000000
+  stageEncounterCount: 050000000500000001000000
 --- !u!1 &614981009
 GameObject:
   m_ObjectHideFlags: 0
@@ -6833,6 +6833,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   energyUpPref: {fileID: 2411558589187892019, guid: 32cdcdf7215c8e648a168334f809b411, type: 3}
+  healthUpPref: {fileID: 2525611104176403417, guid: 84bb5ccb73519f84190655b28e550b44, type: 3}
+  healthRange1: {fileID: 7370122327896854478, guid: 1ec72d9c6e8a6e4429ed8c3e60a834b9, type: 3}
   damageRange1Pref: {fileID: 7261719622072228849, guid: d2ede43add811db46876fac7b7c85c59, type: 3}
   damageRange2Pref: {fileID: 9013331592614335200, guid: a6de0305014c2fc4f9b5f2a768e82676, type: 3}
   damageLaserPref: {fileID: 6711755136279946491, guid: b61c373f2a3ed3f48bc3bbdf9430f4d8, type: 3}
@@ -8223,6 +8225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 1116178862}
+  healthParticlePref: {fileID: 6980539391807994968, guid: 4e8e19c8517dfe443adbaffe1cbd755d, type: 3}
 --- !u!1 &804285070
 GameObject:
   m_ObjectHideFlags: 0
@@ -11626,11 +11629,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 10ed2ecf15fbef747930e01c29d67843, type: 2}
   - {fileID: 11400000, guid: 63a2b959a49e0384da3a2633bd818a6c, type: 2}
   - {fileID: 11400000, guid: 79d4dd0e54b6aed42a58a14b6f4dceaf, type: 2}
+  - {fileID: 11400000, guid: 055dc5fc5688d2846a959f6bf554e2ff, type: 2}
   - {fileID: 11400000, guid: 3695552a9d82be54f84b3d210552187a, type: 2}
+  - {fileID: 11400000, guid: a1adb4acb99107b47a1f6e19bfe28d7d, type: 2}
   - {fileID: 11400000, guid: 9e89498e517426e44869e46b940961f0, type: 2}
   - {fileID: 11400000, guid: 0900ba8ec89f8824e97697b95012e6d4, type: 2}
   - {fileID: 11400000, guid: 3fb4c1617d7b5c14990f451b2fc76be3, type: 2}
   - {fileID: 11400000, guid: 0781c4fd31a507446af3e24cd10dc84d, type: 2}
+  - {fileID: 11400000, guid: 3778b0365e753d344b2080e93bdd4205, type: 2}
   - {fileID: 11400000, guid: 5e69896661d13a148b301c71d9f05b3f, type: 2}
   - {fileID: 11400000, guid: 2da4db1963ca3b6458fa29242ce1c490, type: 2}
 --- !u!4 &1163423231
@@ -13103,7 +13109,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 108, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1269375040
@@ -16158,6 +16164,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c6993fa988dd25742ab3a25b8a89a1f3, type: 2}
   - {fileID: 11400000, guid: ca7777f5bb17842409e1aefffdbfcb8d, type: 2}
   - {fileID: 11400000, guid: 5bb32d2bb9d455b4ca12783035dbbf7e, type: 2}
+  - {fileID: 11400000, guid: da648a5158807ac478790206ea3ae7ef, type: 2}
+  - {fileID: 11400000, guid: 44d43d551f1273e45bd0e5b0c2f2f429, type: 2}
+  - {fileID: 11400000, guid: 61e8fbc371eb4e14c86678da160b3e15, type: 2}
+  - {fileID: 11400000, guid: 8ff26f232d52ded4cb7c9c70f1dfc3a6, type: 2}
+  - {fileID: 11400000, guid: 95ec343e9ca5f494390341449e365774, type: 2}
+  - {fileID: 11400000, guid: 078e8257ec32a7848bccf70643553064, type: 2}
+  - {fileID: 11400000, guid: 27b6b184d006f9c449860b0a505ad863, type: 2}
 --- !u!1 &1678477363
 GameObject:
   m_ObjectHideFlags: 0
@@ -18703,9 +18716,18 @@ MonoBehaviour:
   - {fileID: 11400000, guid: abd09f48b54b7874ea624b4b877fc299, type: 2}
   - {fileID: 11400000, guid: acc6e2fc86615b440b15886dab0cc830, type: 2}
   - {fileID: 11400000, guid: 460a748b91a8c334cb2e3ce2605e6af8, type: 2}
+  - {fileID: 11400000, guid: 07af564f4f31b65468cdc47bf889163e, type: 2}
+  - {fileID: 11400000, guid: 4fd10a92c16affd4ea794a0da3e0ffec, type: 2}
+  - {fileID: 11400000, guid: c08bc8a56d556104bbb1a01162cfdef6, type: 2}
   - {fileID: 11400000, guid: 29b06a06e89a53742a951d21b512483c, type: 2}
+  - {fileID: 11400000, guid: 11f2d17d3faa5da459411af1528a2f98, type: 2}
   - {fileID: 11400000, guid: 6d6cea22732d5b5449a9485d5a0bad75, type: 2}
-  - {fileID: 11400000, guid: fb67795e98e465d45b7f556c2ee0af56, type: 2}
+  - {fileID: 11400000, guid: b0264c98fd4920647a1c9833b4326427, type: 2}
+  - {fileID: 11400000, guid: dbf0bd0bf95e57d4f8897ceeb6cd023c, type: 2}
+  - {fileID: 11400000, guid: a075d663c7dab524db98ccd0cf20c545, type: 2}
+  - {fileID: 11400000, guid: 9e52c42984e091e488493b9362eaa211, type: 2}
+  - {fileID: 11400000, guid: d553fa6ae987c7b47a0140aedecc6741, type: 2}
+  - {fileID: 11400000, guid: 21ff3f043a74f1640a223a0c2fbcc407, type: 2}
   - {fileID: 11400000, guid: df74c4ad59b1fab429fb9bf8e5f834c5, type: 2}
   currentPool: []
 --- !u!1 &1872908294

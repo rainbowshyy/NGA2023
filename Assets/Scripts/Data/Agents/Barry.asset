@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d1e248850f5fb048a7cdb301f3b941b, type: 3}
+  m_Name: Barry
+  m_EditorClassIdentifier: 
+  agentType: 5
+  icon: {fileID: 21300000, guid: 66b5cf97d5f41894c9508e1c73b33f34, type: 3}
+  controller: {fileID: 9100000, guid: 508577f602a9fb4488bcb0d1e9251ab5, type: 2}
+  enemyCode:
+  - code: 11
+    parameters: 0000000000000000
+    scope:
+    - code: 6
+      parameters: 0100000001000000
+      scope: []
+    - code: 1
+      parameters: 0100000001000000
+      scope: []
+  agentName: Barry
+  color: {r: 0.8666667, g: 0.8666667, b: 0.8666667, a: 1}
+  startingHealth: 2

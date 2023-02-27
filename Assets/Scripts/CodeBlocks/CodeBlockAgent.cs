@@ -182,6 +182,10 @@ public class CodeBlockAgent : GridElement
         {
             return;
         }
+        if (toAdd > 0)
+        {
+            EffectManager.Instance.CreateEffect(EffectTypes.healthUp, gridCoords, new int[2] { toAdd, 0 }, Vector2Int.zero, true);
+        }
         UI.HealthAnimation();
     }
 

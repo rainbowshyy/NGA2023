@@ -19,7 +19,7 @@ public class EnergyBlock : CodeBlock
 
     public override string ShowSyntax()
     {
-        return "<color=#ebca54>PWR</color><sprite index=9>  +=  " + parameters[0];
+        return "<color=#ebca54>PWR</color><sprite index=9>  <color=#98f460>+=</color>  " + parameters[0];
     }
 
     public override void VisualCode(CodeBlockAgent agent)
@@ -29,6 +29,6 @@ public class EnergyBlock : CodeBlock
 
     public override string ToolTip()
     {
-        return "This unit adds " + parameters[0] + " to its <color=#ebca54>PWR</color><sprite index=9>.";
+        return "This unit <color=#98f460>adds</color> " + parameters[0] + " to its <color=#ebca54>PWR</color><sprite index=9>.";
     }
 }

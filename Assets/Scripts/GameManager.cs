@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
         onRoundEnd?.Invoke(false);
         health -= loss;
         onNewHealth?.Invoke(health);
-        if (health < 0)
+        if (health <= 0)
         {
             StartCoroutine(DelayLoadScene());
         }

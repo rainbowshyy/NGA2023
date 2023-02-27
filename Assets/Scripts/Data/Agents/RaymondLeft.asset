@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d1e248850f5fb048a7cdb301f3b941b, type: 3}
+  m_Name: RaymondLeft
+  m_EditorClassIdentifier: 
+  agentType: 7
+  icon: {fileID: 21300000, guid: 85d64befe91302c4a9c4aa428d619408, type: 3}
+  controller: {fileID: 9100000, guid: 05ac627b5ab126440b51f4cd7d779d34, type: 2}
+  enemyCode:
+  - code: 20
+    parameters: ffffffff00000000
+    scope:
+    - code: 1
+      parameters: 0100000001000000
+      scope: []
+    - code: 19
+      parameters: ffffffff00000000
+      scope: []
+  agentName: Raymond. left
+  color: {r: 0.8666667, g: 0.8666667, b: 0.8666667, a: 1}
+  startingHealth: 2

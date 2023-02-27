@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 377138a31a2f15d41a260658ce0e949d, type: 3}
-  m_Name: Intro2_Xavier
+  m_Script: {fileID: 11500000, guid: d2ae434bc4bb6834099c34e1118adf45, type: 3}
+  m_Name: HealthRange
   m_EditorClassIdentifier: 
-  stage: 1
-  elements:
-  - type: 2
-    positions:
-    - {x: 3, y: 4}
+  type: 22
+  parameter1Range: 01000000
+  parameter2Range: 00000000
+  parameter3Range: 

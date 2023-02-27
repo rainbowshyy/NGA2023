@@ -15,11 +15,10 @@ MonoBehaviour:
   rarity: 0
   elements:
   - upgrades:
-    - {fileID: 11400000, guid: 41b6ce0a65d876847bdc9a1b5e5c0a5c, type: 2}
-    - {fileID: 11400000, guid: b0a5615f925dc4f47b51ac3fa1a912fa, type: 2}
-  - upgrades:
     - {fileID: 11400000, guid: 2a25b6a6b504f5c4085d47f2f2ee669c, type: 2}
     - {fileID: 11400000, guid: 1244ba3ff37501f4c97fca39432c1bb8, type: 2}
+    - {fileID: 11400000, guid: b0a5615f925dc4f47b51ac3fa1a912fa, type: 2}
+    - {fileID: 11400000, guid: 41b6ce0a65d876847bdc9a1b5e5c0a5c, type: 2}
   - upgrades:
     - {fileID: 11400000, guid: b286d94f1683f6a48b7bf57c27680f3c, type: 2}
     - {fileID: 11400000, guid: a9b74d8e92132964b8400facd84a0ed1, type: 2}

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum CodeBlockTypes { MoveBlock, EnergyBlock, WaitBlock, EnergyInRange, EnergyGreaterThan, EnergyLessThan, DamageInRange, XGreaterThan, XLessThan, YGreaterThan, YLessThan, EnergyGreaterWhile, EnergyLessWhile, XGreaterWhile, XLessWhile, YGreaterWhile, YLessWhile, Space, SpaceWhile, DamageRay, EnemyRay, EnemyRayWhile}
+public enum CodeBlockTypes { MoveBlock, EnergyBlock, WaitBlock, EnergyInRange, EnergyGreaterThan, EnergyLessThan, DamageInRange, XGreaterThan, XLessThan, YGreaterThan, YLessThan, EnergyGreaterWhile, EnergyLessWhile, XGreaterWhile, XLessWhile, YGreaterWhile, YLessWhile, Space, SpaceWhile, DamageRay, EnemyRay, EnemyRayWhile, HealthRange}
 
 public abstract class CodeBlock
 {

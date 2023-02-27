@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EffectTypes { energyUp, damageRange, damageLaser, powerRange, coordCheck}
+public enum EffectTypes { energyUp, damageRange, damageLaser, powerRange, coordCheck, healthUp, healthRange}
 
 public class EffectManager : MonoBehaviour
 {
     [SerializeField] private GameObject energyUpPref;
+    [SerializeField] private GameObject healthUpPref;
+    [SerializeField] private GameObject healthRange1;
     [SerializeField] private GameObject damageRange1Pref;
     [SerializeField] private GameObject damageRange2Pref;
     [SerializeField] private GameObject damageLaserPref;
@@ -50,6 +52,13 @@ public class EffectManager : MonoBehaviour
             case EffectTypes.coordCheck:
                 CoordCheck(pos, parameters[0], parameters[1], isTrue);
                 break;
+            case EffectTypes.healthUp:
+                HealthUp(newPos);
+                break;
+            case EffectTypes.healthRange:
+                HealthRange(newPos, parameters[0]);
+                break;
+
         }
     }
 
@@ -57,6 +66,12 @@ public class EffectManager : MonoBehaviour
     {
         Instantiate(energyUpPref, pos + Vector3.up * 0.9f, Quaternion.identity, effectParent);
     }
+
+    private void HealthUp(Vector3 pos)
+    {
+        Instantiate(healthUpPref, pos + Vector3.up * 0.9f, Quaternion.identity, effectParent);
+    }
+
 
     private void DamageRange(Vector3 pos, int range)
     {
@@ -78,6 +93,13 @@ public class EffectManager : MonoBehaviour
         else if (range == 2)
         {
             Instantiate(powerRange2Pref, pos, Quaternion.identity, effectParent);
+        }
+    }
+    private void HealthRange(Vector3 pos, int range)
+    {
+        if (range == 1)
+        {
+            Instantiate(healthRange1, pos, Quaternion.identity, effectParent);
         }
     }
 

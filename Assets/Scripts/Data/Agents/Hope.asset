@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d1e248850f5fb048a7cdb301f3b941b, type: 3}
+  m_Name: Hope
+  m_EditorClassIdentifier: 
+  agentType: 13
+  icon: {fileID: 21300000, guid: ff5fc19ad07129a4eb308370b0ccf63d, type: 3}
+  controller: {fileID: 9100000, guid: 2356983f01ca6ee4f85735e85bda40df, type: 2}
+  enemyCode:
+  - code: 1
+    parameters: 0100000001000000
+    scope: []
+  - code: 4
+    parameters: 0200000002000000
+    scope:
+    - code: 22
+      parameters: 0100000001000000
+      scope: []
+  agentName: Hope
+  color: {r: 0.8666667, g: 0.8666667, b: 0.8666667, a: 1}
+  startingHealth: 1

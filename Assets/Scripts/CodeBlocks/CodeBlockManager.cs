@@ -225,6 +225,9 @@ public class CodeBlockManager : MonoBehaviour
             case CodeBlockTypes.EnemyRayWhile:
                 codeBlocksReturn = new EnemyRayWhileBlock(codeBlocksParam.parameters);
                 break;
+            case CodeBlockTypes.HealthRange:
+                codeBlocksReturn = new HealthInRangeBlock(codeBlocksParam.parameters);
+                break;
         }
         return codeBlocksReturn;
     }

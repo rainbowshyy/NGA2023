@@ -61,5 +61,9 @@ public class PlayerDataManager : MonoBehaviour
         {
             AddAgent(agentType.SirKel);
         }
+        if (stage == Stages.Act2)
+        {
+            AddAgent(agentType.Treasure);
+        }    
     }
 }

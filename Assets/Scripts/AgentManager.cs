@@ -31,7 +31,7 @@ public struct EnemyCodeStruct
     public List<CodeBlockStruct> codeBlocks;
 }
 
-public enum agentType { Cubert, Blob, Xavier, Ylvis, SirKel}
+public enum agentType { Cubert, Blob, Xavier, Ylvis, SirKel, Barry, Bob, RaymondLeft, RaymondRight, RaymondDown, RaymondUp, Charlie, Rayland, Hope, Treasure}
 
 public class AgentManager : MonoBehaviour
 {

@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class UIHealthBar : MonoBehaviour
 {
     [SerializeField] private Transform parent;
+    [SerializeField] private GameObject healthParticlePref;
 
     private void OnEnable()
     {
@@ -25,6 +26,10 @@ public class UIHealthBar : MonoBehaviour
         {
             if (count > health - 1)
             {
+                if (t.gameObject.GetComponent<CanvasGroup>().alpha == 1f)
+                {
+                    Instantiate(healthParticlePref, t.position, Quaternion.identity);
+                }
                 t.gameObject.GetComponent<CanvasGroup>().alpha = 0f;
             }
             else

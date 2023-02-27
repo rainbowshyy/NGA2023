@@ -23,7 +23,7 @@ public class DamageInRangeBlock : CodeBlock
 
     public override string ShowSyntax()
     {
-        return "<color=#ee5644>HP</color><sprite index=8> in Range( " + parameters[0] + " )  -=  <color=#ebca54>PWR</color><sprite index=9>\n<color=#ebca54>PWR</color><sprite index=9>  =  0";
+        return "<color=#ee5644>HP</color><sprite index=8> in Range( " + parameters[0] + " )  <color=#f3574e>-=</color>  <color=#ebca54>PWR</color><sprite index=9>\n<color=#ebca54>PWR</color><sprite index=9>  =  0";
     }
 
     public override void VisualCode(CodeBlockAgent agent)
@@ -32,6 +32,6 @@ public class DamageInRangeBlock : CodeBlock
     }
     public override string ToolTip()
     {
-        return "This unit removes <color=#ee5644>HP</color><sprite index=8> equal to this unit's <color=#ebca54>PWR</color><sprite index=9> from other units within " + parameters[0] + " tiles. Then set this unit's <color=#ebca54>PWR</color><sprite index=9> to 0.";
+        return "This unit <color=#f3574e>removes</color> <color=#ee5644>HP</color><sprite index=8> equal to this unit's <color=#ebca54>PWR</color><sprite index=9> from other units within " + parameters[0] + " tiles. Then set this unit's <color=#ebca54>PWR</color><sprite index=9> to 0.";
     }
 }
