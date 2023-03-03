@@ -338,7 +338,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2227005518784600242}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bf0142e79c3bfe847b40027a85f50f3a, type: 3}
   m_Name: 
@@ -375,7 +375,6 @@ GameObject:
   - component: {fileID: 2227005518849919362}
   - component: {fileID: 2227005518849919365}
   - component: {fileID: 2227005518849919364}
-  - component: {fileID: 3319091797728417670}
   - component: {fileID: 5861938829195867808}
   m_Layer: 5
   m_Name: EnemyParent
@@ -506,19 +505,6 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 0
---- !u!114 &3319091797728417670
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2227005518849919368}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4c5ced20b4489c40a9bf0cccb4c7036, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boundsSize: {x: 900, y: 520, z: 0}
 --- !u!114 &5861938829195867808
 MonoBehaviour:
   m_ObjectHideFlags: 0

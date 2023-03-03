@@ -5,18 +5,13 @@ using UnityEngine.UI;
 
 public class LayoutRebuilderElement : MonoBehaviour
 {
-    private void OnEnable()
-    {
-        LayoutRebuilderManager.Rebuild += MarkForRebuild;
-    }
-
-    private void OnDisable()
-    {
-        LayoutRebuilderManager.Rebuild -= MarkForRebuild;
-    }
-
-    private void MarkForRebuild()
+    public void DoRebuild()
     {
         LayoutRebuilder.ForceRebuildLayoutImmediate(GetComponent<RectTransform>());
+        LayoutRebuilderElement comp = transform.parent.gameObject.GetComponent<LayoutRebuilderElement>();
+        if (comp != null )
+        {
+            comp.DoRebuild();
+        }
     }
 }

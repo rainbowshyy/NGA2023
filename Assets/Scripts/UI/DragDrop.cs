@@ -13,6 +13,10 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
     [SerializeField] private RectTransform anchorToMove;
     public List<DropZone> dropZone;
     [SerializeField] private CanvasGroup canvasGroup;
+    [SerializeField] private LayoutElement layoutElement;
+
+    private Transform oldParent;
+    private int lastSiblingIndex;
 
     private bool dragged = false;
 
@@ -62,9 +66,11 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
             return;
         }
 
-        Transform oldParent = anchorToMove.parent;
-        anchorToMove.SetParent(background);
-        anchorToMove.SetSiblingIndex(background.childCount - 1);
+        oldParent = anchorToMove.parent;
+        if (oldParent == background)
+            lastSiblingIndex = anchorToMove.GetSiblingIndex();
+        anchorToMove.SetParent(background.parent.parent);
+        anchorToMove.SetSiblingIndex(background.parent.parent.childCount - 1);
         dragged = true;
         canvasGroup.blocksRaycasts = false;
         if (canBeDropped && dropZone[0] != null)
@@ -79,7 +85,13 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
         //LayoutRebuilder.MarkLayoutForRebuild((RectTransform)oldParent);
         //EditorGUIUtility.PingObject(oldParent.gameObject);
         //LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)oldParent);
-        LayoutRebuilderManager.Rebuild?.Invoke();
+
+        LayoutRebuilderElement comp = oldParent.gameObject.GetComponent<LayoutRebuilderElement>();
+        if (comp != null)
+        {
+            comp.DoRebuild();
+        }
+
         DragDropManager.onBeginDrag?.Invoke();
     }
 
@@ -97,6 +109,12 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
                 d.dragged = false;
         }
         canvasGroup.blocksRaycasts = true;
+
+        if (anchorToMove.parent == background.parent.parent)
+        {
+            SetAnchorParent(background, lastSiblingIndex);
+        }
+
         DragDropManager.onStopDrag?.Invoke();
     }
 
@@ -118,10 +136,21 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
         if (canBeDropped)
         {
             anchorToMove.SetParent(tf);
-            anchorToMove.SetSiblingIndex(index);
+            if (index < anchorToMove.parent.childCount)
+            {
+                anchorToMove.SetSiblingIndex(index);
+            }
+            else
+            {
+                anchorToMove.SetAsLastSibling();
+            }
             //EditorGUIUtility.PingObject(tf.gameObject);
             //LayoutRebuilder.ForceRebuildLayoutImmediate(tf); //update layoutgroup?
-            LayoutRebuilderManager.Rebuild?.Invoke();
+            LayoutRebuilderElement comp = tf.gameObject.GetComponent<LayoutRebuilderElement>();
+            if (comp != null)
+            {
+                comp.DoRebuild();
+            }
         }
     }
 

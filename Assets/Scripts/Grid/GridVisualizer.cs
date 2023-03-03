@@ -50,7 +50,7 @@ public class GridVisualizer : MonoBehaviour
     private void UpdateCenter()
     {
         xOffset = GridManager.Instance.width / -2f;
-        yOffset = GridManager.Instance.height / -2f;
+        yOffset = GridManager.Instance.height / -2f + 0.1875f;
 
         onNewCenter?.Invoke();
         grid.transform.position = new Vector3(xOffset, yOffset, 0);

@@ -377,6 +377,7 @@ MonoBehaviour:
   - {fileID: 6073139351970914594}
   - {fileID: 843977875850023743}
   canvasGroup: {fileID: 6073139350927101668}
+  layoutElement: {fileID: 6073139352716762081}
 --- !u!225 &6073139350927101668
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -665,7 +666,6 @@ GameObject:
   - component: {fileID: 6073139352716762092}
   - component: {fileID: 6073139352716762089}
   - component: {fileID: 6073139352716762094}
-  - component: {fileID: 4618170116019746356}
   - component: {fileID: 6347554100165837988}
   - component: {fileID: 6073139352716762081}
   - component: {fileID: 6073139352716762080}
@@ -779,19 +779,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 2
---- !u!114 &4618170116019746356
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6073139352716762082}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4c5ced20b4489c40a9bf0cccb4c7036, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boundsSize: {x: 900, y: 520, z: 0}
 --- !u!114 &6347554100165837988
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
 
     public Stages currentStage;
     private int health;
+    private int gold;
 
     [SerializeField] private int[] stageEncounterCount;
 

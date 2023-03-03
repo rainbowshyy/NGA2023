@@ -51,8 +51,6 @@ public class CameraManager : MonoBehaviour
         {
             vCams.Add(v.vCam, v.obj);
         }
-
-        offset = new Vector2(2.5f, 0);
     }
 
     private void OnEnable()
@@ -67,7 +65,7 @@ public class CameraManager : MonoBehaviour
 
     private void MoveMainGridCamera()
     {
-        MoveVCamera(VCam.MainGridCam, Offset.x * Vector2.left);
+        MoveVCamera(VCam.MainGridCam, offset);
     }
 
     private void MoveVCamera(VCam id, Vector2 pos)

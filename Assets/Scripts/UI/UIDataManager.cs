@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using UnityEditor.PackageManager.UI;
 using UnityEngine;
 
 public class UIDataManager : MonoBehaviour
@@ -11,7 +13,7 @@ public class UIDataManager : MonoBehaviour
     [SerializeField] private GameObject codeParentPref;
     [SerializeField] private GameObject codeParentEnemyPref;
 
-    [SerializeField] private RectTransform codeBlockUI;
+    [SerializeField] private RectTransform[] codeBlockParents;
 
     public Dictionary<agentType, GameObject> EnemyCodeParents { get; private set; }
     public Dictionary<agentType, GameObject> CodeParents { get; private set; }
@@ -55,6 +57,18 @@ public class UIDataManager : MonoBehaviour
         EnemyCodeParents.Clear();
     }
 
+    public RectTransform getParent(CodeBlock code)
+    {
+        if (code.isCondition)
+        {
+            return codeBlockParents[1];
+        }
+        else
+        {
+            return codeBlockParents[0];
+        }
+    }
+
     public void TryCreateCodeParent(agentType type)
     {
         if (CodeParents.ContainsKey(type))
@@ -64,14 +78,17 @@ public class UIDataManager : MonoBehaviour
 
         Vector3 pos = new Vector3(450f + Random.Range(-200f, 200f), -260f + Random.Range(-100f, 100f), 0);
 
-        GameObject go = Instantiate(codeParentPref, codeBlockUI);
+        GameObject window = AgentWindowManager.Instance.AddWindow(type, false);
+        GameObject go = Instantiate(codeParentPref, window.transform);
         go.GetComponent<RectTransform>().anchoredPosition = pos;
         UICodeBlockParent comp = go.GetComponent<UICodeBlockParent>();
         comp.SetType(type);
-        comp.SetDragDropBackground(codeBlockUI);
+        comp.SetDragDropBackground(codeBlockParents[0]);    //CHANGE
         CodeParents.Add(type, go);
 
         comp.SetCodeForManager();
+
+        window.GetComponent<LayoutRebuilderElement>().DoRebuild();
     }
 
     public void TryCreateEnemyCodeParent(agentType type)
@@ -83,16 +100,19 @@ public class UIDataManager : MonoBehaviour
 
         Vector3 pos = new Vector3(450f + Random.Range(-200f, 200f), -260f + Random.Range(-100f, 100f), 0);
 
-        GameObject go = Instantiate(codeParentEnemyPref, codeBlockUI);
+        GameObject window = AgentWindowManager.Instance.AddWindow(type, true);
+        GameObject go = Instantiate(codeParentEnemyPref, window.transform);
         go.GetComponent<RectTransform>().anchoredPosition = pos;
         UICodeBlockParent comp = go.GetComponent<UICodeBlockParent>();
         comp.SetType(type);
-        comp.SetDragDropBackground(codeBlockUI);
+        comp.SetDragDropBackground(codeBlockParents[0]);
 
         List<CodeBlock> codeBlocks = CodeBlockManager.GetCodeListFromStruct(AgentManager.Instance.EnemyCodeMap[type]);
         comp.SetCodeBlocksInit(codeBlocks);
 
         EnemyCodeParents.Add(type, go);
+
+        window.GetComponent<LayoutRebuilderElement>().DoRebuild();
     }
     public GameObject CreateCodeBlock(CodeBlock codeBlock)
     {
@@ -101,18 +121,23 @@ public class UIDataManager : MonoBehaviour
 
         GameObject go;
 
+        RectTransform newParent = getParent(codeBlock);
+
         if (codeBlock.isCondition)
         {
-            go = Instantiate(ifCodeBlockPref, codeBlockUI);
+            go = Instantiate(ifCodeBlockPref, newParent);
         }
         else
         {
-            go = Instantiate(codeBlockPref, codeBlockUI);
+            go = Instantiate(codeBlockPref, newParent);
         }
         go.GetComponent<RectTransform>().anchoredPosition = pos;
         UICodeBlock comp = go.GetComponent<UICodeBlock>();
         comp.SetCode(codeBlock);
-        comp.SetDragDropBackground(codeBlockUI);
+        comp.SetDragDropBackground(newParent);
+
+        newParent.GetComponent<LayoutRebuilderElement>().DoRebuild();
+
         return go;
     }
 
@@ -122,17 +147,20 @@ public class UIDataManager : MonoBehaviour
 
         GameObject go;
 
+        Transform newParent = getParent(codeBlock);
+
         if (codeBlock.isCondition)
         {
-            go = Instantiate(ifCodeBlockEnemyPref, codeBlockUI);
+            go = Instantiate(ifCodeBlockEnemyPref, newParent);
         }
         else
         {
-            go = Instantiate(codeBlockEnemyPref, codeBlockUI);
+            go = Instantiate(codeBlockEnemyPref, newParent);
         }
         go.GetComponent<RectTransform>().anchoredPosition = pos;
         UICodeBlock comp = go.GetComponent<UICodeBlock>();
         comp.SetCode(codeBlock);
+
         return go;
     }
 }

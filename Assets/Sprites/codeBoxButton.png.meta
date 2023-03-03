@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c5307c402c6ecd042804e96560893dad
+guid: 7e5a699fe61832a40b25ae5d4ef633cb
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -117,64 +117,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: hpBorder_0
+      name: codeBoxButton_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 9
-        width: 7
-        height: 7
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 3, y: 3, z: 3, w: 3}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 88d8e6196b886094ea8efecae8a558c3
-      internalID: -1598850106
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: hpBorder_1
-      rect:
-        serializedVersion: 2
-        x: 16
         y: 0
         width: 16
-        height: 15
+        height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 60509f0c320229743a02b639fcacbaec
-      internalID: 1050147949
+      spriteID: dd3ae8aacf295c2469f640b325b4d750
+      internalID: -1618609031
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: hpBorder_2
+      name: codeBoxButton_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1
-        width: 7
-        height: 7
+        x: 16
+        y: 0
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 1, y: 1, z: 1, w: 1}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3200be6fdea307546815f946c2b3b6bd
-      internalID: -264783112
+      spriteID: 8ccf344b3ab2ea04c9d0ce5c6713b6d0
+      internalID: -1184318719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: codeBoxButton_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50e15f0e80bbf4d4cb62286980458c1a
+      internalID: -918744835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: codeBoxButton_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7cf3be6f6e079164986c14bb10e71686
+      internalID: 1083826193
       vertices: []
       indices: 
       edges: []
@@ -190,9 +211,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      hpBorder_1: 1050147949
-      hpBorder_0: -1598850106
-      hpBorder_2: -264783112
+      codeBoxButton_3: 1083826193
+      codeBoxButton_0: -1618609031
+      codeBoxButton_1: -1184318719
+      codeBoxButton_2: -918744835
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
