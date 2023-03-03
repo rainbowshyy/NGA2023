@@ -177,7 +177,6 @@ public class AudioManager : MonoBehaviour
                     Stop(musicMap[musicLayer.Health1][audioState.Combat][bpm][0]);
                     Stop(musicMap[musicLayer.Health2][audioState.Combat][bpm][0]);
                     StopEnemy(audioState.Combat);
-                    PlayState(audioState.Victory);
                     SetNextLoopTimeToBeats(4);
                     SetState(audioState.Planning);
                     break;
@@ -193,7 +192,6 @@ public class AudioManager : MonoBehaviour
                     Stop(musicMap[musicLayer.Health1][audioState.Combat][bpm][0]);
                     Stop(musicMap[musicLayer.Health2][audioState.Combat][bpm][0]);
                     StopEnemy(audioState.Combat);
-                    PlayState(audioState.Loss);
                     SetNextLoopTimeToBeats(2);
                     SetState(audioState.Planning);
                     break;
@@ -377,7 +375,7 @@ public class AudioManager : MonoBehaviour
                 case beatEvent.Laser:
                     if (volume > 0)
                     {
-                        volume = Mathf.Log10(1.3f * volume + 0.5f) + 0.3f;
+                        volume = Mathf.Log10(1.3f * volume + 0.5f) + 0.6f;
                         if (volume > 1.4f)
                         {
                             volume = 1.4f;
@@ -484,24 +482,25 @@ public class AudioManager : MonoBehaviour
 
     private void SetTempVolumeForPlayerAgent(agentType agent, float volume)
     {
-        switch (agent)
-        {
-            case agentType.Cubert:
-                musicMap[musicLayer.Cubert][state][bpm][0].audioSource[0].volume = volume;
-                musicMap[musicLayer.Cubert][state][bpm][0].audioSource[1].volume = volume;
-                agentAlive[0] = false;
-                break;
-            case agentType.SirKel:
-                musicMap[musicLayer.SirKel][state][bpm][0].audioSource[0].volume = volume;
-                musicMap[musicLayer.SirKel][state][bpm][0].audioSource[1].volume = volume;
-                agentAlive[1] = false;
-                break;
-            case agentType.Treasure:
-                musicMap[musicLayer.Treasure][state][bpm][0].audioSource[0].volume = volume;
-                musicMap[musicLayer.Treasure][state][bpm][0].audioSource[1].volume = volume;
-                agentAlive[2] = false;
-                break;
-        }
+        foreach (int currentBpm in new int[3] {100, 120, 140})
+            switch (agent)
+            {
+                case agentType.Cubert:
+                    musicMap[musicLayer.Cubert][state][currentBpm][0].audioSource[0].volume = volume;
+                    musicMap[musicLayer.Cubert][state][currentBpm][0].audioSource[1].volume = volume;
+                    agentAlive[0] = false;
+                    break;
+                case agentType.SirKel:
+                    musicMap[musicLayer.SirKel][state][currentBpm][0].audioSource[0].volume = volume;
+                    musicMap[musicLayer.SirKel][state][currentBpm][0].audioSource[1].volume = volume;
+                    agentAlive[1] = false;
+                    break;
+                case agentType.Treasure:
+                    musicMap[musicLayer.Treasure][state][currentBpm][0].audioSource[0].volume = volume;
+                    musicMap[musicLayer.Treasure][state][currentBpm][0].audioSource[1].volume = volume;
+                    agentAlive[2] = false;
+                    break;
+            }
     }
 
     private float GetVolumeFromIntensity(int param)
@@ -631,12 +630,15 @@ public class AudioManager : MonoBehaviour
         if (win)
         {
             SetState(audioState.Victory);
+            PlayState(audioState.Victory);
         }
         else
         {
             SetState(audioState.Loss);
+            PlayState(audioState.Loss);
         }
-        nextBeat[0] = 0;
+        StopEnemy(audioState.Combat);
+        //nextBeat[0] = 0;
     }
 
     private void SetState(audioState state)
@@ -669,10 +671,18 @@ public class AudioManager : MonoBehaviour
 
         if ((newIntensity != intensities[musicLayer.Enemy] && enemyIntensity > 0) || force)
         {
-            musicMap[musicLayer.Enemy][state][bpm][intensities[musicLayer.Enemy]].audioSource[0].volume = 0;
-            musicMap[musicLayer.Enemy][state][bpm][intensities[musicLayer.Enemy]].audioSource[1].volume = 0;
-            musicMap[musicLayer.Enemy][state][bpm][newIntensity].audioSource[0].volume = 1;
-            musicMap[musicLayer.Enemy][state][bpm][newIntensity].audioSource[1].volume = 1;
+            musicMap[musicLayer.Enemy][state][100][intensities[musicLayer.Enemy]].audioSource[0].volume = 0;
+            musicMap[musicLayer.Enemy][state][100][intensities[musicLayer.Enemy]].audioSource[1].volume = 0;
+            musicMap[musicLayer.Enemy][state][100][newIntensity].audioSource[0].volume = 1;
+            musicMap[musicLayer.Enemy][state][100][newIntensity].audioSource[1].volume = 1;
+            musicMap[musicLayer.Enemy][state][120][intensities[musicLayer.Enemy]].audioSource[0].volume = 0;
+            musicMap[musicLayer.Enemy][state][120][intensities[musicLayer.Enemy]].audioSource[1].volume = 0;
+            musicMap[musicLayer.Enemy][state][120][newIntensity].audioSource[0].volume = 1;
+            musicMap[musicLayer.Enemy][state][120][newIntensity].audioSource[1].volume = 1;
+            musicMap[musicLayer.Enemy][state][140][intensities[musicLayer.Enemy]].audioSource[0].volume = 0;
+            musicMap[musicLayer.Enemy][state][140][intensities[musicLayer.Enemy]].audioSource[1].volume = 0;
+            musicMap[musicLayer.Enemy][state][140][newIntensity].audioSource[0].volume = 1;
+            musicMap[musicLayer.Enemy][state][140][newIntensity].audioSource[1].volume = 1;
             intensities[musicLayer.Enemy] = newIntensity;
         }
     }
