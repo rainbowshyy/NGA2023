@@ -23,12 +23,16 @@ public class DamageRayBlock : CodeBlock
             if (hit != null)
             {
                 hit.AddHealth(-agent.energy);
+                AudioManager.onAudioEvent?.Invoke(audioEvent.Laser, agent.energy);
                 agent.energy = 0;
                 pointHit = currentPos;
                 return true;
             }
         }
         pointHit = currentPos;
+
+        AudioManager.onAudioEvent?.Invoke(audioEvent.Laser, agent.energy);
+
         agent.energy = 0;
         return false;
     }

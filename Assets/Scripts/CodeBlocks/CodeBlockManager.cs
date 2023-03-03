@@ -12,6 +12,7 @@ public class CodeBlockManager : MonoBehaviour
     private int step;
     private float speedMult = 0.5f;
     private bool stopped = false;
+    private bool lastEnemy = true;
 
     Coroutine codeCo;
 
@@ -34,27 +35,29 @@ public class CodeBlockManager : MonoBehaviour
     private void OnEnable()
     {
         GameManager.onRoundEnd += StopProgram;
+        AudioManager.onBeat += CodeStepAudio;
     }
 
     private void OnDisable()
     {
         GameManager.onRoundEnd -= StopProgram;
+        AudioManager.onBeat -= CodeStepAudio;
     }
 
     public void StartProgram()
     {
+        lastEnemy = true;
         step = 0;
         stopped = false;
-        onStartProgram?.Invoke();
-        codeCo = StartCoroutine(CodeStep());
+        //codeCo = StartCoroutine(CodeStep());
         InputManager.onToggleInputs?.Invoke(false);
+        onStartProgram?.Invoke();
     }
 
     public void StopProgram(bool win)
     {
         stopped = true;
-        StopCoroutine(codeCo);
-        Debug.Log("yep");
+        //StopCoroutine(codeCo);
         InputManager.onToggleInputs?.Invoke(true);
     }
 
@@ -78,6 +81,23 @@ public class CodeBlockManager : MonoBehaviour
     public bool TypeHasCode(agentType type)
     {
         return (codeBlocks[type].Count > 0);
+    }
+
+    private void CodeStepAudio()
+    {
+        if (lastEnemy)
+        {
+            lastEnemy = false;
+            onDoCode?.Invoke(agentTeam.Player, step);
+        }
+        else
+        {
+            lastEnemy = true;
+            onDoCode?.Invoke(agentTeam.Enemy, step);
+            step += 1;
+        }
+        if (step > 35)
+            SpawningManager.Instance.DoDamage();
     }
 
     IEnumerator CodeStep()
@@ -108,6 +128,18 @@ public class CodeBlockManager : MonoBehaviour
     public void SetCodeForType(agentType type, List<CodeBlock> codeBlocksParam)
     {
         codeBlocks[type] = codeBlocksParam;
+        switch (type)
+        {
+            case agentType.Cubert:
+                AudioManager.onAudioEvent?.Invoke(audioEvent.CubertIntensity, codeBlocksParam.Count);
+                break;
+            case agentType.SirKel:
+                AudioManager.onAudioEvent?.Invoke(audioEvent.SirKelIntensity, codeBlocksParam.Count);
+                break;
+            case agentType.Treasure:
+                AudioManager.onAudioEvent?.Invoke(audioEvent.TreasureIntensity, codeBlocksParam.Count);
+                break;
+        }
     }
 
     public static List<CodeBlock> GetCodeListFromStruct(List<CodeBlockStruct> codeBlocksParam)

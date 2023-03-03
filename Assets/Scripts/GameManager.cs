@@ -63,7 +63,6 @@ public class GameManager : MonoBehaviour
         SpawningManager.SpawnCodeBlock(new CodeBlockStruct(CodeBlockTypes.EnergyBlock, new int[2] { 1, 0 }, null));
 
         EncounterManager.Instance.PopulatePool(stageEncounterCount);
-
         onNewRound?.Invoke();
     }
 

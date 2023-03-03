@@ -167,6 +167,7 @@ public class CodeBlockAgent : GridElement
             return;
         }
         EffectManager.Instance.CreateEffect(EffectTypes.energyUp, gridCoords, new int[2] {toAdd, 0}, Vector2Int.zero, true);
+        AudioManager.onAudioEvent?.Invoke(audioEvent.Energy, 1);
         UI.EnergyAnimation();
     }
 
@@ -185,6 +186,7 @@ public class CodeBlockAgent : GridElement
         if (toAdd > 0)
         {
             EffectManager.Instance.CreateEffect(EffectTypes.healthUp, gridCoords, new int[2] { toAdd, 0 }, Vector2Int.zero, true);
+            AudioManager.onAudioEvent?.Invoke(audioEvent.Health, 1);
         }
         UI.HealthAnimation();
     }
@@ -195,16 +197,30 @@ public class CodeBlockAgent : GridElement
         if (team == agentTeam.Enemy)
         {
             SpawningManager.Instance.ChangeEnemyCount(-1);
+            AudioManager.onAudioEvent?.Invoke(audioEvent.EnemyIntensity, -AgentManager.Instance.AgentMusicIntensityMap[type]);
         }
         else
         {
             SpawningManager.Instance.ChangePlayerCount(-1);
+            switch (type)
+            {
+                case agentType.Cubert:
+                    AudioManager.onAudioEvent?.Invoke(audioEvent.CubertDie, 0);
+                    break;
+                case agentType.SirKel:
+                    AudioManager.onAudioEvent?.Invoke(audioEvent.SirKelDie, 0);
+                    break;
+                case agentType.Treasure:
+                    AudioManager.onAudioEvent?.Invoke(audioEvent.TreasureDie, 0);
+                    break;
+            }
         }
         Destroy(gameObject);
     }
 
     private void OnDestroy()
     {
-        Destroy(UI.gameObject);
+        if (UI != null)
+            Destroy(UI.gameObject);
     }
 }

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5235dcb61593ac34ba7caad7215e2cf9, type: 3}
+  m_Name: 120_SirkelPlanning1
+  m_EditorClassIdentifier: 
+  layer: 2
+  state: 0
+  intensity: 0
+  bpm: 120
+  volume: 1
+  pitch: 1
+  clip: {fileID: 8300000, guid: cf6d1abb10b10884a8618a622392df7f, type: 3}
+  audioSource:
+  - {fileID: 0}
+  - {fileID: 0}
+  toggle: 0

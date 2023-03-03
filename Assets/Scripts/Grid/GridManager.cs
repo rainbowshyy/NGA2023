@@ -7,7 +7,7 @@ using UnityEngine;
 public class GridManager : MonoBehaviour
 {
     private HashSet<Vector2Int> gridCurrentCoords;
-    private List<GameObject> objectsInGrid;
+    public List<GameObject> objectsInGrid;
 
     public int width;
     public int height;

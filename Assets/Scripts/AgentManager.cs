@@ -43,6 +43,7 @@ public class AgentManager : MonoBehaviour
     public Dictionary<agentType, Sprite> AgentIconMap { get; private set; }
     public Dictionary<agentType, string> AgentNameMap { get; private set; }
     public Dictionary<agentType, int> AgentHealthMap { get; private set; }
+    public Dictionary<agentType, int> AgentMusicIntensityMap { get; private set; }
 
     public static AgentManager Instance { get; private set; }
 
@@ -62,6 +63,7 @@ public class AgentManager : MonoBehaviour
         AgentIconMap = new Dictionary<agentType, Sprite>();
         AgentNameMap = new Dictionary<agentType, string>();
         AgentHealthMap = new Dictionary<agentType, int>();
+        AgentMusicIntensityMap = new Dictionary<agentType, int>();
 
         foreach (Agent a in agents)
         {
@@ -74,6 +76,7 @@ public class AgentManager : MonoBehaviour
             AgentIconMap.Add(a.agentType, a.icon);
             AgentNameMap.Add(a.agentType, a.agentName);
             AgentHealthMap.Add(a.agentType, a.startingHealth);
+            AgentMusicIntensityMap.Add(a.agentType, a.musicIntensity);
         }
     }
 }

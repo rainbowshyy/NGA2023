@@ -71,10 +71,12 @@ public class EncounterManager : MonoBehaviour
 
     private void InitEncounter(Encounter encounter)
     {
+        AudioManager.onAudioEvent?.Invoke(audioEvent.EnemyIntensitySet, 0);
         foreach (EncounterElement e in encounter.elements)
         {
             Vector2Int pos = e.positions[Mathf.FloorToInt(Random.Range(0, e.positions.Count))];
             SpawningManager.Instance.SpawnEnemy(e.type, pos);
+            AudioManager.onAudioEvent?.Invoke(audioEvent.EnemyIntensity, AgentManager.Instance.AgentMusicIntensityMap[e.type]);
         }
         if (encounter.stage != GameManager.Instance.currentStage)
         {

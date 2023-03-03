@@ -17,6 +17,9 @@ public class DamageInRangeBlock : CodeBlock
         {
             c.AddHealth(-agent.energy);
         }
+
+        AudioManager.onAudioEvent?.Invoke(audioEvent.Damage, agent.energy);
+
         agent.energy = 0;
         return true;
     }

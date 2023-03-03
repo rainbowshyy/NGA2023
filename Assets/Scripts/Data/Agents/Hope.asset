@@ -28,3 +28,4 @@ MonoBehaviour:
   agentName: Hope
   color: {r: 0.8666667, g: 0.8666667, b: 0.8666667, a: 1}
   startingHealth: 1
+  musicIntensity: 1
