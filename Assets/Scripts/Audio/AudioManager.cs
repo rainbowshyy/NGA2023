@@ -103,7 +103,7 @@ public class AudioManager : MonoBehaviour
         }
 
         nextBeat = new List<double>();
-        SetBPM(120);
+        SetBPM(100);
         agentAlive = new bool[3] { true, true, true };
 
         intensities[musicLayer.Enemy] = 1;
@@ -128,7 +128,7 @@ public class AudioManager : MonoBehaviour
     private void Start()
     {
         planningMusicStarted = true;
-        SetNextLoopTimeToBeats(6);
+        SetNextLoopTimeToBeats(4);
         PlayStateScheduled(audioState.Planning, nextLoop);
     }
 
