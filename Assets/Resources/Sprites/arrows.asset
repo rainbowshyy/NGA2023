@@ -138,6 +138,12 @@ MonoBehaviour:
     m_Scale: 1
     m_Name: arrows_9
     m_HashCode: 1446554572
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 10
+    m_Scale: 1
+    m_Name: arrows_10
+    m_HashCode: 491660404
   m_SpriteGlyphTable:
   - m_Index: 0
     m_Metrics:
@@ -299,5 +305,21 @@ MonoBehaviour:
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
     sprite: {fileID: -408214413, guid: 54a99cc7aca4f684e892660ba611c638, type: 3}
+  - m_Index: 10
+    m_Metrics:
+      m_Width: 8
+      m_Height: 8
+      m_HorizontalBearingX: -2
+      m_HorizontalBearingY: 7
+      m_HorizontalAdvance: 8
+    m_GlyphRect:
+      m_X: 16
+      m_Y: 0
+      m_Width: 8
+      m_Height: 8
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+    sprite: {fileID: -1808647126, guid: 54a99cc7aca4f684e892660ba611c638, type: 3}
   spriteInfoList: []
   fallbackSpriteAssets: []

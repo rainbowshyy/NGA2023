@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class EncounterManager : MonoBehaviour
 {
-    [SerializeField] private List<Encounter> encounterList;
-
     private Dictionary<Stages, List<Encounter>> encounterMap;
 
     public List<Encounter> currentPool;
@@ -24,7 +22,7 @@ public class EncounterManager : MonoBehaviour
         Instance = this;
 
         encounterMap = new Dictionary<Stages, List<Encounter>>();
-        foreach (Encounter e in encounterList)
+        foreach (Encounter e in Resources.LoadAll<Encounter>("Encounters/"))
         {
             if (!encounterMap.ContainsKey(e.stage))
             {

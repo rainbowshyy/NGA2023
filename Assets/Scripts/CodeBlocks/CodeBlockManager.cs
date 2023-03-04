@@ -58,7 +58,6 @@ public class CodeBlockManager : MonoBehaviour
     {
         stopped = true;
         //StopCoroutine(codeCo);
-        InputManager.onToggleInputs?.Invoke(true);
     }
 
     public void ChangeSpeed(bool positive)

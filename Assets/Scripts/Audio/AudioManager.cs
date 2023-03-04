@@ -12,7 +12,6 @@ public enum beatEvent { Laser, Energy, Damage, Health}
 
 public class AudioManager : MonoBehaviour
 {
-    [SerializeField] private List<MusicElement> mElements;
     [SerializeField] private Dictionary<musicLayer, Dictionary<audioState, Dictionary<int, Dictionary<int, MusicElement>>>> musicMap;
 
     private Dictionary<beatEvent, int> beatEvents;
@@ -51,7 +50,7 @@ public class AudioManager : MonoBehaviour
         Instance = this;
 
         musicMap = new Dictionary<musicLayer, Dictionary<audioState, Dictionary<int, Dictionary<int, MusicElement>>>>();
-        foreach (MusicElement element in mElements)
+        foreach (MusicElement element in Resources.LoadAll<MusicElement>("MusicElements/"))
         {
             for (int i = 0; i < 2; i++)
             {

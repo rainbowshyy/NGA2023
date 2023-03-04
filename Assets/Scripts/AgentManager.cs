@@ -35,8 +35,6 @@ public enum agentType { Cubert, Blob, Xavier, Ylvis, SirKel, Barry, Bob, Raymond
 
 public class AgentManager : MonoBehaviour
 {
-    [SerializeField] private List<Agent> agents;
-
     public Dictionary<agentType, List<CodeBlockStruct>> EnemyCodeMap { get; private set; }
     public Dictionary<agentType, RuntimeAnimatorController> AgentAnimatorMap { get; private set; }
     public Dictionary<agentType, Color> AgentColorMap { get; private set; }
@@ -65,7 +63,7 @@ public class AgentManager : MonoBehaviour
         AgentHealthMap = new Dictionary<agentType, int>();
         AgentMusicIntensityMap = new Dictionary<agentType, int>();
 
-        foreach (Agent a in agents)
+        foreach (Agent a in Resources.LoadAll<Agent>("Agents/"))
         {
             if (a.enemyCode != null && a.enemyCode.Count > 0)
             {

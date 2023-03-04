@@ -131,7 +131,7 @@ public class EffectManager : MonoBehaviour
         var angle = Mathf.Atan2(yDir, xDir) * Mathf.Rad2Deg;
         GameObject go = Instantiate(coordPref, GridVisualizer.Instance.GetWorldPos(pos), Quaternion.AngleAxis(angle + 180f, Vector3.forward), effectParent);
         go.transform.position += go.transform.right * 0.5f;
-        go.GetComponent<SpriteRenderer>().size = new Vector2(new Vector2(pos.x - point.x, pos.y - point.y).magnitude + 0.625f, 1f);
+        go.GetComponent<SpriteRenderer>().size = new Vector2(new Vector2(pos.x - point.x, pos.y - point.y).magnitude + 0.5f, 1f);
         go.GetComponent<Animator>().SetBool("X", xDir == 0);
         go.GetComponent<Animator>().SetBool("True", isTrue);
     }

@@ -69,6 +69,7 @@ public class GameManager : MonoBehaviour
 
     private void NewRound()
     {
+        InputManager.onToggleInputs?.Invoke(true);
         UIDataManager.Instance.RemoveCodeParents();
         GridManager.Instance.ResetObjects();
         EncounterManager.Instance.NextInPool();
