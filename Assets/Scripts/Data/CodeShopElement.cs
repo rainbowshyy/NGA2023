@@ -7,6 +7,7 @@ public class CodeShopElement : ShopElement
 {
     public CodeBlockTypes codeBlockTypes;
     public Vector2Int[] parameters;
+    public Vector2Int[] extraParameters;
     [HideInInspector]
     public CodeBlockStruct codeStruct;
 }

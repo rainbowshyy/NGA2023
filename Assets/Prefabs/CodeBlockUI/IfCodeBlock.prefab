@@ -378,6 +378,7 @@ MonoBehaviour:
   - {fileID: 843977875850023743}
   canvasGroup: {fileID: 6073139350927101668}
   layoutElement: {fileID: 6073139352716762081}
+  sold: 0
 --- !u!225 &6073139350927101668
 CanvasGroup:
   m_ObjectHideFlags: 0

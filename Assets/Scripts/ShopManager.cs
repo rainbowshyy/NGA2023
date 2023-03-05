@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
-using static UnityEditor.Rendering.FilterWindow;
 
 public class ShopManager : MonoBehaviour
 {
@@ -80,7 +79,6 @@ public class ShopManager : MonoBehaviour
         {
             shop.Add(RollShopElement(type));
         }
-        Debug.Log(shop.Count);
     }
 
     private List<shopType> RollShopTypes(bool noAgent)
@@ -163,7 +161,15 @@ public class ShopManager : MonoBehaviour
         if (element is CodeShopElement code)
         {
             Vector2Int parameters = code.parameters[Mathf.FloorToInt(UnityEngine.Random.Range(0, code.parameters.Length))];
-            code.codeStruct = new CodeBlockStruct(code.codeBlockTypes, new int[2] { parameters.x, parameters.y }, null, code.price);
+            if (code.extraParameters != null && code.extraParameters.Length > 0)
+            {
+                Vector2Int extraParameters = code.extraParameters[Mathf.FloorToInt(UnityEngine.Random.Range(0, code.extraParameters.Length))];
+                code.codeStruct = new CodeBlockStruct(code.codeBlockTypes, new int[4] { parameters.x, parameters.y, extraParameters.x, extraParameters.y }, null, code.price);
+            }
+            else
+            {
+                code.codeStruct = new CodeBlockStruct(code.codeBlockTypes, new int[2] { parameters.x, parameters.y }, null, code.price);
+            }
         }
 
         return element;
@@ -187,10 +193,6 @@ public class ShopManager : MonoBehaviour
             {
                 int roll = Mathf.FloorToInt(UnityEngine.Random.Range(0f, pool.Count));
                 element = pool[roll];
-                if (element is AgentShopElement agent)
-                {
-                    pool.RemoveAt(roll);
-                }
                 rolled = true;
             }
         }
@@ -233,6 +235,7 @@ public class ShopManager : MonoBehaviour
         if (shop[id] is AgentShopElement agent)
         {
             PlayerDataManager.Instance.AddAgent(agent.type, true);
+            shopMap[shop[id].shopType][shop[id].stage].Remove(shop[id]);
         }
         else if (shop[id] is CodeShopElement code)
         {

@@ -16,4 +16,4 @@ MonoBehaviour:
   elements:
   - type: 1
     positions:
-    - {x: 3, y: 4}
+    - {x: 3, y: 3}

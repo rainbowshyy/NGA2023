@@ -35,5 +35,6 @@ public class UIGold : MonoBehaviour
             animator.ResetTrigger("AddGold");
             animator.SetTrigger("AddGold");
         }
+        lastNumber = number;
     }
 }

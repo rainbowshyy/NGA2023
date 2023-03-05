@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class PlayButton : MonoBehaviour
 {
     [SerializeField] private Button button;
+    [SerializeField] private GameObject text;
+    [SerializeField] private Button stopButton;
 
     private void OnEnable()
     {
@@ -22,5 +24,9 @@ public class PlayButton : MonoBehaviour
     private void ToggleActive(bool active)
     {
         button.interactable = active;
+        button.image.enabled = active;
+        text.SetActive(active);
+        stopButton.gameObject.SetActive(!active);
+        stopButton.interactable = !active;
     }
 }

@@ -90,6 +90,22 @@ public class UIDataManager : MonoBehaviour
         window.GetComponent<LayoutRebuilderElement>().DoRebuild();
     }
 
+    private List<CodeBlock> AddEnergyMod(List<CodeBlock> codeBlocks)
+    {
+        foreach (CodeBlock block in codeBlocks)
+        {
+            if (block is EnergyBlock || block is EnergyInRangeBlock || block is EnergySetBlock || block is EnergyGreaterBlock || block is EnergyGreaterWhileBlock || block is EnergyLessBlock || block is EnergyLessWhileBlock)
+            {
+                block.parameters[0] *= GameManager.Instance.EnemyPowerMod;
+            }
+            if (block.isCondition && block.scope != null && block.scope.Count > 0)
+            {
+                block.scope = AddEnergyMod(block.scope);
+            }
+        }
+        return codeBlocks;
+    }
+
     public void TryCreateEnemyCodeParent(agentType type)
     {
         if (EnemyCodeParents.ContainsKey(type))
@@ -107,6 +123,7 @@ public class UIDataManager : MonoBehaviour
         comp.SetDragDropBackground(codeBlockParents[0]);
 
         List<CodeBlock> codeBlocks = CodeBlockManager.GetCodeListFromStruct(AgentManager.Instance.EnemyCodeMap[type]);
+        codeBlocks = AddEnergyMod(codeBlocks);
         comp.SetCodeBlocksInit(codeBlocks);
 
         EnemyCodeParents.Add(type, go);

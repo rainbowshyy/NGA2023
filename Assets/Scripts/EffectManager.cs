@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EffectTypes { energyUp, damageRange, damageLaser, powerRange, coordCheck, healthUp, healthRange}
+public enum EffectTypes { energyUp, damageRange, damageLaser, powerRange, coordCheck, healthUp, healthRange, powerLaser}
 
 public class EffectManager : MonoBehaviour
 {
@@ -15,6 +15,7 @@ public class EffectManager : MonoBehaviour
     [SerializeField] private GameObject powerRange1Pref;
     [SerializeField] private GameObject powerRange2Pref;
     [SerializeField] private GameObject coordPref;
+    [SerializeField] private GameObject powerLaserPref;
 
     [SerializeField] private Transform effectParent;
 
@@ -57,6 +58,9 @@ public class EffectManager : MonoBehaviour
                 break;
             case EffectTypes.healthRange:
                 HealthRange(newPos, parameters[0]);
+                break;
+            case EffectTypes.powerLaser:
+                PowerRaycast(pos, parameters[0], parameters[1], point);
                 break;
 
         }
@@ -109,6 +113,14 @@ public class EffectManager : MonoBehaviour
         GameObject go = Instantiate(damageLaserPref, GridVisualizer.Instance.GetWorldPos(pos), Quaternion.AngleAxis(angle + 180f, Vector3.forward), effectParent);
         go.GetComponent<SpriteRenderer>().size = new Vector2(new Vector2(pos.x - point.x, pos.y - point.y).magnitude, 1.5f);
     }
+
+    private void PowerRaycast(Vector2Int pos, int xDir, int yDir, Vector2Int point)
+    {
+        var angle = Mathf.Atan2(yDir, xDir) * Mathf.Rad2Deg;
+        GameObject go = Instantiate(powerLaserPref, GridVisualizer.Instance.GetWorldPos(pos), Quaternion.AngleAxis(angle + 180f, Vector3.forward), effectParent);
+        go.GetComponent<SpriteRenderer>().size = new Vector2(new Vector2(pos.x - point.x, pos.y - point.y).magnitude, 1.5f);
+    }
+
     private void CoordCheck(Vector2Int pos, int xDir, int yDir, bool isTrue)
     {
         Vector2Int point = new Vector2Int(0, 0);

@@ -14,13 +14,18 @@ public class CodeBlockAgent : GridElement
     public int energy;
     public List<int> currentStep;
 
-    public override void Start()
+    public void Setup()
     {
-        base.Start();
+        gridCoords = startingCoords;
+        GridManager.Instance.AddGridElement(this);
+
         health = AgentManager.Instance.AgentHealthMap[type];
+        if (team == agentTeam.Enemy)
+        {
+            health *= GameManager.Instance.EnemyHealthMod;
+        }
         energy = 0;
         currentStep = new List<int>() { 0 };
-
         UpdateStatsUI();
     }
 

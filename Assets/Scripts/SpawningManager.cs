@@ -58,6 +58,8 @@ public class SpawningManager : MonoBehaviour
         codeAgent.UI = agentUI;
 
         ChangePlayerCount(1);
+
+        codeAgent.Setup();
     }
 
     public void SpawnEnemy(agentType type, Vector2Int pos)
@@ -79,6 +81,8 @@ public class SpawningManager : MonoBehaviour
         codeAgent.UI = agentUI;
 
         ChangeEnemyCount(1);
+        
+        codeAgent.Setup();
     }
 
     public void ChangeEnemyCount(int change)
@@ -88,7 +92,6 @@ public class SpawningManager : MonoBehaviour
         {
             GameManager.onRoundEnd?.Invoke(true);
         }
-        Debug.Log(enemyCount);
     }
 
     public void ChangePlayerCount(int change)

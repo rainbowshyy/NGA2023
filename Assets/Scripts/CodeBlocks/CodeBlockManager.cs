@@ -95,8 +95,6 @@ public class CodeBlockManager : MonoBehaviour
             onDoCode?.Invoke(agentTeam.Enemy, step);
             step += 1;
         }
-        if (step > 35)
-            SpawningManager.Instance.DoDamage();
     }
 
     IEnumerator CodeStep()
@@ -270,6 +268,18 @@ public class CodeBlockManager : MonoBehaviour
                 break;
             case CodeBlockTypes.HealthPWR:
                 codeBlocksReturn = new HealthPWRBlock(codeBlocksParam.parameters);
+                break;
+            case CodeBlockTypes.Create:
+                codeBlocksReturn = new CreateBlock(codeBlocksParam.parameters);
+                break;
+            case CodeBlockTypes.EnergyRay:
+                codeBlocksReturn = new PowerRayBlock(codeBlocksParam.parameters);
+                break;
+            case CodeBlockTypes.EnergyRayPower:
+                codeBlocksReturn = new PowerRayPowerBlock(codeBlocksParam.parameters);
+                break;
+            case CodeBlockTypes.PowerRangePower:
+                codeBlocksReturn = new EnergyRangePowerBlock(codeBlocksParam.parameters);
                 break;
         }
 

@@ -15,10 +15,18 @@ public class GameManager : MonoBehaviour
     public static Action<int> onNewHealth;
 
     public Stages currentStage;
+    public int currentRound;
     private int health;
     private int gold;
 
+    [SerializeField] private int enemyPowerIncreaseInterval;
+    [SerializeField] private int enemyHealthIncreaseInterval;
+    private int nextEnemyHealthIncrease;
+    private int nextEnemyEnergyIncrease;
     [SerializeField] private int[] stageEncounterCount;
+
+    public int EnemyHealthMod { get; private set; }
+    public int EnemyPowerMod { get; private set; }
 
     public static GameManager Instance { get; private set; }
 
@@ -54,10 +62,16 @@ public class GameManager : MonoBehaviour
 
     private void StartGame()
     {
+        currentRound = 0;
         currentStage = Stages.Intro;
         health = 10;
         gold = 5;
         onNewHealth?.Invoke(health);
+
+        EnemyHealthMod = 1;
+        EnemyPowerMod = 1;
+        nextEnemyEnergyIncrease = enemyPowerIncreaseInterval;
+        nextEnemyHealthIncrease = enemyHealthIncreaseInterval;
 
         PlayerDataManager.Instance.AddAgent(agentType.Cubert, false);
 
@@ -77,6 +91,22 @@ public class GameManager : MonoBehaviour
         EncounterManager.Instance.NextInPool();
         SpawningManager.Instance.SpawnPlayerAgents();
         onNewRoundStarted?.Invoke();
+        currentRound += 1;
+        if (currentRound > 1)
+        {
+            AddGold(1);
+        }
+        if (currentRound >= nextEnemyHealthIncrease)
+        {
+            EnemyHealthMod += 1;
+            nextEnemyHealthIncrease += enemyHealthIncreaseInterval;
+        }
+        if (currentRound >= nextEnemyEnergyIncrease)
+        {
+            EnemyPowerMod += 1;
+            nextEnemyEnergyIncrease += enemyPowerIncreaseInterval;
+        }
+        Debug.Log("healthMod: " + EnemyHealthMod + " powerMod: " + EnemyPowerMod);
     }
 
     private void TakeDamage(int loss)

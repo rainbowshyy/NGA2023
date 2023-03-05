@@ -349,6 +349,8 @@ MonoBehaviour:
   dropZone:
   - {fileID: 0}
   canvasGroup: {fileID: 2227005518784600268}
+  layoutElement: {fileID: 0}
+  sold: 0
 --- !u!225 &2227005518784600268
 CanvasGroup:
   m_ObjectHideFlags: 0

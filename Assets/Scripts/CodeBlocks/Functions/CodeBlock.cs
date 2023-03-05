@@ -56,7 +56,15 @@ public enum CodeBlockTypes {
     [InspectorName("Health/Add")]
     Health,
     [InspectorName("Health/Add power")]
-    HealthPWR
+    HealthPWR,
+    [InspectorName("Misc/Create")]
+    Create,
+    [InspectorName("Power/Add at Ray")]
+    EnergyRay,
+    [InspectorName("Power/Add Power at Ray")]
+    EnergyRayPower,
+    [InspectorName("Power/Add Power in Range")]
+    PowerRangePower
 }
 
 public abstract class CodeBlock
