@@ -22,6 +22,8 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
 
     private bool inputsEnabled;
 
+    public bool sold;
+
     private void Start()
     {
         ToggleInputsEnabled(true);
@@ -93,6 +95,7 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
         }
 
         DragDropManager.onBeginDrag?.Invoke();
+        ShopManager.onCodePickup?.Invoke(transform.parent.GetComponent<UICodeBlock>().Code);
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -116,6 +119,10 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
         }
 
         DragDropManager.onStopDrag?.Invoke();
+        if (sold)
+        {
+            Destroy(anchorToMove.gameObject);
+        }
     }
 
     private void DoBeginDrag()

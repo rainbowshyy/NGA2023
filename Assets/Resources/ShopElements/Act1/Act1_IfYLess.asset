@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acdd5121f66f0fa4594a6ce995348777, type: 3}
   m_Name: Act1_IfYLess
   m_EditorClassIdentifier: 
-  price: 2
+  price: 1
   stage: 2
   shopType: 5
   codeBlockTypes: 10
@@ -25,5 +25,6 @@ MonoBehaviour:
   - {x: 6, y: 0}
   codeStruct:
     code: 10
-    parameters: 0200000000000000
+    parameters: 0600000000000000
     scope: []
+    price: 1

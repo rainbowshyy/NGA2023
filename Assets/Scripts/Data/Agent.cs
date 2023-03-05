@@ -13,4 +13,5 @@ public class Agent : ScriptableObject
     public Color color;
     public int startingHealth;
     public int musicIntensity;
+    public int gold;
 }

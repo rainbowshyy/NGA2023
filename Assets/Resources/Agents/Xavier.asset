@@ -22,25 +22,34 @@ MonoBehaviour:
     - code: 0
       parameters: 0100000000000000
       scope: []
+      price: 0
+    price: 0
   - code: 1
     parameters: 0100000001000000
     scope: []
+    price: 0
   - code: 6
     parameters: 0100000001000000
     scope: []
+    price: 0
   - code: 18
     parameters: ffffffff00000000
     scope:
     - code: 0
       parameters: ffffffff00000000
       scope: []
+      price: 0
+    price: 0
   - code: 1
     parameters: 0100000001000000
     scope: []
+    price: 0
   - code: 6
     parameters: 0100000001000000
     scope: []
+    price: 0
   agentName: Xavier
   color: {r: 0.8679245, g: 0.8679245, b: 0.8679245, a: 1}
   startingHealth: 2
   musicIntensity: 2
+  gold: 2

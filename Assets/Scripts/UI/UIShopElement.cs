@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class UIShopElement : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI text;
+    [SerializeField] private Image image;
 
     [SerializeField] private GameObject codeBlockPref;
     [SerializeField] private GameObject conditionBlockPref;
@@ -37,6 +39,19 @@ public class UIShopElement : MonoBehaviour
             go.GetComponent<UIUpgradeElement>().SetText(codeBlock.ShowSyntax());
             go.GetComponent<UIUpgradeElement>().SetToolTip(codeBlock.ToolTip());
         }
-        text.text = "Price: " + element.price + " <sprite index=10>";
+        text.text = element.price + " <sprite index=10>";
+
+        switch (element.stage)
+        {
+            case Stages.Act1:
+                image.color = ShopManager.Instance.rarityColors[0];
+                break;
+            case Stages.Act2:
+                image.color = ShopManager.Instance.rarityColors[1];
+                break;
+            case Stages.Act3:
+                image.color = ShopManager.Instance.rarityColors[2];
+                break;
+        }
     }
 }

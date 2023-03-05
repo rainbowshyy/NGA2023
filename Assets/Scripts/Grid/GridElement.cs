@@ -13,7 +13,7 @@ public abstract class GridElement : MonoBehaviour
         gridCoords = startingCoords;
         if (!GridManager.Instance.AddGridElement(this))
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 

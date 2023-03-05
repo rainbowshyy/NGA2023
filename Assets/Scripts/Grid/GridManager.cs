@@ -177,7 +177,7 @@ public class GridManager : MonoBehaviour
                 }
             }
         }
-
+        Debug.Log(freeTiles.Count);
         System.Random rand = new System.Random();
 
         randomTile = freeTiles.ElementAt(rand.Next(freeTiles.Count));

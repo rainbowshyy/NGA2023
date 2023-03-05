@@ -522,6 +522,11 @@ public class AudioManager : MonoBehaviour
 
     private void SetBPMRuntime(int bpmParam)
     {
+        if (state == audioState.Loss || state == audioState.Victory)
+        {
+            return;
+        }
+
         double samples = musicMap[musicLayer.Cubert][state][bpm][0].audioSource[1 - musicMap[musicLayer.Cubert][state][bpm][0].toggle].timeSamples;
         double freq = musicMap[musicLayer.Cubert][state][bpm][0].audioSource[musicMap[musicLayer.Cubert][state][bpm][0].toggle].clip.frequency;
         double time = samples / freq;
@@ -530,6 +535,10 @@ public class AudioManager : MonoBehaviour
 
         if (state == audioState.Combat)
         {
+            Stop(musicMap[musicLayer.Cubert][audioState.Planning][bpm][0]);
+            Stop(musicMap[musicLayer.SirKel][audioState.Planning][bpm][0]);
+            Stop(musicMap[musicLayer.Treasure][audioState.Planning][bpm][0]);
+            StopEnemy(audioState.Planning);
             Stop(musicMap[musicLayer.Laser][audioState.Combat][bpm][0]);
             Stop(musicMap[musicLayer.Energy1][audioState.Combat][bpm][0]);
             Stop(musicMap[musicLayer.Energy2][audioState.Combat][bpm][0]);

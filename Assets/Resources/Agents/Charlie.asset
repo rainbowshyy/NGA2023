@@ -19,10 +19,13 @@ MonoBehaviour:
   - code: 3
     parameters: 0100000002000000
     scope: []
+    price: 0
   - code: 2
     parameters: 0100000001000000
     scope: []
+    price: 0
   agentName: Charlie
   color: {r: 0.8666667, g: 0.8666667, b: 0.8666667, a: 1}
   startingHealth: 1
   musicIntensity: 1
+  gold: 2

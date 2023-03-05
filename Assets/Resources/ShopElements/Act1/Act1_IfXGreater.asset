@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acdd5121f66f0fa4594a6ce995348777, type: 3}
   m_Name: Act1_IfXGreater
   m_EditorClassIdentifier: 
-  price: 2
+  price: 1
   stage: 2
   shopType: 5
   codeBlockTypes: 7
@@ -24,6 +24,7 @@ MonoBehaviour:
   - {x: 4, y: 0}
   - {x: 5, y: 0}
   codeStruct:
-    code: 0
-    parameters: 
+    code: 7
+    parameters: 0200000000000000
     scope: []
+    price: 1

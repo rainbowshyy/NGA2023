@@ -8,7 +8,8 @@ public struct CodeBlockStruct
     public CodeBlockTypes code;
     public int[] parameters;
     public List<CodeBlockStruct> scope;
-    public CodeBlockStruct(CodeBlockTypes code, int[] parameters, List<CodeBlockStruct> scope)
+    public int price;
+    public CodeBlockStruct(CodeBlockTypes code, int[] parameters, List<CodeBlockStruct> scope, int price)
     {
         this.code = code;
         this.parameters = parameters;
@@ -20,6 +21,7 @@ public struct CodeBlockStruct
         {
             this.scope = scope;
         }
+        this.price = price;
 
     }
 }
@@ -42,6 +44,7 @@ public class AgentManager : MonoBehaviour
     public Dictionary<agentType, string> AgentNameMap { get; private set; }
     public Dictionary<agentType, int> AgentHealthMap { get; private set; }
     public Dictionary<agentType, int> AgentMusicIntensityMap { get; private set; }
+    public Dictionary<agentType, int> AgentGoldMap { get; private set; }
 
     public static AgentManager Instance { get; private set; }
 
@@ -62,6 +65,7 @@ public class AgentManager : MonoBehaviour
         AgentNameMap = new Dictionary<agentType, string>();
         AgentHealthMap = new Dictionary<agentType, int>();
         AgentMusicIntensityMap = new Dictionary<agentType, int>();
+        AgentGoldMap = new Dictionary<agentType, int>();
 
         foreach (Agent a in Resources.LoadAll<Agent>("Agents/"))
         {
@@ -75,6 +79,7 @@ public class AgentManager : MonoBehaviour
             AgentNameMap.Add(a.agentType, a.agentName);
             AgentHealthMap.Add(a.agentType, a.startingHealth);
             AgentMusicIntensityMap.Add(a.agentType, a.musicIntensity);
+            AgentGoldMap.Add(a.agentType, a.gold);
         }
     }
 }

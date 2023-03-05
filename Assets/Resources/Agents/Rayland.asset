@@ -22,37 +22,50 @@ MonoBehaviour:
     - code: 1
       parameters: 0100000001000000
       scope: []
+      price: 0
     - code: 19
       parameters: 0100000000000000
       scope: []
+      price: 0
+    price: 0
   - code: 20
     parameters: ffffffff00000000
     scope:
     - code: 1
       parameters: 0100000001000000
       scope: []
+      price: 0
     - code: 19
       parameters: ffffffff00000000
       scope: []
+      price: 0
+    price: 0
   - code: 20
     parameters: 0000000001000000
     scope:
     - code: 1
       parameters: 0100000001000000
       scope: []
+      price: 0
     - code: 19
       parameters: 0000000001000000
       scope: []
+      price: 0
+    price: 0
   - code: 20
     parameters: 00000000ffffffff
     scope:
     - code: 1
       parameters: 0100000001000000
       scope: []
+      price: 0
     - code: 19
       parameters: 00000000ffffffff
       scope: []
+      price: 0
+    price: 0
   agentName: Rayland
   color: {r: 0.8666667, g: 0.8666667, b: 0.8666667, a: 1}
   startingHealth: 2
   musicIntensity: 3
+  gold: 4

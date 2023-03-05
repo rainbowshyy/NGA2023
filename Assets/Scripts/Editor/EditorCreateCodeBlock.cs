@@ -14,7 +14,7 @@ public class EditorCreateCodeBlock : Editor
         {
             if (GUILayout.Button("Create " + type.ToString()))
             {
-                uIDataManager.CreateCodeBlock(CodeBlockManager.GetCodeFromStruct(new CodeBlockStruct(type, new int[3] { 1, 1, 1}, null)));
+                uIDataManager.CreateCodeBlock(CodeBlockManager.GetCodeFromStruct(new CodeBlockStruct(type, new int[3] { 1, 1, 1}, null, 0)));
             }
         }
     }

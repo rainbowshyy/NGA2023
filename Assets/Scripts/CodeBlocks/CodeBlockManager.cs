@@ -259,7 +259,21 @@ public class CodeBlockManager : MonoBehaviour
             case CodeBlockTypes.HealthRange:
                 codeBlocksReturn = new HealthInRangeBlock(codeBlocksParam.parameters);
                 break;
+            case CodeBlockTypes.PushBlock:
+                codeBlocksReturn = new PushBlock(codeBlocksParam.parameters);
+                break;
+            case CodeBlockTypes.EnergySetBlock:
+                codeBlocksReturn = new EnergySetBlock(codeBlocksParam.parameters);
+                break;
+            case CodeBlockTypes.Health:
+                codeBlocksReturn = new HealthBlock(codeBlocksParam.parameters);
+                break;
+            case CodeBlockTypes.HealthPWR:
+                codeBlocksReturn = new HealthPWRBlock(codeBlocksParam.parameters);
+                break;
         }
+
+        codeBlocksReturn.price = codeBlocksParam.price;
         return codeBlocksReturn;
     }
 }

@@ -40,12 +40,12 @@ public class CodeBlockAgent : GridElement
         {
             return;
         }
-
         bool isCondition = true;
         int depth = 0;
         CodeBlock current = CodeBlockManager.Instance.codeBlocks[type][currentStep[depth]];
         int safety = 0;
         bool alreadyLooped = false; //if it loops twice, there is no code to run.
+
         while (isCondition)
         {
             safety += 1;
@@ -105,6 +105,10 @@ public class CodeBlockAgent : GridElement
                             }
                             depth = 0;
                             current = CodeBlockManager.Instance.codeBlocks[type][currentStep[depth]];
+                        }
+                        else if (current.isLoop)
+                        {
+                            current = current.scope[currentStep[depth]];
                         }
                     }
                     else
@@ -171,6 +175,18 @@ public class CodeBlockAgent : GridElement
         UI.EnergyAnimation();
     }
 
+    public void SetEnergy(int set)
+    {
+        if (energy < set)
+        {
+            EffectManager.Instance.CreateEffect(EffectTypes.energyUp, gridCoords, new int[2] { set - energy, 0 }, Vector2Int.zero, true);
+            AudioManager.onAudioEvent?.Invoke(audioEvent.Energy, 1);
+        }
+        energy = set;
+        UpdateStatsUI();
+        UI.EnergyAnimation();
+    }
+
     public void AddHealth(int toAdd)
     {
         health += toAdd;
@@ -197,6 +213,7 @@ public class CodeBlockAgent : GridElement
         if (team == agentTeam.Enemy)
         {
             SpawningManager.Instance.ChangeEnemyCount(-1);
+            GameManager.Instance.AddGold(AgentManager.Instance.AgentGoldMap[type]);
             AudioManager.onAudioEvent?.Invoke(audioEvent.EnemyIntensity, -AgentManager.Instance.AgentMusicIntensityMap[type]);
         }
         else

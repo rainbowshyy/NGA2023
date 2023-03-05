@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acdd5121f66f0fa4594a6ce995348777, type: 3}
   m_Name: Act2_WhileYLess
   m_EditorClassIdentifier: 
-  price: 2
+  price: 1
   stage: 3
   shopType: 5
   codeBlockTypes: 16
@@ -27,3 +27,4 @@ MonoBehaviour:
     code: 0
     parameters: 
     scope: []
+    price: 0

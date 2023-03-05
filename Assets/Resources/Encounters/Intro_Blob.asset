@@ -16,6 +16,4 @@ MonoBehaviour:
   elements:
   - type: 1
     positions:
-    - {x: 1, y: 5}
-    - {x: 3, y: 5}
-    - {x: 5, y: 5}
+    - {x: 3, y: 4}

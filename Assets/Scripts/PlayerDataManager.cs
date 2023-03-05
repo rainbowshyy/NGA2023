@@ -34,36 +34,18 @@ public class PlayerDataManager : MonoBehaviour
         playerAgents = new List<playerAgentData>();
     }
 
-    private void OnEnable()
-    {
-        GameManager.onNewStage += AddNewAgent;
-    }
-
-    private void OnDisable()
-    {
-        GameManager.onNewStage -= AddNewAgent;
-    }
-
-    public void AddAgent(agentType type)
+    public void AddAgent(agentType type, bool spawn)
     {
         Vector2Int pos = GridManager.Instance.GetRandomTileInRect(0, 0, 6, 1);
         playerAgents.Add(new playerAgentData(type, pos));
+        if (spawn)
+        {
+            SpawningManager.Instance.SpawnCodeAgent(type, pos);
+        }
     }
 
     public void SetAgent(agentType type, Vector2Int pos)
     {
         playerAgents.Add(new playerAgentData(type, pos));
-    }
-
-    private void AddNewAgent(Stages stage)
-    {
-        if (stage == Stages.Act1)
-        {
-            AddAgent(agentType.SirKel);
-        }
-        if (stage == Stages.Act2)
-        {
-            AddAgent(agentType.Treasure);
-        }    
     }
 }

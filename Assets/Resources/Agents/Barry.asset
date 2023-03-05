@@ -22,10 +22,14 @@ MonoBehaviour:
     - code: 6
       parameters: 0100000001000000
       scope: []
+      price: 0
     - code: 1
       parameters: 0100000001000000
       scope: []
+      price: 0
+    price: 0
   agentName: Barry
   color: {r: 0.8666667, g: 0.8666667, b: 0.8666667, a: 1}
   startingHealth: 2
   musicIntensity: 2
+  gold: 2

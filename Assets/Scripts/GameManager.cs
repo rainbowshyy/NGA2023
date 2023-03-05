@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public static Action<bool> onRoundEnd;
     public static Action<Stages> onNewStage;
 
+    public static Action<int> onNewGold;
     public static Action<int> onNewHealth;
 
     public Stages currentStage;
@@ -55,13 +56,14 @@ public class GameManager : MonoBehaviour
     {
         currentStage = Stages.Intro;
         health = 10;
+        gold = 5;
         onNewHealth?.Invoke(health);
 
-        PlayerDataManager.Instance.AddAgent(agentType.Cubert);
+        PlayerDataManager.Instance.AddAgent(agentType.Cubert, false);
 
-        SpawningManager.SpawnCodeBlock(new CodeBlockStruct(CodeBlockTypes.MoveBlock, new int[2] { 0, 1 }, null));
-        SpawningManager.SpawnCodeBlock(new CodeBlockStruct(CodeBlockTypes.DamageInRange, new int[2] { 1, 1 }, null));
-        SpawningManager.SpawnCodeBlock(new CodeBlockStruct(CodeBlockTypes.EnergyBlock, new int[2] { 1, 0 }, null));
+        SpawningManager.SpawnCodeBlock(new CodeBlockStruct(CodeBlockTypes.MoveBlock, new int[2] { 0, 1 }, null, 2));
+        SpawningManager.SpawnCodeBlock(new CodeBlockStruct(CodeBlockTypes.DamageInRange, new int[2] { 1, 1 }, null, 4));
+        SpawningManager.SpawnCodeBlock(new CodeBlockStruct(CodeBlockTypes.EnergyBlock, new int[2] { 1, 0 }, null, 4));
 
         EncounterManager.Instance.PopulatePool(stageEncounterCount);
         onNewRound?.Invoke();
@@ -86,6 +88,17 @@ public class GameManager : MonoBehaviour
         {
             StartCoroutine(DelayLoadScene());
         }
+    }
+
+    public void AddGold(int amount)
+    {
+        gold += amount;
+        onNewGold?.Invoke(gold);
+    }
+
+    public bool EnoughGold(int amount)
+    {
+        return gold >= amount;
     }
 
     private void NewStage(Stages stage)

@@ -3,25 +3,48 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using static UnityEditor.Rendering.FilterWindow;
 
 public class ShopManager : MonoBehaviour
 {
     [SerializeField] private UIShopElement[] slots;
+    public Color[] rarityColors;
 
     private Dictionary<shopType, Dictionary<Stages, List<ShopElement>>> shopMap;
 
     private List<ShopElement> shop;
 
+    public static Action<CodeBlock> onCodePickup;
     public static ShopManager Instance { get; private set; }
 
     private void OnEnable()
     {
         GameManager.onNewRound += DoShop;
+        DragDropManager.onBeginDrag += HideElements;
+        DragDropManager.onStopDrag += ShowElements;
     }
 
     private void OnDisable()
     {
         GameManager.onNewRound -= DoShop;
+        DragDropManager.onBeginDrag -= HideElements;
+        DragDropManager.onStopDrag -= ShowElements;
+    }
+
+    private void HideElements()
+    {
+        foreach (UIShopElement element in slots) 
+        { 
+            element.gameObject.SetActive(false);
+        }
+    }
+
+    private void ShowElements()
+    {
+        foreach (UIShopElement element in slots)
+        {
+            element.gameObject.SetActive(true);
+        }
     }
 
     private void Awake()
@@ -68,6 +91,10 @@ public class ShopManager : MonoBehaviour
             if (!noAgent || type != shopType.Agent)
             {
                 types.Add(type);
+                if (type == shopType.Condition)
+                {
+                    types.Add(type);
+                }
             }
         }
 
@@ -136,7 +163,7 @@ public class ShopManager : MonoBehaviour
         if (element is CodeShopElement code)
         {
             Vector2Int parameters = code.parameters[Mathf.FloorToInt(UnityEngine.Random.Range(0, code.parameters.Length))];
-            code.codeStruct = new CodeBlockStruct(code.codeBlockTypes, new int[2] { parameters.x, parameters.y }, null);
+            code.codeStruct = new CodeBlockStruct(code.codeBlockTypes, new int[2] { parameters.x, parameters.y }, null, code.price);
         }
 
         return element;
@@ -149,28 +176,21 @@ public class ShopManager : MonoBehaviour
         bool rolled = false;
         while (!rolled)
         {
-            int roll = Mathf.FloorToInt(UnityEngine.Random.Range(0f, pool.Count));
-            element = pool[roll];
-            if (element is AgentShopElement agent)
+            if (pool.Count == 0)
             {
-                if (PlayerDataManager.Instance.playerAgents.FindAll(x => x.type == agent.type).Count > agent.number)
-                {
-                    pool.RemoveAt(roll);
-                    if (pool.Count == 0)
-                    {
-                        List<shopType> newTypesPool = RollShopTypes(true);
-                        shopType newType = newTypesPool[Mathf.FloorToInt(UnityEngine.Random.Range(0f, newTypesPool.Count))];
-                        element = GetRandomShopElement(newType, stage);
-                        rolled = true;
-                    }
-                }
-                else
-                {
-                    rolled = true;
-                }
+                List<shopType> newTypesPool = RollShopTypes(true);
+                shopType newType = newTypesPool[Mathf.FloorToInt(UnityEngine.Random.Range(0f, newTypesPool.Count))];
+                element = GetRandomShopElement(newType, stage);
+                rolled = true;
             }
             else
             {
+                int roll = Mathf.FloorToInt(UnityEngine.Random.Range(0f, pool.Count));
+                element = pool[roll];
+                if (element is AgentShopElement agent)
+                {
+                    pool.RemoveAt(roll);
+                }
                 rolled = true;
             }
         }
@@ -194,6 +214,35 @@ public class ShopManager : MonoBehaviour
 
     public void Reroll()
     {
-        DoShop();
+        if (GameManager.Instance.EnoughGold(1))
+        {
+            DoShop();
+            GameManager.Instance.AddGold(-1);
+        }
+    }
+
+    public void Buy(int id)
+    {
+        if (!GameManager.Instance.EnoughGold(shop[id].price))
+        {
+            return;
+        }
+
+        GameManager.Instance.AddGold(-shop[id].price);
+
+        if (shop[id] is AgentShopElement agent)
+        {
+            PlayerDataManager.Instance.AddAgent(agent.type, true);
+        }
+        else if (shop[id] is CodeShopElement code)
+        {
+            CodeBlock block = CodeBlockManager.GetCodeFromStruct(code.codeStruct);
+            block.price = shop[id].price;
+            UIDataManager.Instance.CreateCodeBlock(block);
+        }
+        List<shopType> newTypesPool = RollShopTypes(true);
+        shopType newType = newTypesPool[Mathf.FloorToInt(UnityEngine.Random.Range(0f, newTypesPool.Count))];
+        shop[id] = RollShopElement(newType);
+        slots[id].Display(shop[id]);
     }
 }
