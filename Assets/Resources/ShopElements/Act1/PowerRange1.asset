@@ -12,13 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acdd5121f66f0fa4594a6ce995348777, type: 3}
   m_Name: PowerRange1
   m_EditorClassIdentifier: 
-  price: 4
+  price: 2
   stage: 2
   shopType: 1
   codeBlockTypes: 3
   parameters:
   - {x: 1, y: 1}
+  extraParameters: []
   codeStruct:
     code: 3
     parameters: 0100000001000000
     scope: []
+    price: 4

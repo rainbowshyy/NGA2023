@@ -64,7 +64,17 @@ public enum CodeBlockTypes {
     [InspectorName("Power/Add Power at Ray")]
     EnergyRayPower,
     [InspectorName("Power/Add Power in Range")]
-    PowerRangePower
+    PowerRangePower,
+    [InspectorName("Damage/Add Health in Range")]
+    DamageRangeHealth,
+    [InspectorName("Conditions/If/Health less")]
+    HealthLess,
+    [InspectorName("Conditions/If/Health greater")]
+    HealthGreater,
+    [InspectorName("Conditions/While/Health less")]
+    HealthLessWhile,
+    [InspectorName("Conditions/While/Health greater")]
+    HealthGreaterWhile
 }
 
 public abstract class CodeBlock

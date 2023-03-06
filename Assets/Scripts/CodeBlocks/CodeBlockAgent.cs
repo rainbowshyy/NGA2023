@@ -13,6 +13,7 @@ public class CodeBlockAgent : GridElement
     public int health;
     public int energy;
     public List<int> currentStep;
+    private int order;
 
     public void Setup()
     {
@@ -32,11 +33,13 @@ public class CodeBlockAgent : GridElement
     private void OnEnable()
     {
         CodeBlockManager.onDoCode += DoCode;
+        order = CodeBlockManager.Instance.GetOrder(true,team);
     }
 
     private void OnDisable()
     {
         CodeBlockManager.onDoCode -= DoCode;
+        CodeBlockManager.Instance.GetOrder(false,team);
     }
 
     private void DoCode(agentTeam codeTeam, int step)
@@ -161,6 +164,7 @@ public class CodeBlockAgent : GridElement
         }
         UI.SetEnergyText(energy);
         UI.SetHPText(health);
+        UI.SetOrderText(order);
     }
 
     public void AddEnergy(int toAdd)

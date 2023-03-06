@@ -14,7 +14,7 @@ public class CodeBlockManager : MonoBehaviour
     private bool stopped = false;
     private bool lastEnemy = true;
 
-    Coroutine codeCo;
+    private int[] order = new int[2];
 
     public static CodeBlockManager Instance { get; private set; }
 
@@ -44,6 +44,24 @@ public class CodeBlockManager : MonoBehaviour
         AudioManager.onBeat -= CodeStepAudio;
     }
 
+    public int GetOrder(bool add, agentTeam team)
+    {
+        int index = 0;
+        if (team == agentTeam.Enemy)
+        {
+            index = 1;
+        }
+        if (add)
+        {
+            order[index] += 1;
+        }
+        else
+        {
+            order[index] -= 1;
+        }
+        return order[index];
+    }
+
     public void StartProgram()
     {
         lastEnemy = true;
@@ -58,23 +76,6 @@ public class CodeBlockManager : MonoBehaviour
     {
         stopped = true;
         //StopCoroutine(codeCo);
-    }
-
-    public void ChangeSpeed(bool positive)
-    {
-        if (positive && speedMult > 0.0625f)
-        {
-            speedMult *= 0.5f;
-        }
-        else if (!positive && speedMult < 2)
-        {
-            speedMult *= 2f;
-        }
-    }
-
-    public int GetStepForType(agentType type, int totalStep)
-    {
-        return totalStep % codeBlocks[type].Count;
     }
 
     public bool TypeHasCode(agentType type)
@@ -117,7 +118,8 @@ public class CodeBlockManager : MonoBehaviour
             yield break;
         }
         if (step < 36)
-            codeCo = StartCoroutine(CodeStep());
+            yield break;
+        //codeCo = StartCoroutine(CodeStep());
         else
             SpawningManager.Instance.DoDamage();
     }
@@ -280,6 +282,21 @@ public class CodeBlockManager : MonoBehaviour
                 break;
             case CodeBlockTypes.PowerRangePower:
                 codeBlocksReturn = new EnergyRangePowerBlock(codeBlocksParam.parameters);
+                break;
+            case CodeBlockTypes.DamageRangeHealth:
+                codeBlocksReturn = new DamageInRangeHealthBlock(codeBlocksParam.parameters);
+                break;
+            case CodeBlockTypes.HealthGreater:
+                codeBlocksReturn = new HealthGreaterBlock(codeBlocksParam.parameters);
+                break;
+            case CodeBlockTypes.HealthGreaterWhile:
+                codeBlocksReturn = new HealthGreaterWhileBlock(codeBlocksParam.parameters);
+                break;
+            case CodeBlockTypes.HealthLess:
+                codeBlocksReturn = new HealthLessBlock(codeBlocksParam.parameters);
+                break;
+            case CodeBlockTypes.HealthLessWhile:
+                codeBlocksReturn = new HealthLessWhileBlock(codeBlocksParam.parameters);
                 break;
         }
 

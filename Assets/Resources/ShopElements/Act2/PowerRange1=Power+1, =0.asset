@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acdd5121f66f0fa4594a6ce995348777, type: 3}
   m_Name: PowerRange1=Power+1, =0
   m_EditorClassIdentifier: 
-  price: 6
+  price: 4
   stage: 3
   shopType: 1
   codeBlockTypes: 30

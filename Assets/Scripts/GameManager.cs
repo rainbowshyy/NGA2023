@@ -88,8 +88,8 @@ public class GameManager : MonoBehaviour
         InputManager.onToggleInputs?.Invoke(true);
         UIDataManager.Instance.RemoveCodeParents();
         GridManager.Instance.ResetObjects();
-        EncounterManager.Instance.NextInPool();
         SpawningManager.Instance.SpawnPlayerAgents();
+        EncounterManager.Instance.NextInPool();
         onNewRoundStarted?.Invoke();
         currentRound += 1;
         if (currentRound > 1)

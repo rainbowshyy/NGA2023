@@ -10,18 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: acdd5121f66f0fa4594a6ce995348777, type: 3}
-  m_Name: PowerRay=Power+1, =0
+  m_Name: CreateIfPowerGreater6
   m_EditorClassIdentifier: 
-  price: 4
-  stage: 3
-  shopType: 1
-  codeBlockTypes: 29
+  price: 12
+  stage: 4
+  shopType: 0
+  codeBlockTypes: 27
   parameters:
   - {x: 0, y: 1}
   - {x: 0, y: -1}
   - {x: 1, y: 0}
   - {x: -1, y: 0}
-  extraParameters: []
+  extraParameters:
+  - {x: 6, y: 0}
+  - {x: 6, y: 4}
+  - {x: 6, y: 14}
   codeStruct:
     code: 0
     parameters: 
