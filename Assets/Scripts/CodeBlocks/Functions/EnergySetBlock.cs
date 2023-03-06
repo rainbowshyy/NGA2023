@@ -13,7 +13,7 @@ public class EnergySetBlock : CodeBlock
 
     public override bool RunCode(CodeBlockAgent agent)
     {
-        agent.AddEnergy(parameters[0]);
+        agent.SetEnergy(parameters[0]);
         return true;
     }
 

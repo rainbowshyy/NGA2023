@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemyRayBlock : ConditionBlock
 {
-    public EnemyRayBlock(int[] param) : base(param) { }
+    public EnemyRayBlock(int[] param) : base(param) { conditionType = ConditionOptionType.Direction; }
 
     public override bool ReadyCode(CodeBlockAgent agent)
     {

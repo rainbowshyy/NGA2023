@@ -22,9 +22,9 @@ MonoBehaviour:
   - {x: 1, y: 0}
   - {x: -1, y: 0}
   extraParameters:
-  - {x: 6, y: 0}
-  - {x: 6, y: 4}
-  - {x: 6, y: 14}
+  - {x: 8, y: 0}
+  - {x: 8, y: 4}
+  - {x: 8, y: 14}
   codeStruct:
     code: 0
     parameters: 

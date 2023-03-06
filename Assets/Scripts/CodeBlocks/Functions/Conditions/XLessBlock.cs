@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class XLessBlock : ConditionBlock
 {
-    public XLessBlock(int[] param) : base(param) { }
+    public XLessBlock(int[] param) : base(param) { conditionType = ConditionOptionType.Int; }
 
     public override bool ReadyCode(CodeBlockAgent agent)
     {

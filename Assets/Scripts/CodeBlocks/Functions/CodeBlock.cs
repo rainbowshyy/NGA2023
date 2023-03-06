@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -87,7 +88,15 @@ public abstract class CodeBlock
 
     protected CodeBlock(int[] param)
     {
-        parameters = param;
+        parameters = new int[param.Length];
+        if (param != null && param.Length > 0) 
+        {
+            Array.Copy(param, parameters, param.Length - 1);
+        }
+        else 
+        { 
+            parameters = new int[2];
+        }
         isCondition = false;
         isLoop = false;
     }

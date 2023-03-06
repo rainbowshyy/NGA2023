@@ -27,7 +27,7 @@ public class UIShopElement : MonoBehaviour
         else if (element is CodeShopElement code)
         {
             GameObject go;
-            CodeBlock codeBlock = CodeBlockManager.GetCodeFromStruct(code.codeStruct);
+            CodeBlock codeBlock = CodeBlockManager.GetCodeFromStruct(code.codeStruct, false);
             if (codeBlock.isCondition)
             {
                 go = Instantiate(conditionBlockPref, transform);

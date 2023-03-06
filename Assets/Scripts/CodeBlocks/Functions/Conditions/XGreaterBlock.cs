@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class XGreaterBlock : ConditionBlock
 {
-    public XGreaterBlock(int[] param) : base(param) { }
+    public XGreaterBlock(int[] param) : base(param) { conditionType = ConditionOptionType.Int; }
 
     public override bool ReadyCode(CodeBlockAgent agent)
     {

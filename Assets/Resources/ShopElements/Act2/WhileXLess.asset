@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acdd5121f66f0fa4594a6ce995348777, type: 3}
   m_Name: WhileXLess
   m_EditorClassIdentifier: 
-  price: 1
+  price: 2
   stage: 3
   shopType: 5
   codeBlockTypes: 14
@@ -23,6 +23,7 @@ MonoBehaviour:
   - {x: 4, y: 0}
   - {x: 5, y: 0}
   - {x: 6, y: 0}
+  extraParameters: []
   codeStruct:
     code: 0
     parameters: 

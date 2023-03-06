@@ -239,7 +239,7 @@ public class ShopManager : MonoBehaviour
         }
         else if (shop[id] is CodeShopElement code)
         {
-            CodeBlock block = CodeBlockManager.GetCodeFromStruct(code.codeStruct);
+            CodeBlock block = CodeBlockManager.GetCodeFromStruct(code.codeStruct, false);
             block.price = shop[id].price;
             UIDataManager.Instance.CreateCodeBlock(block);
         }

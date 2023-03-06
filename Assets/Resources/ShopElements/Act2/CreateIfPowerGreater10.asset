@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CreateIfPowerGreater10
   m_EditorClassIdentifier: 
   price: 12
-  stage: 4
+  stage: 3
   shopType: 0
   codeBlockTypes: 27
   parameters:
@@ -22,9 +22,9 @@ MonoBehaviour:
   - {x: 1, y: 0}
   - {x: -1, y: 0}
   extraParameters:
-  - {x: 10, y: 0}
-  - {x: 10, y: 4}
-  - {x: 10, y: 14}
+  - {x: 14, y: 0}
+  - {x: 14, y: 4}
+  - {x: 14, y: 14}
   codeStruct:
     code: 0
     parameters: 

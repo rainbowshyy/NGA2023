@@ -92,7 +92,9 @@ public class UIDataManager : MonoBehaviour
 
     private List<CodeBlock> AddEnergyMod(List<CodeBlock> codeBlocks)
     {
-        foreach (CodeBlock block in codeBlocks)
+        List<CodeBlock> toReturn = codeBlocks;
+
+        foreach (CodeBlock block in toReturn)
         {
             if (block is EnergyBlock || block is EnergyInRangeBlock || block is EnergySetBlock || block is EnergyGreaterBlock || block is EnergyGreaterWhileBlock || block is EnergyLessBlock || block is EnergyLessWhileBlock)
             {
@@ -103,7 +105,7 @@ public class UIDataManager : MonoBehaviour
                 block.scope = AddEnergyMod(block.scope);
             }
         }
-        return codeBlocks;
+        return toReturn;
     }
 
     public void TryCreateEnemyCodeParent(agentType type)
@@ -122,8 +124,15 @@ public class UIDataManager : MonoBehaviour
         comp.SetType(type);
         comp.SetDragDropBackground(codeBlockParents[0]);
 
-        List<CodeBlock> codeBlocks = CodeBlockManager.GetCodeListFromStruct(AgentManager.Instance.EnemyCodeMap[type]);
-        codeBlocks = AddEnergyMod(codeBlocks);
+        List<CodeBlockStruct> structList = new List<CodeBlockStruct>();
+
+        foreach (CodeBlockStruct block in AgentManager.Instance.EnemyCodeMap[type])
+        {
+            structList.Add((CodeBlockStruct)block.Clone());
+        }
+
+        List<CodeBlock> codeBlocks = CodeBlockManager.GetCodeListFromStruct(structList, true);
+        //codeBlocks = AddEnergyMod(codeBlocks);
         comp.SetCodeBlocksInit(codeBlocks);
 
         EnemyCodeParents.Add(type, go);

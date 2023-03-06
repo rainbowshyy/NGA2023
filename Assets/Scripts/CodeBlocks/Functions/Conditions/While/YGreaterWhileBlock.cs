@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class YGreaterWhileBlock : WhileBlock
 {
-    public YGreaterWhileBlock(int[] param) : base(param) { }
+    public YGreaterWhileBlock(int[] param) : base(param) { conditionType = ConditionOptionType.Int; }
 
     public override bool ReadyCode(CodeBlockAgent agent)
     {

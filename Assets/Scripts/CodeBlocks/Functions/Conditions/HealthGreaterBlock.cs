@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HealthGreaterBlock : ConditionBlock
 {
-    public HealthGreaterBlock(int[] param) : base(param) { }
+    public HealthGreaterBlock(int[] param) : base(param) { conditionType = ConditionOptionType.Int; }
 
     public override bool ReadyCode(CodeBlockAgent agent)
     {

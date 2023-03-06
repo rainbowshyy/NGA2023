@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnergyGreaterBlock : ConditionBlock
 {
-    public EnergyGreaterBlock(int[] param) : base(param) { }
+    public EnergyGreaterBlock(int[] param) : base(param) { conditionType = ConditionOptionType.Int; }
 
     public override bool ReadyCode(CodeBlockAgent agent)
     {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HealthGreaterWhileBlock : WhileBlock
 {
-    public HealthGreaterWhileBlock(int[] param) : base(param) { }
+    public HealthGreaterWhileBlock(int[] param) : base(param) { conditionType = ConditionOptionType.Int; }
 
     public override bool ReadyCode(CodeBlockAgent agent)
     {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpaceBlock : ConditionBlock
 {
-    public SpaceBlock(int[] param) : base(param) { }
+    public SpaceBlock(int[] param) : base(param) { conditionType = ConditionOptionType.Direction; }
 
     public override bool ReadyCode(CodeBlockAgent agent)
     {

@@ -1,12 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public struct CodeBlockStruct
+public class CodeBlockStruct : ICloneable
 {
     public CodeBlockTypes code;
-    public int[] parameters;
+    [SerializeField] private int[] parameters;
+    public int[] Parameters { get { return parameters; } }
     public List<CodeBlockStruct> scope;
     public int price;
     public CodeBlockStruct(CodeBlockTypes code, int[] parameters, List<CodeBlockStruct> scope, int price)
@@ -24,13 +26,11 @@ public struct CodeBlockStruct
         this.price = price;
 
     }
-}
 
-[System.Serializable]
-public struct EnemyCodeStruct
-{
-    public agentType type;
-    public List<CodeBlockStruct> codeBlocks;
+    public object Clone()
+    {
+        return this.MemberwiseClone();
+    }
 }
 
 public enum agentType { Cubert, Blob, Xavier, Ylvis, SirKel, Barry, Bob, RaymondLeft, RaymondRight, RaymondDown, RaymondUp, Charlie, Rayland, Hope, Treasure}
@@ -67,19 +67,21 @@ public class AgentManager : MonoBehaviour
         AgentMusicIntensityMap = new Dictionary<agentType, int>();
         AgentGoldMap = new Dictionary<agentType, int>();
 
-        foreach (Agent a in Resources.LoadAll<Agent>("Agents/"))
+        foreach (Agent agent in Resources.LoadAll<Agent>("Agents/"))
         {
-            if (a.enemyCode != null && a.enemyCode.Count > 0)
+            var a = Instantiate(agent);
+
+            if (a.EnemyCode != null && a.EnemyCode.Count > 0)
             {
-                EnemyCodeMap.Add(a.agentType, a.enemyCode);
+                EnemyCodeMap.Add(a.AgentType, a.EnemyCode);
             }
-            AgentAnimatorMap.Add(a.agentType, a.controller);
-            AgentColorMap.Add(a.agentType, a.color);
-            AgentIconMap.Add(a.agentType, a.icon);
-            AgentNameMap.Add(a.agentType, a.agentName);
-            AgentHealthMap.Add(a.agentType, a.startingHealth);
-            AgentMusicIntensityMap.Add(a.agentType, a.musicIntensity);
-            AgentGoldMap.Add(a.agentType, a.gold);
+            AgentAnimatorMap.Add(a.AgentType, a.Controller);
+            AgentColorMap.Add(a.AgentType, a.Color);
+            AgentIconMap.Add(a.AgentType, a.Icon);
+            AgentNameMap.Add(a.AgentType, a.AgentName);
+            AgentHealthMap.Add(a.AgentType, a.StartingHealth);
+            AgentMusicIntensityMap.Add(a.AgentType, a.MusicIntensity);
+            AgentGoldMap.Add(a.AgentType, a.Gold);
         }
     }
 }

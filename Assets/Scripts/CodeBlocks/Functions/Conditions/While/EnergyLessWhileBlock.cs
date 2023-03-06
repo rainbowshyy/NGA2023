@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnergyLessWhileBlock : WhileBlock
 {
-    public EnergyLessWhileBlock(int[] param) : base(param) { }
+    public EnergyLessWhileBlock(int[] param) : base(param) { conditionType = ConditionOptionType.Int; }
 
     public override bool ReadyCode(CodeBlockAgent agent)
     {

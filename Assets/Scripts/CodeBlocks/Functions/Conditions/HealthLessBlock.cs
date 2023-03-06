@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HealthLessBlock : ConditionBlock
 {
-    public HealthLessBlock(int[] param) : base(param) { }
+    public HealthLessBlock(int[] param) : base(param) { conditionType = ConditionOptionType.Int; }
 
     public override bool ReadyCode(CodeBlockAgent agent)
     {

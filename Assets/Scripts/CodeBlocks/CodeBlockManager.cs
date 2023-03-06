@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class CodeBlockManager : MonoBehaviour
@@ -141,42 +142,19 @@ public class CodeBlockManager : MonoBehaviour
         }
     }
 
-    public static List<CodeBlock> GetCodeListFromStruct(List<CodeBlockStruct> codeBlocksParam)
+    public static List<CodeBlock> GetCodeListFromStruct(List<CodeBlockStruct> codeBlocksParam, bool energyScaling)
     {
         List<CodeBlock> codeBlocksReturn = new List<CodeBlock>();
 
         foreach (CodeBlockStruct s in codeBlocksParam)
         {
-            CodeBlock toAdd = new WaitBlock(s.parameters);
-            /*
-            switch (s.code)
-            {
-                case CodeBlockTypes.MoveBlock:
-                    toAdd = new MoveBlock(s.parameters);
-                    break;
-                case CodeBlockTypes.EnergyBlock:
-                    toAdd = new EnergyBlock(s.parameters);
-                    break;
-                case CodeBlockTypes.WaitBlock:
-                    toAdd = new WaitBlock(s.parameters);
-                    break;
-                case CodeBlockTypes.EnergyGreaterThan:
-                    toAdd = new EnergyGreaterBlock(s.parameters);
-                    break;
-                case CodeBlockTypes.EnergyInRange:
-                    toAdd = new EnergyInRangeBlock(s.parameters);
-                    break;
-                case CodeBlockTypes.DamageInRange:
-                    toAdd = new DamageInRange(s.parameters);
-                    break;
-            }
-            */
+            CodeBlock toAdd = new WaitBlock(s.Parameters);
 
-            toAdd = GetCodeFromStruct(s);
+            toAdd = GetCodeFromStruct(s, energyScaling);
 
             if (s.scope != null && s.scope.Count > 0)
             {
-                toAdd.scope = GetCodeListFromStruct(s.scope);
+                toAdd.scope = GetCodeListFromStruct(s.scope, energyScaling);
             }
             codeBlocksReturn.Add(toAdd);
         }
@@ -184,123 +162,129 @@ public class CodeBlockManager : MonoBehaviour
         return codeBlocksReturn;
     }
 
-    public static CodeBlock GetCodeFromStruct(CodeBlockStruct codeBlocksParam)
+    public static CodeBlock GetCodeFromStruct(CodeBlockStruct codeBlocksParam, bool energyScaling)
     {
-        CodeBlock codeBlocksReturn = new WaitBlock(codeBlocksParam.parameters);
+        CodeBlock codeBlocksReturn = new WaitBlock(codeBlocksParam.Parameters);
 
         switch (codeBlocksParam.code)
         {
             case CodeBlockTypes.MoveBlock:
-                codeBlocksReturn = new MoveBlock(codeBlocksParam.parameters);
+                codeBlocksReturn = new MoveBlock(codeBlocksParam.Parameters);
                 break;
             case CodeBlockTypes.EnergyBlock:
-                codeBlocksReturn = new EnergyBlock(codeBlocksParam.parameters);
+                codeBlocksReturn = new EnergyBlock(codeBlocksParam.Parameters);
                 break;
             case CodeBlockTypes.WaitBlock:
-                codeBlocksReturn = new WaitBlock(codeBlocksParam.parameters);
+                codeBlocksReturn = new WaitBlock(codeBlocksParam.Parameters);
                 break;
             case CodeBlockTypes.EnergyGreaterThan:
-                codeBlocksReturn = new EnergyGreaterBlock(codeBlocksParam.parameters);
+                codeBlocksReturn = new EnergyGreaterBlock(codeBlocksParam.Parameters);
                 break;
             case CodeBlockTypes.EnergyLessThan:
-                codeBlocksReturn = new EnergyLessBlock(codeBlocksParam.parameters);
+                codeBlocksReturn = new EnergyLessBlock(codeBlocksParam.Parameters);
                 break;
             case CodeBlockTypes.EnergyInRange:
-                codeBlocksReturn = new EnergyInRangeBlock(codeBlocksParam.parameters);
+                codeBlocksReturn = new EnergyInRangeBlock(codeBlocksParam.Parameters);
                 break;
             case CodeBlockTypes.DamageInRange:
-                codeBlocksReturn = new DamageInRangeBlock(codeBlocksParam.parameters);
+                codeBlocksReturn = new DamageInRangeBlock(codeBlocksParam.Parameters);
                 break;
             case CodeBlockTypes.XGreaterThan:
-                codeBlocksReturn = new XGreaterBlock(codeBlocksParam.parameters);
+                codeBlocksReturn = new XGreaterBlock(codeBlocksParam.Parameters);
                 break;
             case CodeBlockTypes.XLessThan:
-                codeBlocksReturn = new XLessBlock(codeBlocksParam.parameters);
+                codeBlocksReturn = new XLessBlock(codeBlocksParam.Parameters);
                 break;
             case CodeBlockTypes.YGreaterThan:
-                codeBlocksReturn = new YGreaterBlock(codeBlocksParam.parameters);
+                codeBlocksReturn = new YGreaterBlock(codeBlocksParam.Parameters);
                 break;
             case CodeBlockTypes.YLessThan:
-                codeBlocksReturn = new YLessBlock(codeBlocksParam.parameters);
+                codeBlocksReturn = new YLessBlock(codeBlocksParam.Parameters);
                 break;
             case CodeBlockTypes.EnergyGreaterWhile:
-                codeBlocksReturn = new EnergyGreaterWhileBlock(codeBlocksParam.parameters);
+                codeBlocksReturn = new EnergyGreaterWhileBlock(codeBlocksParam.Parameters);
                 break;
             case CodeBlockTypes.EnergyLessWhile:
-                codeBlocksReturn = new EnergyLessWhileBlock(codeBlocksParam.parameters);
+                codeBlocksReturn = new EnergyLessWhileBlock(codeBlocksParam.Parameters);
                 break;
             case CodeBlockTypes.XGreaterWhile:
-                codeBlocksReturn = new XGreaterWhileBlock(codeBlocksParam.parameters);
+                codeBlocksReturn = new XGreaterWhileBlock(codeBlocksParam.Parameters);
                 break;
             case CodeBlockTypes.XLessWhile:
-                codeBlocksReturn = new XLessWhileBlock(codeBlocksParam.parameters);
+                codeBlocksReturn = new XLessWhileBlock(codeBlocksParam.Parameters);
                 break;
             case CodeBlockTypes.YGreaterWhile:
-                codeBlocksReturn = new YGreaterWhileBlock(codeBlocksParam.parameters);
+                codeBlocksReturn = new YGreaterWhileBlock(codeBlocksParam.Parameters);
                 break;
             case CodeBlockTypes.YLessWhile:
-                codeBlocksReturn = new YLessWhileBlock(codeBlocksParam.parameters);
+                codeBlocksReturn = new YLessWhileBlock(codeBlocksParam.Parameters);
                 break;
             case CodeBlockTypes.Space:
-                codeBlocksReturn = new SpaceBlock(codeBlocksParam.parameters);
+                codeBlocksReturn = new SpaceBlock(codeBlocksParam.Parameters);
                 break;
             case CodeBlockTypes.SpaceWhile:
-                codeBlocksReturn = new SpaceWhileBlock(codeBlocksParam.parameters);
+                codeBlocksReturn = new SpaceWhileBlock(codeBlocksParam.Parameters);
                 break;
             case CodeBlockTypes.DamageRay:
-                codeBlocksReturn = new DamageRayBlock(codeBlocksParam.parameters);
+                codeBlocksReturn = new DamageRayBlock(codeBlocksParam.Parameters);
                 break;
             case CodeBlockTypes.EnemyRay:
-                codeBlocksReturn = new EnemyRayBlock(codeBlocksParam.parameters);
+                codeBlocksReturn = new EnemyRayBlock(codeBlocksParam.Parameters);
                 break;
             case CodeBlockTypes.EnemyRayWhile:
-                codeBlocksReturn = new EnemyRayWhileBlock(codeBlocksParam.parameters);
+                codeBlocksReturn = new EnemyRayWhileBlock(codeBlocksParam.Parameters);
                 break;
             case CodeBlockTypes.HealthRange:
-                codeBlocksReturn = new HealthInRangeBlock(codeBlocksParam.parameters);
+                codeBlocksReturn = new HealthInRangeBlock(codeBlocksParam.Parameters);
                 break;
             case CodeBlockTypes.PushBlock:
-                codeBlocksReturn = new PushBlock(codeBlocksParam.parameters);
+                codeBlocksReturn = new PushBlock(codeBlocksParam.Parameters);
                 break;
             case CodeBlockTypes.EnergySetBlock:
-                codeBlocksReturn = new EnergySetBlock(codeBlocksParam.parameters);
+                codeBlocksReturn = new EnergySetBlock(codeBlocksParam.Parameters);
                 break;
             case CodeBlockTypes.Health:
-                codeBlocksReturn = new HealthBlock(codeBlocksParam.parameters);
+                codeBlocksReturn = new HealthBlock(codeBlocksParam.Parameters);
                 break;
             case CodeBlockTypes.HealthPWR:
-                codeBlocksReturn = new HealthPWRBlock(codeBlocksParam.parameters);
+                codeBlocksReturn = new HealthPWRBlock(codeBlocksParam.Parameters);
                 break;
             case CodeBlockTypes.Create:
-                codeBlocksReturn = new CreateBlock(codeBlocksParam.parameters);
+                codeBlocksReturn = new CreateBlock(codeBlocksParam.Parameters);
                 break;
             case CodeBlockTypes.EnergyRay:
-                codeBlocksReturn = new PowerRayBlock(codeBlocksParam.parameters);
+                codeBlocksReturn = new PowerRayBlock(codeBlocksParam.Parameters);
                 break;
             case CodeBlockTypes.EnergyRayPower:
-                codeBlocksReturn = new PowerRayPowerBlock(codeBlocksParam.parameters);
+                codeBlocksReturn = new PowerRayPowerBlock(codeBlocksParam.Parameters);
                 break;
             case CodeBlockTypes.PowerRangePower:
-                codeBlocksReturn = new EnergyRangePowerBlock(codeBlocksParam.parameters);
+                codeBlocksReturn = new EnergyRangePowerBlock(codeBlocksParam.Parameters);
                 break;
             case CodeBlockTypes.DamageRangeHealth:
-                codeBlocksReturn = new DamageInRangeHealthBlock(codeBlocksParam.parameters);
+                codeBlocksReturn = new DamageInRangeHealthBlock(codeBlocksParam.Parameters);
                 break;
             case CodeBlockTypes.HealthGreater:
-                codeBlocksReturn = new HealthGreaterBlock(codeBlocksParam.parameters);
+                codeBlocksReturn = new HealthGreaterBlock(codeBlocksParam.Parameters);
                 break;
             case CodeBlockTypes.HealthGreaterWhile:
-                codeBlocksReturn = new HealthGreaterWhileBlock(codeBlocksParam.parameters);
+                codeBlocksReturn = new HealthGreaterWhileBlock(codeBlocksParam.Parameters);
                 break;
             case CodeBlockTypes.HealthLess:
-                codeBlocksReturn = new HealthLessBlock(codeBlocksParam.parameters);
+                codeBlocksReturn = new HealthLessBlock(codeBlocksParam.Parameters);
                 break;
             case CodeBlockTypes.HealthLessWhile:
-                codeBlocksReturn = new HealthLessWhileBlock(codeBlocksParam.parameters);
+                codeBlocksReturn = new HealthLessWhileBlock(codeBlocksParam.Parameters);
                 break;
         }
 
         codeBlocksReturn.price = codeBlocksParam.price;
+        if (energyScaling)
+        {
+            int prev = codeBlocksReturn.parameters[0];
+            codeBlocksReturn.parameters[0] *= GameManager.Instance.EnemyPowerMod;
+            Debug.Log(prev + " , " + codeBlocksReturn.parameters[0]);
+        }
         return codeBlocksReturn;
     }
 }

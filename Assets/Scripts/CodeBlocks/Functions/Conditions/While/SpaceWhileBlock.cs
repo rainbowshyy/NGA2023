@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpaceWhileBlock : WhileBlock
 {
-    public SpaceWhileBlock(int[] param) : base(param) { }
+    public SpaceWhileBlock(int[] param) : base(param) { conditionType = ConditionOptionType.Direction; }
 
     public override bool ReadyCode(CodeBlockAgent agent)
     {

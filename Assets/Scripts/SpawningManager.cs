@@ -118,6 +118,6 @@ public class SpawningManager : MonoBehaviour
 
     public static void SpawnCodeBlock(CodeBlockStruct code)
     {
-        UIDataManager.Instance.CreateCodeBlock(CodeBlockManager.GetCodeFromStruct(code));
+        UIDataManager.Instance.CreateCodeBlock(CodeBlockManager.GetCodeFromStruct(code, false));
     }
 }

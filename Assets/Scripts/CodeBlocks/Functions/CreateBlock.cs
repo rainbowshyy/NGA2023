@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine;
 
 public class CreateBlock : CodeBlock
 {
@@ -148,6 +147,8 @@ public class CreateBlock : CodeBlock
                 }
             }
         }
-        return "This unit moves <color=#4eb2f3>" + parameters[0] + "</color> tiles along the <color=#4eb2f3>X axis</color> and <color=#f38f4e>" + parameters[1] + "</color> tiles along the <color=#f38f4e>Y axis</color> ( <sprite index=" + spriteIndex + "> ) if able.";
+        string name = AgentManager.Instance.AgentNameMap[(agentType)parameters[3]];
+        string hexColor = ColorUtility.ToHtmlStringRGB(AgentManager.Instance.AgentColorMap[(agentType)parameters[3]]);
+        return "If this units <color=#ebca54>PWR</color><sprite index=9> is greater than " + parameters[2] + " and there is nothing <color=#4eb2f3>" + parameters[0] + "</color> tiles along the <color=#4eb2f3>X axis</color> and <color=#f38f4e>" + parameters[1] + "</color> tiles along the <color=#f38f4e>Y axis</color> ( <sprite index=" + spriteIndex + "> ), this unit <color=#98f460>creates a new</color> <color=#" + hexColor + ">" + name + "</color> . Then set this units <color=#ebca54>PWR</color><sprite index=9> to 0.";
     }
 }
