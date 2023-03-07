@@ -75,7 +75,9 @@ public enum CodeBlockTypes {
     [InspectorName("Conditions/While/Health less")]
     HealthLessWhile,
     [InspectorName("Conditions/While/Health greater")]
-    HealthGreaterWhile
+    HealthGreaterWhile,
+    [InspectorName("Health/Add at Ray")]
+    HealthRay
 }
 
 public abstract class CodeBlock
@@ -91,7 +93,7 @@ public abstract class CodeBlock
         parameters = new int[param.Length];
         if (param != null && param.Length > 0) 
         {
-            Array.Copy(param, parameters, param.Length - 1);
+            Array.Copy(param, parameters, param.Length);
         }
         else 
         { 

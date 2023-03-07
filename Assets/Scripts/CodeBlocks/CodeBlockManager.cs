@@ -276,10 +276,15 @@ public class CodeBlockManager : MonoBehaviour
             case CodeBlockTypes.HealthLessWhile:
                 codeBlocksReturn = new HealthLessWhileBlock(codeBlocksParam.Parameters);
                 break;
+            case CodeBlockTypes.HealthRay:
+                codeBlocksReturn = new HealthRayBlock(codeBlocksParam.Parameters);
+                break;
         }
 
         codeBlocksReturn.price = codeBlocksParam.price;
-        if (energyScaling)
+        List<CodeBlockTypes> energyBlocks = new List<CodeBlockTypes>() { CodeBlockTypes.EnergyBlock, CodeBlockTypes.EnergyRay, CodeBlockTypes.EnergyInRange, CodeBlockTypes.EnergyGreaterThan,
+        CodeBlockTypes.EnergyLessThan, CodeBlockTypes.EnergyLessWhile, CodeBlockTypes.EnergyGreaterWhile, CodeBlockTypes.EnergySetBlock};
+        if (energyScaling && energyBlocks.Contains(codeBlocksParam.code))
         {
             int prev = codeBlocksReturn.parameters[0];
             codeBlocksReturn.parameters[0] *= GameManager.Instance.EnemyPowerMod;

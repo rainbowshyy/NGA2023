@@ -33,20 +33,6 @@ public class UIDataManager : MonoBehaviour
         CodeParents = new Dictionary<agentType, GameObject>();
     }
 
-    private void Start()
-    {
-        /*
-        CreateCodeBlock(new MoveBlock(new int[2] { 0, 1 }));
-        CreateCodeBlock(new MoveBlock(new int[2] { 0, -1 }));
-        CreateCodeBlock(new MoveBlock(new int[2] { -1, 0 }));
-        CreateCodeBlock(new MoveBlock(new int[2] { 1, 0 }));
-        CreateCodeBlock(new EnergyBlock(new int[2] { 1, 0 }));
-        CreateCodeBlock(new EnergyGreaterBlock(new int[2] { 1, 0 }));
-        CreateCodeBlock(new EnergyInRange(new int[2] { 1, 1 }));
-        CreateCodeBlock(new DamageInRange(new int[2] { 1, 1 }));
-        */
-    }
-
     public void RemoveCodeParents()
     {
         foreach (GameObject codeParent in EnemyCodeParents.Values)

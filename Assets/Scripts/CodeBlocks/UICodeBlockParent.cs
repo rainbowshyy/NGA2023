@@ -42,7 +42,7 @@ public class UICodeBlockParent : MonoBehaviour
 
     public void SetText(string newText)
     {
-        text.text = newText + " ( )";
+        text.text = newText;
     }
 
     public void SetType (agentType newType)
