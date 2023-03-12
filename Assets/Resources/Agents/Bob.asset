@@ -21,7 +21,7 @@ MonoBehaviour:
     scope: []
     price: 0
   - code: 4
-    parameters: 0900000000000000
+    parameters: 0500000000000000
     scope:
     - code: 6
       parameters: 0200000002000000

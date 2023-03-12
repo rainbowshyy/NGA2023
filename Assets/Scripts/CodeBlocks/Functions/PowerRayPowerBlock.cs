@@ -20,20 +20,24 @@ public class PowerRayPowerBlock : CodeBlock
         }
 
         Vector2Int currentPos = agent.gridCoords;
-        CodeBlockAgent hit = null;
+        GridElement hit = null;
         while (currentPos.x >= 0 && currentPos.x <= 6 && currentPos.y >= 0 && currentPos.y <= 6)
         {
             currentPos += new Vector2Int(parameters[0], parameters[1]);
             hit = GridManager.Instance.GetAgentAtCoords(currentPos.x, currentPos.y);
             if (hit != null)
             {
-                if (parameters.Length > 2)
+                if (hit is CodeBlockAgent)
                 {
-                    hit.AddEnergy(agent.energy * 2);
-                }
-                else
-                {
-                    hit.AddEnergy(agent.energy);
+                    CodeBlockAgent agentHit = (CodeBlockAgent)hit;
+                    if (parameters.Length > 2)
+                    {
+                        agentHit.AddEnergy(agent.energy * 2);
+                    }
+                    else
+                    {
+                        agentHit.AddEnergy(agent.energy);
+                    }
                 }
                 pointHit = currentPos;
                 agent.energy = 0;

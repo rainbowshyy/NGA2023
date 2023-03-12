@@ -677,7 +677,7 @@ public class AudioManager : MonoBehaviour
             newIntensity = 1;
         }
 
-        if ((newIntensity != intensities[musicLayer.Enemy] && enemyIntensity > 0) || force)
+        if (((newIntensity != intensities[musicLayer.Enemy] && enemyIntensity > 0) || force) && (state == audioState.Combat || state == audioState.Planning))
         {
             musicMap[musicLayer.Enemy][state][100][intensities[musicLayer.Enemy]].audioSource[0].volume = 0;
             musicMap[musicLayer.Enemy][state][100][intensities[musicLayer.Enemy]].audioSource[1].volume = 0;

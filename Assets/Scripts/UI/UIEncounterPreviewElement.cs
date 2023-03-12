@@ -20,7 +20,7 @@ public class UIEncounterPreviewElement : MonoBehaviour
         }
         for (int i = 0; i < 4; i++)
         {
-            if (i < encounter.elements.Count)
+            if (i < encounter.elements.Count && encounter.elements[i].type != agentType.Wall)
             {
                 agentType type = encounter.elements[i].type;
                 icons[i].sprite = AgentManager.Instance.AgentIconMap[type];

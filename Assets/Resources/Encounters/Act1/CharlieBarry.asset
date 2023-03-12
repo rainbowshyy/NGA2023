@@ -10,30 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 377138a31a2f15d41a260658ce0e949d, type: 3}
-  m_Name: Act2_XavierHope
+  m_Name: CharlieBarry
   m_EditorClassIdentifier: 
-  stage: 3
+  stage: 2
   elements:
-  - type: 2
+  - type: 11
     positions:
-    - {x: 0, y: 6}
-    - {x: 1, y: 6}
-    - {x: 2, y: 6}
-    - {x: 3, y: 6}
-    - {x: 4, y: 6}
-    - {x: 5, y: 6}
-    - {x: 6, y: 6}
-  - type: 2
-    positions:
-    - {x: 0, y: 4}
-    - {x: 1, y: 4}
-    - {x: 2, y: 4}
     - {x: 3, y: 4}
-    - {x: 4, y: 4}
-    - {x: 5, y: 4}
-    - {x: 6, y: 4}
-  - type: 13
+  - type: 5
+    positions:
+    - {x: 2, y: 3}
+  - type: 5
     positions:
     - {x: 2, y: 5}
-    - {x: 3, y: 5}
+  - type: 5
+    positions:
+    - {x: 4, y: 3}
+  - type: 5
+    positions:
     - {x: 4, y: 5}

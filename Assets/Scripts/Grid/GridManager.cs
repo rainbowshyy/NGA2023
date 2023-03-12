@@ -56,9 +56,9 @@ public class GridManager : MonoBehaviour
         onRemove?.Invoke(gridElement);
     }
 
-    public CodeBlockAgent GetAgentAtCoords(int x, int y)
+    public GridElement GetAgentAtCoords(int x, int y)
     {
-        CodeBlockAgent agent = null;
+        GridElement agent = null;
 
         foreach (GameObject g in objectsInGrid)
         {
@@ -66,7 +66,7 @@ public class GridManager : MonoBehaviour
 
             if (comp.gridCoords.x == x && comp.gridCoords.y == y)
             {
-                agent = g.GetComponent<CodeBlockAgent>();
+                agent = g.GetComponent<GridElement>();
                 break;
             }
         }
@@ -85,7 +85,8 @@ public class GridManager : MonoBehaviour
             if (comp.gridCoords.x >= x - range &&
                 comp.gridCoords.x <= x + range &&
                 comp.gridCoords.y >= y - range &&
-                comp.gridCoords.y <= y + range)
+                comp.gridCoords.y <= y + range &&
+                g.GetComponent<CodeBlockAgent>() != null)
             {
                 if (includeCenter || comp.gridCoords.x != x || comp.gridCoords.y != y)
                 {
@@ -123,6 +124,7 @@ public class GridManager : MonoBehaviour
 
         gridCurrentCoords.Remove(gridElement.gridCoords);
         gridCurrentCoords.Add(newCoords);
+        onRemove?.Invoke(gridElement);
         gridElement.gridCoords = newCoords;
         onMove?.Invoke(gridElement, newCoords);
 
@@ -192,7 +194,7 @@ public class GridManager : MonoBehaviour
         for (int i = 0; i < objectsInGrid.Count; i++)
         {
             GameObject g = objectsInGrid[i];
-            RemoveGridElement(g.GetComponent<CodeBlockAgent>());
+            RemoveGridElement(g.GetComponent<GridElement>());
             Destroy(g);
             i--;
         }
@@ -203,7 +205,7 @@ public class GridManager : MonoBehaviour
         PlayerDataManager.Instance.playerAgents.Clear();
         foreach (GameObject go in objectsInGrid)
         {
-            if (go.GetComponent<CodeBlockAgent>().team == agentTeam.Player)
+            if (go.GetComponent<CodeBlockAgent>() != null && go.GetComponent<CodeBlockAgent>().team == agentTeam.Player)
             {
                 PlayerDataManager.Instance.SetAgent(go.GetComponent<CodeBlockAgent>().type, go.GetComponent<CodeBlockAgent>().startingCoords);
             }

@@ -25,9 +25,22 @@ public class GridVisualizer : MonoBehaviour
             return;
         }
         Instance = this;
+    }
 
+    private void OnEnable()
+    {
         GridManager.onAdd += InitElement;
         GridManager.onMove += MoveElement;
+        GridManager.onRemove += RemoveElement;
+        GameManager.onNewStage += ChangeColor;
+    }
+
+    private void OnDisable()
+    {
+        GridManager.onMove -= MoveElement;
+        GridManager.onAdd -= InitElement;
+        GridManager.onRemove -= RemoveElement;
+        GameManager.onNewStage -= ChangeColor;
     }
 
     private void Start()
@@ -56,14 +69,35 @@ public class GridVisualizer : MonoBehaviour
         grid.transform.position = new Vector3(xOffset, yOffset, 0);
     }
 
+    private void ChangeColor(Stages stage)
+    {
+        tilemap.color = GameManager.Instance.actColor[(int)stage] * 0.9f;
+    }
+
     private void MoveElement(GridElement gridElement, Vector2 coords)
     {
         gridElement.UpdatePosition();
+        if (gridElement is GridWall)
+        {
+            tilemap.SetTile(new Vector3Int((int)coords.x, (int)coords.y, 0), tiles[1]);
+        }
     }
 
     private void InitElement(GridElement gridElement)
     {
         gridElement.UpdatePosition();
+        if (gridElement is GridWall)
+        {
+            tilemap.SetTile(new Vector3Int(gridElement.startingCoords.x, gridElement.startingCoords.y, 0), tiles[1]);
+        }
+    }
+
+    private void RemoveElement(GridElement gridElement)
+    {
+        if (gridElement is GridWall)
+        {
+            tilemap.SetTile(new Vector3Int(gridElement.gridCoords.x, gridElement.gridCoords.y, 0), tiles[0]);
+        }
     }
 
     public Vector3 GetWorldPos(Vector2Int pos)

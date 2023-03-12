@@ -33,7 +33,7 @@ public class CodeBlockStruct : ICloneable
     }
 }
 
-public enum agentType { Cubert, Blob, Xavier, Ylvis, SirKel, Barry, Bob, RaymondLeft, RaymondRight, RaymondDown, RaymondUp, Charlie, Rayland, Hope, Treasure}
+public enum agentType { Cubert, Blob, Xavier, Ylvis, SirKel, Barry, Bob, RaymondLeft, RaymondRight, RaymondDown, RaymondUp, Charlie, Rayland, Hope, Treasure, Wall}
 
 public class AgentManager : MonoBehaviour
 {

@@ -15,23 +15,24 @@ public class HealthRayBlock : CodeBlock
     public override bool RunCode(CodeBlockAgent agent)
     {
         Vector2Int currentPos = agent.gridCoords;
-        CodeBlockAgent hit = null;
+        GridElement hit = null;
         while (currentPos.x >= 0 && currentPos.x <= 6 && currentPos.y >= 0 && currentPos.y <= 6)
         {
             currentPos += new Vector2Int(parameters[0], parameters[1]);
             hit = GridManager.Instance.GetAgentAtCoords(currentPos.x, currentPos.y);
             if (hit != null)
             {
-                hit.AddHealth(agent.energy);
-                AudioManager.onAudioEvent?.Invoke(audioEvent.Laser, agent.energy);
+                if (hit is CodeBlockAgent)
+                {
+                    CodeBlockAgent agentHit = (CodeBlockAgent)hit;
+                    agentHit.AddHealth(agent.energy);
+                }
                 agent.energy = 0;
                 pointHit = currentPos;
                 return true;
             }
         }
         pointHit = currentPos;
-
-        AudioManager.onAudioEvent?.Invoke(audioEvent.Laser, agent.energy);
 
         agent.energy = 0;
         return false;
@@ -92,7 +93,7 @@ public class HealthRayBlock : CodeBlock
 
     public override void VisualCode(CodeBlockAgent agent)
     {
-        EffectManager.Instance.CreateEffect(EffectTypes.damageLaser, agent.gridCoords, parameters, pointHit, true);
+        EffectManager.Instance.CreateEffect(EffectTypes.healthLaser, agent.gridCoords, parameters, pointHit, true);
     }
     public override string ToolTip()
     {

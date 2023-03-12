@@ -10,25 +10,40 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 377138a31a2f15d41a260658ce0e949d, type: 3}
-  m_Name: Act3_BobBlob
+  m_Name: RaylandCharlie
   m_EditorClassIdentifier: 
-  stage: 4
+  stage: 3
   elements:
-  - type: 1
+  - type: 12
     positions:
-    - {x: 1, y: 3}
-  - type: 1
+    - {x: 3, y: 6}
+  - type: 11
     positions:
-    - {x: 2, y: 3}
-  - type: 1
+    - {x: 3, y: 4}
+  - type: 15
     positions:
     - {x: 3, y: 3}
-  - type: 1
+  - type: 15
     positions:
-    - {x: 4, y: 3}
-  - type: 1
+    - {x: 2, y: 6}
+  - type: 15
     positions:
-    - {x: 5, y: 3}
-  - type: 6
+    - {x: 2, y: 5}
+  - type: 15
     positions:
-    - {x: 3, y: 5}
+    - {x: 1, y: 6}
+  - type: 15
+    positions:
+    - {x: 1, y: 5}
+  - type: 15
+    positions:
+    - {x: 4, y: 6}
+  - type: 15
+    positions:
+    - {x: 4, y: 5}
+  - type: 15
+    positions:
+    - {x: 5, y: 6}
+  - type: 15
+    positions:
+    - {x: 5, y: 5}

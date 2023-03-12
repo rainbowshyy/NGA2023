@@ -5,6 +5,7 @@ using UnityEngine;
 public class SpawningManager : MonoBehaviour
 {
     [SerializeField] private GameObject enemyPref;
+    [SerializeField] private GameObject wallPref;
 
     [SerializeField] private GameObject agentPref;
 
@@ -75,6 +76,8 @@ public class SpawningManager : MonoBehaviour
 
         go.GetComponent<Animator>().runtimeAnimatorController = AgentManager.Instance.AgentAnimatorMap[type];
 
+        go.GetComponent<SpriteRenderer>().color = GameManager.Instance.actColor[(int)GameManager.Instance.currentStage];
+
         GameObject UI = Instantiate(enemyUIPref, agentUIParent);
         AgentUI agentUI = UI.GetComponent<AgentUI>();
         agentUI.canvas = agentUIParent.GetComponent<Canvas>();
@@ -83,6 +86,14 @@ public class SpawningManager : MonoBehaviour
         ChangeEnemyCount(1);
         
         codeAgent.Setup();
+    }
+
+    public void SpawnWall(Vector2Int pos)
+    {
+        GameObject go = Instantiate(wallPref, agentParent);
+        GridWall gridWall = go.GetComponent<GridWall>();
+        gridWall.startingCoords = pos;
+        gridWall.Setup();
     }
 
     public void ChangeEnemyCount(int change)

@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public Color[] actColor;
+    
     public static Action<int> onTakeDamage;
     public static Action onNewRound;
     public static Action onNewRoundStarted;
@@ -89,13 +91,17 @@ public class GameManager : MonoBehaviour
         UIDataManager.Instance.RemoveCodeParents();
         GridManager.Instance.ResetObjects();
         SpawningManager.Instance.SpawnPlayerAgents();
-        EncounterManager.Instance.NextInPool();
+        if (!EncounterManager.Instance.NextInPool())
+        {
+            DelayLoadScene(2);
+        }
         onNewRoundStarted?.Invoke();
         currentRound += 1;
         if (currentRound > 1)
         {
             AddGold(1);
         }
+        /*
         if (currentRound >= nextEnemyHealthIncrease)
         {
             EnemyHealthMod += 1;
@@ -105,8 +111,7 @@ public class GameManager : MonoBehaviour
         {
             EnemyPowerMod += 1;
             nextEnemyEnergyIncrease += enemyPowerIncreaseInterval;
-        }
-        Debug.Log("healthMod: " + EnemyHealthMod + " powerMod: " + EnemyPowerMod);
+        }*/
     }
 
     private void TakeDamage(int loss)
@@ -116,7 +121,7 @@ public class GameManager : MonoBehaviour
         onNewHealth?.Invoke(health);
         if (health <= 0)
         {
-            StartCoroutine(DelayLoadScene());
+            StartCoroutine(DelayLoadScene(3));
         }
     }
 
@@ -134,11 +139,16 @@ public class GameManager : MonoBehaviour
     private void NewStage(Stages stage)
     {
         currentStage = stage;
+        if (stage != Stages.Intro && stage != Stages.Intro2 && stage != Stages.Act1)
+        {
+            EnemyPowerMod += 1;
+            EnemyHealthMod += 1;
+        }
     }
 
-    IEnumerator DelayLoadScene()
+    IEnumerator DelayLoadScene(int id)
     {
         yield return new WaitForEndOfFrame();
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(id);
     }
 }

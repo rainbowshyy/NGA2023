@@ -8,7 +8,7 @@ public abstract class GridElement : MonoBehaviour
     public Vector2Int startingCoords;
     public AgentUI UI;
 
-    public void UpdatePosition()
+    public virtual void UpdatePosition()
     {
         transform.position = new Vector3(GridVisualizer.Instance.xOffset + gridCoords.x + 0.5f, GridVisualizer.Instance.yOffset + gridCoords.y + 0.5625f, 0);
         if (UI != null)

@@ -61,24 +61,35 @@ public class EncounterManager : MonoBehaviour
         }
     }
 
-    public void NextInPool()
+    public bool NextInPool()
     {
+        if (currentPool.Count == 0)
+            return false;
+
         InitEncounter(currentPool[0]);
         currentPool.RemoveAt(0);
+        return true;
     }
 
     private void InitEncounter(Encounter encounter)
     {
         AudioManager.onAudioEvent?.Invoke(audioEvent.EnemyIntensitySet, 0);
-        foreach (EncounterElement e in encounter.elements)
-        {
-            Vector2Int pos = e.positions[Mathf.FloorToInt(Random.Range(0, e.positions.Count))];
-            SpawningManager.Instance.SpawnEnemy(e.type, pos);
-            AudioManager.onAudioEvent?.Invoke(audioEvent.EnemyIntensity, AgentManager.Instance.AgentMusicIntensityMap[e.type]);
-        }
         if (encounter.stage != GameManager.Instance.currentStage)
         {
             GameManager.onNewStage?.Invoke(encounter.stage);
+        }
+        foreach (EncounterElement e in encounter.elements)
+        {
+            Vector2Int pos = e.positions[Mathf.FloorToInt(Random.Range(0, e.positions.Count))];
+            if (e.type == agentType.Wall)
+            {
+                SpawningManager.Instance.SpawnWall(pos);
+            }
+            else
+            {
+                SpawningManager.Instance.SpawnEnemy(e.type, pos);
+                AudioManager.onAudioEvent?.Invoke(audioEvent.EnemyIntensity, AgentManager.Instance.AgentMusicIntensityMap[e.type]);
+            }
         }
     }
 }

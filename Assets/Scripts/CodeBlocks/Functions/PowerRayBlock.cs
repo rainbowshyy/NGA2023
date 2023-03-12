@@ -15,14 +15,18 @@ public class PowerRayBlock : CodeBlock
     public override bool RunCode(CodeBlockAgent agent)
     {
         Vector2Int currentPos = agent.gridCoords;
-        CodeBlockAgent hit = null;
+        GridElement hit = null;
         while (currentPos.x >= 0 && currentPos.x <= 6 && currentPos.y >= 0 && currentPos.y <= 6)
         {
             currentPos += new Vector2Int(parameters[0], parameters[1]);
             hit = GridManager.Instance.GetAgentAtCoords(currentPos.x, currentPos.y);
             if (hit != null)
             {
-                hit.AddEnergy(parameters[2]);
+                if (hit is CodeBlockAgent)
+                {
+                    CodeBlockAgent agentHit = (CodeBlockAgent)hit;
+                    agentHit.AddEnergy(parameters[2]);
+                }
                 pointHit = currentPos;
                 return true;
             }

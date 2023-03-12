@@ -14,14 +14,14 @@ public class PushBlock : CodeBlock
 
     public override bool RunCode(CodeBlockAgent agent)
     {
-        List<CodeBlockAgent> agentsInLine = new List<CodeBlockAgent>();
+        List<GridElement> agentsInLine = new List<GridElement>();
         bool searching = true;
         bool valid = true;
         Vector2Int currentPos = agent.gridCoords;
         while (searching)
         {
             currentPos += new Vector2Int(parameters[0], parameters[1]);
-            CodeBlockAgent current = GridManager.Instance.GetAgentAtCoords(currentPos.x, currentPos.y);
+            GridElement current = GridManager.Instance.GetAgentAtCoords(currentPos.x, currentPos.y);
             if (current != null)
             {
                 agentsInLine.Add(current);
@@ -39,7 +39,7 @@ public class PushBlock : CodeBlock
 
         for (int i = 0; i < agentsInLine.Count; i++)
         {
-            CodeBlockAgent current = agentsInLine[agentsInLine.Count - 1 - i];
+            GridElement current = agentsInLine[agentsInLine.Count - 1 - i];
             current.TryMove(parameters[0], parameters[1]);
         }
 

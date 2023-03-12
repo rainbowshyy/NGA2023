@@ -15,14 +15,19 @@ public class EnemyRayWhileBlock : WhileBlock
     public override bool RunCode(CodeBlockAgent agent)
     {
         Vector2Int currentPos = agent.gridCoords;
-        CodeBlockAgent hit = null;
+        GridElement hit = null;
         while (currentPos.x >= 0 && currentPos.x <= 6 && currentPos.y >= 0 && currentPos.y <= 6)
         {
             currentPos += new Vector2Int(parameters[0], parameters[1]);
             hit = GridManager.Instance.GetAgentAtCoords(currentPos.x, currentPos.y);
             if (hit != null)
             {
-                return hit.team != agent.team;
+                if (hit is CodeBlockAgent)
+                {
+                    CodeBlockAgent agentHit = (CodeBlockAgent)hit;
+                    return agentHit.team != agent.team;
+                }
+                return false;
             }
         }
         return false;

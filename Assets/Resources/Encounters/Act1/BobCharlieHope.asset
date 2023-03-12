@@ -10,19 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 377138a31a2f15d41a260658ce0e949d, type: 3}
-  m_Name: Act2_Raymond
+  m_Name: BobCharlieHope
   m_EditorClassIdentifier: 
-  stage: 3
+  stage: 2
   elements:
-  - type: 7
+  - type: 6
     positions:
-    - {x: 6, y: 3}
-  - type: 8
+    - {x: 3, y: 5}
+  - type: 11
     positions:
-    - {x: 0, y: 4}
-  - type: 7
+    - {x: 3, y: 6}
+  - type: 13
     positions:
-    - {x: 6, y: 5}
-  - type: 8
-    positions:
-    - {x: 0, y: 6}
+    - {x: 3, y: 4}
